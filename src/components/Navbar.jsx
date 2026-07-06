@@ -1,152 +1,120 @@
 'use client'
-import Image from 'next/image'
-import Link from 'next/link'
-import React, { useState } from 'react'
-import NavLink from './NavLink'
-import {motion} from 'framer-motion'
-import DarkModeToggle from './DarkModeToggle/DarkModeToggle'
+import { useState, useContext, useEffect } from 'react'
+import { ThemeContext } from '@/context/ThemeContext'
 
 const links = [
-    { url: '/', title: "Home"},
-    { url: '/about', title: "About"},
-    { url: '/portfolio', title: "Portfolio"},
-    { url: '/contact', title: "Contact"},
+  { href: '#hero', title: 'Home' },
+  { href: '#about', title: 'About' },
+  { href: '#experience', title: 'Experience' },
+  { href: '#projects', title: 'Projects' },
+  { href: '#contact', title: 'Contact' },
 ]
 
 const Navbar = () => {
+  const { toggle, mode } = useContext(ThemeContext)
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
-    const [open, setOpen] = useState(false)
-
-    const topVariants = {
-        closed:{
-            rotate:0
-        },
-        opened:{
-            rotate:45,
-            backgroundColor:"rgb(255,255,255)"
-        }
-    }
-
-    const centerVariants = {
-        closed:{
-            opacity:1
-        },
-        opened:{
-            opacity:0,
-            
-        }
-    }
-
-    const bottomVariants = {
-        closed:{
-            rotation:0
-        },
-        opened:{
-            rotate:-45,
-            backgroundColor:"rgb(255, 255, 255)"
-        }
-    }
-    const listVariants ={
-        closed: {
-            x:"100vw",
-        },
-        opened:{
-            x:0,
-            transition:{
-                when: "beforeChildren",
-                staggerChildren: 0.2,
-            }
-        }
-    }
-    
-    const listItemVariant ={
-        closed: {
-            x:-10,
-            opacity:0
-        },
-        opened: {
-            x:0,
-            opacity:1
-        },
-    }
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
-    <div className='h-full flex items-center justify-between px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48 text-xl'>
-         {/**LINKS */}
-        <div className='hidden md:flex gap-4 w-1/3'>
-           {links.map(link=> (
-               <NavLink link={link} key={link.title}/>
-           ))}
-        </div>
-        {/**LOGO */}
-        <div className='md:hidden lg:flex xl:w-1/3 xl:justify-center'>
-            <DarkModeToggle/>
-        </div>
-         {/**SOCIALS */}
-        <div className='hidden md:flex gap-4 w-1/3'>
-            <Link href='https://github.com/Solohater'>
-                <Image src='/github.png' alt='' width={24} height={24}/>
-            </Link>
-            <Link href='https://www.pinterest.com/yosefayalew56'>
-                <Image src='/pinterest.png' alt='' width={24} height={24}/>
-            </Link>
-            <Link href='https://www.instagram.com/soloreader4days?igsh=YWlyODk2ZHlzZW9r'>
-                <Image src='/instagram.png' alt='' width={24} height={24}/>
-            </Link>
-            <Link href='https://www.linkedin.com/in/yoseph-ayalew-65247b291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'>
-                <Image src='/linkedin.png' alt='' width={24} height={24}/>
-            </Link>
-            <Link href='https://www.telegram.me/Sougo15'>
-                <Image src='/telegram.jpg' alt='' width={24} height={24}/>
-            </Link>
-        </div>
-        {/**MENU */}
-        <div className='md:hidden'>
-            {/**MENU BUTTON */}
-          <button
-            className="w-10 h-8 flex flex-col justify-between z-50 relative"
-            onClick={() => setOpen((prev) => !prev)}
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-white/90 dark:bg-[#0f0f15]/90 backdrop-blur-md shadow-sm'
+          : 'bg-transparent'
+      }`}
+    >
+      <div className="max-w-6xl mx-auto flex items-center justify-between px-6 h-16">
+        <a
+          href="#hero"
+          className="text-xl font-bold"
+          style={{ color: 'var(--accent)' }}
+        >
+          YA
+        </a>
+
+        <div className="hidden md:flex items-center gap-8">
+          {links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-sm font-medium transition-colors"
+              style={{ color: 'var(--text)' }}
+              onMouseEnter={(e) => e.target.style.color = 'var(--accent)'}
+              onMouseLeave={(e) => e.target.style.color = 'var(--text)'}
             >
-            <motion.div
-                variants={topVariants}
-                animate={open ? "opened" : "closed"}
-                className="w-10 h-1 rounded origin-left bg-black dark:bg-white"
-                />
-
-            <motion.div
-                variants={centerVariants}
-                animate={open ? "opened" : "closed"}
-                className={`w-10 h-1 rounded ${
-                open
-                    ? "bg-black dark:bg-white"
-                    : "bg-black dark:bg-white"
-                }`}
-            ></motion.div>
-            <motion.div
-                variants={bottomVariants}
-                animate={open ? "opened" : "closed"}
-                className={`w-10 h-1 rounded origin-left ${
-                open
-                    ? "bg-black dark:bg-white"
-                    : "bg-black dark:bg-white"
-                }`}
-            ></motion.div>
-            </button>
-
-            {/**MENU LIST */}
-            {open && (
-            <motion.div variants={listVariants} initial="closed" animate="opened" className='z-40 flex flex-col absolute top-0 left-0 w-screen h-screen bg-black text-white items-center justify-center gap-8 text-4xl'>
-                
-                {links.map(link=> (
-                    <motion.div key={link.title} variants={listItemVariant}>
-                    <Link href={link.url}>{link.title}</Link>
-                    </motion.div>
-                ))}
-                
-            </motion.div>
-            )}
+              {link.title}
+            </a>
+          ))}
         </div>
-    </div>
+
+        <div className="flex items-center gap-4">
+          <button
+            onClick={toggle}
+            className="px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 border"
+            style={{
+              background: 'var(--accent-bg)',
+              color: 'var(--accent)',
+              borderColor: 'var(--border)',
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = 'var(--accent)'
+              e.target.style.color = '#fff'
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = 'var(--accent-bg)'
+              e.target.style.color = 'var(--accent)'
+            }}
+            aria-label="Toggle theme"
+          >
+            {mode === 'dark' ? (
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            ) : (
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+            )}
+          </button>
+
+          <button
+            className="md:hidden flex flex-col gap-1.5"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Menu"
+          >
+            <span className={`block w-6 h-0.5 bg-current transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+            <span className={`block w-6 h-0.5 bg-current transition-all ${menuOpen ? 'opacity-0' : ''}`} />
+            <span className={`block w-6 h-0.5 bg-current transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+          </button>
+        </div>
+      </div>
+
+      {menuOpen && (
+        <div className="md:hidden border-t" style={{ background: 'var(--bg)', borderColor: 'var(--border)' }}>
+          <div className="flex flex-col gap-2 px-6 py-4">
+            {links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium py-2 transition-colors"
+                style={{ color: 'var(--text)' }}
+                onClick={() => setMenuOpen(false)}
+                onMouseEnter={(e) => e.target.style.color = 'var(--accent)'}
+                onMouseLeave={(e) => e.target.style.color = 'var(--text)'}
+              >
+                {link.title}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </nav>
   )
 }
 

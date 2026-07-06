@@ -2,68 +2,41 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Footer from '@/components/Footer';
 
 const floatingTags = [
   "Java", "Vert.x", "Angular", "React", "Next.js",
   "PostgreSQL", "TypeScript", "JavaScript", "Tailwind CSS", "Go"
 ];
 
-const Homepage = () => {
+/* ───── Hero ───── */
+function HeroSection() {
   return (
-    <motion.div
-      className="h-full overflow-x-hidden"
-      initial={{ y: '-200vh' }}
-      animate={{ y: '0%' }}
-      transition={{ duration: 1 }}
-    >
-      <div className="relative min-h-screen flex flex-col lg:flex-row items-center justify-center px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48 gap-10 lg:gap-20 overflow-hidden">
-        {/* Background gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 dark:from-black dark:via-gray-900 dark:to-black -z-10" />
-        <div className="absolute inset-0 opacity-20 -z-10">
-          <Image src="/hero-bg.jpg" alt="" fill className="object-cover" />
-        </div>
+    <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 py-24 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 dark:from-black dark:via-gray-900 dark:to-black -z-10" />
+      <div className="absolute inset-0 opacity-20 -z-10">
+        <Image src="/hero-bg.jpg" alt="" fill className="object-cover" />
+      </div>
 
-        {/* TEXT CONTAINER */}
-        <div className="w-full lg:w-1/2 flex flex-col gap-6 z-10 text-center lg:text-left">
-          {/* GREETING */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-sm uppercase tracking-widest text-gray-400"
-          >
-            Hello, I&apos;m
-          </motion.p>
+      <div className="max-w-6xl w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-20 z-10">
+        {/* Text */}
+        <div className="flex-1 flex flex-col gap-5 text-center lg:text-left">
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+            className="text-xs uppercase tracking-widest text-gray-400"
+          >Hello, I&apos;m</motion.p>
 
-          {/* NAME */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight text-white"
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white"
           >
-            Yoseph
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-              Ayalew
-            </span>
+            Yoseph<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Ayalew</span>
           </motion.h1>
 
-          {/* TITLE */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
             className="text-lg sm:text-xl text-blue-300 font-medium"
-          >
-            Junior Software Engineer
-          </motion.p>
+          >Junior Software Engineer</motion.p>
 
-          {/* DESCRIPTION */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
             className="text-sm sm:text-base text-gray-300 max-w-lg"
           >
             I specialize in developing full-stack web applications using Java, Vert.x,
@@ -72,30 +45,18 @@ const Homepage = () => {
             robust backend APIs.
           </motion.p>
 
-          {/* BUTTONS */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
             className="flex flex-wrap gap-4 justify-center lg:justify-start"
           >
-            <Link href="/portfolio">
-              <button className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-medium hover:opacity-90 transition text-sm sm:text-base">
-                View My Work
-              </button>
-            </Link>
-            <Link href="/about">
-              <button className="px-6 py-3 ring-1 ring-white/30 text-white rounded-lg font-medium hover:bg-white/10 transition text-sm sm:text-base">
-                About Me
-              </button>
-            </Link>
+            <a href="#projects" className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-medium hover:opacity-90 transition text-sm sm:text-base">
+              View My Work
+            </a>
+            <a href="#contact" className="px-6 py-3 ring-1 ring-white/30 text-white rounded-lg font-medium hover:bg-white/10 transition text-sm sm:text-base">
+              Get In Touch
+            </a>
           </motion.div>
 
-          {/* SOCIAL LINKS */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}
             className="flex gap-4 justify-center lg:justify-start pt-2"
           >
             <Link href="https://github.com/Solohater" target="_blank" className="text-gray-400 hover:text-white transition">
@@ -110,51 +71,32 @@ const Homepage = () => {
           </motion.div>
         </div>
 
-        {/* IMAGE CONTAINER */}
-        <div className="w-full lg:w-1/2 flex items-center justify-center relative z-10">
+        {/* Photo */}
+        <div className="flex-shrink-0 flex items-center justify-center">
           <div className="relative">
-            {/* Profile photo */}
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden ring-4 ring-blue-500/30 shadow-2xl"
+              className="relative w-56 h-56 sm:w-72 sm:h-72 rounded-full overflow-hidden ring-4 ring-blue-500/30 shadow-2xl"
             >
-              <Image
-                src="/mypic.jpg"
-                alt="Yoseph Ayalew"
-                fill
-                className="object-cover"
-                priority
-              />
+              <Image src="/mypic.jpg" alt="Yoseph Ayalew" fill className="object-cover" priority />
             </motion.div>
 
-            {/* Floating tech tags */}
             {floatingTags.map((tag, i) => {
               const angle = (i / floatingTags.length) * 360;
-              const radius = 180;
+              const radius = 170;
               const x = Math.cos((angle * Math.PI) / 180) * radius;
               const y = Math.sin((angle * Math.PI) / 180) * radius;
               return (
-                <motion.div
-                  key={tag}
+                <motion.div key={tag}
                   className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.8 + i * 0.1 }}
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 + i * 0.1 }}
                 >
                   <motion.div
                     className="absolute px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 backdrop-blur-sm border border-white/20 text-white whitespace-nowrap"
-                    animate={{
-                      x: [x, x + 10, x],
-                      y: [y, y - 10, y],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      delay: i * 0.3,
-                      ease: "easeInOut",
-                    }}
+                    animate={{ x: [x, x + 10, x], y: [y, y - 10, y] }}
+                    transition={{ duration: 4, repeat: Infinity, delay: i * 0.3, ease: "easeInOut" }}
                   >
                     {tag}
                   </motion.div>
@@ -164,8 +106,265 @@ const Homepage = () => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </section>
   );
-};
+}
 
-export default Homepage;
+/* ───── About ───── */
+function AboutSection() {
+  return (
+    <section id="about" className="px-6 py-20 md:py-28">
+      <div className="max-w-3xl mx-auto">
+        <h2 className="section-title">About Me</h2>
+
+        <div className="flex flex-col sm:flex-row gap-6 items-start mb-8">
+          <Image src="/mypic.jpg" alt="" width={100} height={100} className="w-24 h-24 rounded-full object-cover flex-shrink-0 ring-2" style={{ ringColor: 'var(--accent)' }} />
+          <p className="text-base leading-relaxed" style={{ color: 'var(--text)' }}>
+            Motivated Computer Science graduate and Junior Software Developer with professional experience
+            building web applications using <strong>Java, Vert.x, Angular, PostgreSQL,</strong> and <strong>SQL</strong>.
+            Skilled in frontend and backend development, debugging, testing, Git, and GitLab.
+            Currently expanding backend expertise with <strong>Go</strong>.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          {[
+            { label: 'Education', value: 'BSc Computer Science — St. Mary\'s University (07/2023)' },
+            { label: 'Location', value: 'Addis Ababa, Ethiopia' },
+            { label: 'Languages', value: 'Amharic (Native) — English (Fluent)' },
+          ].map((item) => (
+            <div key={item.label} className="p-4 rounded-xl" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)' }}>
+              <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--accent)' }}>{item.label}</p>
+              <p className="text-sm" style={{ color: 'var(--text-h)' }}>{item.value}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───── Experience ───── */
+const experiences = [
+  {
+    period: 'Mar 2026 – Present',
+    title: 'Junior Software Developer',
+    company: 'eTech SC',
+    points: [
+      'Develop and maintain software features using Java and Vert.x',
+      'Build and improve frontend components using Angular',
+      'Work with PostgreSQL databases and SQL queries',
+      'Debug, test, and resolve software defects',
+      'Collaborate with developers and stakeholders using Git and GitLab',
+      'Participate in feature implementation, maintenance, and code reviews',
+    ],
+  },
+];
+
+function ExperienceSection() {
+  return (
+    <section id="experience" className="px-6 py-20 md:py-28" style={{ background: 'var(--bg-alt)' }}>
+      <div className="max-w-3xl mx-auto">
+        <h2 className="section-title">Experience</h2>
+        <div className="relative pl-8" style={{ borderLeft: '2px solid var(--border)' }}>
+          {experiences.map((exp, i) => (
+            <div key={i} className="relative pb-12 last:pb-0">
+              <div className="absolute -left-[13px] top-1 w-6 h-6 rounded-full flex items-center justify-center" style={{ background: 'var(--accent)' }}>
+                <div className="w-2 h-2 rounded-full bg-white" />
+              </div>
+              <p className="text-sm font-medium mb-1" style={{ color: 'var(--accent)' }}>{exp.period}</p>
+              <h3 className="text-lg font-bold" style={{ color: 'var(--text-h)' }}>{exp.title}</h3>
+              <p className="text-sm font-medium mb-3" style={{ color: 'var(--text)' }}>{exp.company}</p>
+              <ul className="space-y-1.5">
+                {exp.points.map((pt, j) => (
+                  <li key={j} className="text-sm flex gap-2" style={{ color: 'var(--text)' }}>
+                    <span style={{ color: 'var(--accent)' }}>▸</span>
+                    {pt}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───── Skills ───── */
+const skillGroups = [
+  { category: 'Languages', skills: ['Java', 'JavaScript', 'TypeScript', 'SQL', 'Go'] },
+  { category: 'Frontend', skills: ['Angular', 'React', 'Next.js', 'Tailwind CSS', 'Redux', 'Material UI'] },
+  { category: 'Backend', skills: ['Vert.x', 'Node.js', 'Express.js', 'REST APIs', 'JWT'] },
+  { category: 'Databases', skills: ['PostgreSQL', 'MongoDB'] },
+  { category: 'Tools', skills: ['Git', 'GitLab', 'GitHub', 'Postman', 'Figma', 'Vercel', 'Render'] },
+];
+
+function SkillsSection() {
+  return (
+    <section id="skills" className="px-6 py-20 md:py-28">
+      <div className="max-w-4xl mx-auto">
+        <h2 className="section-title">Tech Stack</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {skillGroups.map((group) => (
+            <div key={group.category} className="p-5 rounded-xl" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)' }}>
+              <h3 className="text-sm font-bold uppercase tracking-wider mb-3" style={{ color: 'var(--accent)' }}>{group.category}</h3>
+              <div className="flex flex-wrap gap-2">
+                {group.skills.map((skill) => (
+                  <span key={skill} className="px-3 py-1 rounded-full text-xs font-medium" style={{ background: 'var(--accent-bg)', color: 'var(--accent)' }}>
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───── Projects ───── */
+const projects = [
+  {
+    title: 'Dave Phone Repair Management System',
+    desc: 'A full-stack MERN repair shop management system with role-based authentication, repair tracking, dashboards, and REST APIs.',
+    tech: ['React', 'Node.js', 'Express', 'MongoDB'],
+    link: 'https://daveprojfront.onrender.com',
+    github: 'https://github.com/Solohater/DaveProjFront',
+  },
+  {
+    title: 'E-Commerce Store',
+    desc: 'A responsive storefront built with Next.js featuring product filtering, sorting, shopping cart functionality, and a clean modern UI.',
+    tech: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    link: 'https://e-commerce-m6g8.vercel.app',
+    github: 'https://github.com/Solohater/e-commerce',
+  },
+  {
+    title: 'Food Delivery Platform',
+    desc: 'A food delivery web application for browsing restaurants, managing orders, and tracking deliveries.',
+    tech: ['TypeScript', 'Next.js', 'Tailwind CSS'],
+    link: 'https://fastfood-amber-chi.vercel.app',
+    github: 'https://github.com/Solohater/Food-Delivery-Platform',
+  },
+  {
+    title: 'Document Management System',
+    desc: 'A document management application with React frontend, Node.js/Express backend, Prisma ORM, and Neon PostgreSQL database.',
+    tech: ['React', 'Node.js', 'Prisma', 'PostgreSQL'],
+    link: 'https://github.com/Solohater/Document-Management',
+    github: 'https://github.com/Solohater/Document-Management',
+  },
+  {
+    title: 'Acme Rockets',
+    desc: 'A rocket-themed landing page built with Tailwind CSS showcasing responsive design and modern CSS techniques.',
+    tech: ['Tailwind CSS'],
+    link: 'https://acme-rockets-cwqd.onrender.com/#hero',
+    github: 'https://github.com/Solohater/tailwind-tut-first-project',
+  },
+  {
+    title: 'Grocery Reminder App',
+    desc: 'A simple grocery list reminder app — my first React project.',
+    tech: ['React'],
+    link: 'https://groceryreminder.netlify.app',
+    github: 'https://github.com/Solohater/react_deploy_netlify',
+  },
+];
+
+function ProjectsSection() {
+  return (
+    <section id="projects" className="px-6 py-20 md:py-28" style={{ background: 'var(--bg-alt)' }}>
+      <div className="max-w-5xl mx-auto">
+        <h2 className="section-title">Projects</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {projects.map((p, i) => (
+            <div key={i} className="p-6 rounded-xl transition-transform hover:-translate-y-1" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)' }}>
+              <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-h)' }}>{p.title}</h3>
+              <p className="text-sm mb-4 leading-relaxed" style={{ color: 'var(--text)' }}>{p.desc}</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {p.tech.map((t) => (
+                  <span key={t} className="px-2.5 py-0.5 rounded text-xs font-medium" style={{ background: 'var(--accent-bg)', color: 'var(--accent)' }}>
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <div className="flex gap-3">
+                <a href={p.github} target="_blank" className="text-xs font-medium px-3 py-1.5 rounded transition" style={{ background: 'var(--accent-bg)', color: 'var(--accent)' }}
+                  onMouseEnter={(e) => { e.target.style.background = 'var(--accent)'; e.target.style.color = '#fff'; }}
+                  onMouseLeave={(e) => { e.target.style.background = 'var(--accent-bg)'; e.target.style.color = 'var(--accent)'; }}
+                >
+                  Source Code
+                </a>
+                <a href={p.link} target="_blank" className="text-xs font-medium px-3 py-1.5 rounded transition" style={{ border: '1px solid var(--border)', color: 'var(--text-h)' }}
+                  onMouseEnter={(e) => { e.target.style.borderColor = 'var(--accent)'; e.target.style.color = 'var(--accent)'; }}
+                  onMouseLeave={(e) => { e.target.style.borderColor = 'var(--border)'; e.target.style.color = 'var(--text-h)'; }}
+                >
+                  Live Demo
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───── Contact ───── */
+function ContactSection() {
+  return (
+    <section id="contact" className="px-6 py-20 md:py-28">
+      <div className="max-w-3xl mx-auto">
+        <h2 className="section-title">Get In Touch</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="flex flex-col gap-5">
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--text)' }}>
+              Feel free to reach out for opportunities, collaboration, or just a chat.
+            </p>
+            <div className="flex flex-col gap-3">
+              <a href="mailto:yosefayalew56@gmail.com" className="text-sm font-medium transition" style={{ color: 'var(--accent)' }}>
+                yosefayalew56@gmail.com
+              </a>
+              <span className="text-sm" style={{ color: 'var(--text)' }}>Addis Ababa, Ethiopia</span>
+            </div>
+            <div className="flex gap-4 pt-2">
+              <a href="https://github.com/Solohater" target="_blank" className="text-sm font-medium" style={{ color: 'var(--accent)' }}>GitHub</a>
+              <a href="https://www.linkedin.com/in/yoseph-ayalew-65247b291" target="_blank" className="text-sm font-medium" style={{ color: 'var(--accent)' }}>LinkedIn</a>
+            </div>
+          </div>
+
+          <form className="flex flex-col gap-4" action="https://formspree.io/f/xqeoarld" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required
+              className="px-4 py-3 rounded-lg text-sm outline-none transition" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', color: 'var(--text-h)' }} />
+            <input type="email" name="email" placeholder="Your Email" required
+              className="px-4 py-3 rounded-lg text-sm outline-none transition" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', color: 'var(--text-h)' }} />
+            <textarea name="message" placeholder="Your Message" rows={4} required
+              className="px-4 py-3 rounded-lg text-sm outline-none transition resize-none" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', color: 'var(--text-h)' }} />
+            <button type="submit"
+              className="self-start px-5 py-2.5 rounded-lg text-sm font-medium transition border-2"
+              style={{ background: 'var(--accent)', color: '#fff', borderColor: 'var(--accent)' }}
+              onMouseEnter={(e) => { e.target.style.background = 'var(--accent-hover)'; e.target.style.borderColor = 'var(--accent-hover)'; }}
+              onMouseLeave={(e) => { e.target.style.background = 'var(--accent)'; e.target.style.borderColor = 'var(--accent)'; }}
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───── Page ───── */
+export default function Home() {
+  return (
+    <>
+      <HeroSection />
+      <AboutSection />
+      <ExperienceSection />
+      <SkillsSection />
+      <ProjectsSection />
+      <ContactSection />
+      <Footer />
+    </>
+  );
+}
