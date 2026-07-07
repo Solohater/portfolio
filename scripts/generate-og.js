@@ -19,10 +19,10 @@ const html = `<!DOCTYPE html>
     width: 340px; height: 340px;
     border-radius: 50%;
     position: relative;
-    background: radial-gradient(circle at 35% 30%, rgba(57,255,20,0.4), rgba(0,20,0,0.9) 60%, #000 100%);
+    background: radial-gradient(circle at 35% 30%, rgba(0,204,102,0.4), rgba(0,20,0,0.9) 60%, #000 100%);
     box-shadow:
-      0 0 100px rgba(57,255,20,0.15),
-      0 0 200px rgba(57,255,20,0.08),
+      0 0 100px rgba(0,204,102,0.15),
+      0 0 200px rgba(0,204,102,0.08),
       inset 0 0 80px rgba(0,0,0,0.5);
   }
 
@@ -31,7 +31,7 @@ const html = `<!DOCTYPE html>
     content: '';
     position: absolute; inset: -4px;
     border-radius: 50%;
-    background: conic-gradient(from 0deg, transparent, rgba(57,255,20,0.3), rgba(57,255,20,0.6), rgba(57,255,20,0.3), transparent);
+    background: conic-gradient(from 0deg, transparent, rgba(0,204,102,0.3), rgba(0,204,102,0.6), rgba(0,204,102,0.3), transparent);
     -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 1px));
     mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 1px));
     animation: spin 4s linear infinite;
@@ -42,7 +42,7 @@ const html = `<!DOCTYPE html>
     content: '';
     position: absolute; inset: -12px;
     border-radius: 50%;
-    background: conic-gradient(from 180deg, transparent, rgba(57,255,20,0.1), rgba(57,255,20,0.3), rgba(57,255,20,0.1), transparent);
+    background: conic-gradient(from 180deg, transparent, rgba(0,204,102,0.1), rgba(0,204,102,0.3), rgba(0,204,102,0.1), transparent);
     -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 1px), #fff calc(100%));
     mask: radial-gradient(farthest-side, transparent calc(100% - 1px), #fff calc(100%));
     animation: spin 6s linear reverse infinite;
@@ -62,24 +62,24 @@ const html = `<!DOCTYPE html>
     position: absolute;
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     font-size: 64px; font-weight: 800;
-    color: rgba(57,255,20,0.6);
-    text-shadow: 0 0 30px rgba(57,255,20,0.3);
+    color: rgba(0,204,102,0.6);
+    text-shadow: 0 0 30px rgba(0,204,102,0.3);
   }
 
   .y {
     top: 50%; left: 50%;
     transform: translate(-100%, -50%);
     margin-left: -20px;
-    color: rgba(57,255,20,0.8);
-    text-shadow: 0 0 40px rgba(57,255,20,0.4);
+    color: rgba(0,204,102,0.8);
+    text-shadow: 0 0 40px rgba(0,204,102,0.4);
   }
 
   .a {
     top: 50%; left: 50%;
     transform: translate(0, -50%);
     margin-left: 20px;
-    color: rgba(57,255,20,0.8);
-    text-shadow: 0 0 40px rgba(57,255,20,0.4);
+    color: rgba(0,204,102,0.8);
+    text-shadow: 0 0 40px rgba(0,204,102,0.4);
   }
 
   @keyframes spin {
