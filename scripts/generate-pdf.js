@@ -24,15 +24,15 @@ const html = `<!DOCTYPE html>
     gap: 20px;
     align-items: center;
     padding-bottom: 14px;
-    border-bottom: 3px solid #39ff14;
+    border-bottom: 3px solid #00bb00;
     margin-bottom: 14px;
   }
   .header-content { flex: 1; }
   .header h1 { font-size: 26px; color: #000; margin: 0; }
-  .header .title { font-size: 15px; color: #39ff14; font-weight: 600; margin: 3px 0; }
+  .header .title { font-size: 15px; color: #00bb00; font-weight: 600; margin: 3px 0; }
   .header .contact { font-size: 11px; color: #000; display: flex; flex-wrap: wrap; gap: 14px; margin-top: 5px; }
   .header .contact a { color: #000; text-decoration: none; border-bottom: 1px solid #ccc; }
-  .photo { width: 72px; height: 72px; border-radius: 50%; overflow: hidden; border: 2px solid #39ff14; flex-shrink: 0; }
+  .photo { width: 72px; height: 72px; border-radius: 50%; overflow: hidden; border: 2px solid #00bb00; flex-shrink: 0; }
   .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .summary { font-size: 12px; color: #000; margin-bottom: 14px; line-height: 1.45; }
   .section { margin-bottom: 12px; }
@@ -40,11 +40,11 @@ const html = `<!DOCTYPE html>
     font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
     display: flex; align-items: center; gap: 7px; margin-bottom: 7px; color: #000;
   }
-  .section-title .bar { width: 4px; height: 15px; background: #39ff14; border-radius: 2px; display: inline-block; }
+  .section-title .bar { width: 4px; height: 15px; background: #00bb00; border-radius: 2px; display: inline-block; }
   .exp-item { margin-bottom: 8px; }
   .exp-header { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
   .exp-header h3 { font-size: 13px; font-weight: 700; color: #000; }
-  .exp-company { font-size: 11px; color: #39ff14; font-weight: 600; }
+  .exp-company { font-size: 11px; color: #00bb00; font-weight: 600; }
   .exp-period { font-size: 10px; color: #000; margin-left: auto; white-space: nowrap; }
   .exp-desc { font-size: 11px; color: #000; margin-top: 2px; line-height: 1.4; }
   .exp-points { margin: 4px 0 0 16px; }
@@ -52,7 +52,7 @@ const html = `<!DOCTYPE html>
   .edu-item { margin-bottom: 6px; }
   .edu-header { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
   .edu-header h3 { font-size: 13px; font-weight: 700; color: #000; }
-  .edu-school { font-size: 11px; color: #39ff14; font-weight: 600; }
+  .edu-school { font-size: 11px; color: #00bb00; font-weight: 600; }
   .edu-period { font-size: 10px; color: #000; margin-left: auto; white-space: nowrap; }
   .edu-desc { font-size: 11px; color: #000; margin-top: 2px; }
   .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 20px; }
