@@ -8,6 +8,7 @@ const links = [
   { href: '#experience', title: 'Experience' },
   { href: '#projects', title: 'Projects' },
   { href: '#contact', title: 'Contact' },
+  { href: '/cv', title: 'CV' },
 ]
 
 const Navbar = () => {
