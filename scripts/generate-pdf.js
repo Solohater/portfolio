@@ -1,5 +1,9 @@
 const { execSync } = require('child_process');
 const path = require('path');
+const fs = require('fs');
+
+const imgPath = path.join(__dirname, '..', 'public', 'photojo.jpg');
+const imgBase64 = fs.readFileSync(imgPath).toString('base64');
 
 const html = `<!DOCTYPE html>
 <html>
@@ -10,51 +14,56 @@ const html = `<!DOCTYPE html>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    color: #1a1a2e;
-    line-height: 1.3;
+    color: #000;
+    line-height: 1.35;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
   .header {
     display: flex;
-    gap: 16px;
-    align-items: start;
-    padding-bottom: 12px;
+    gap: 20px;
+    align-items: center;
+    padding-bottom: 14px;
     border-bottom: 3px solid #39ff14;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
   .header-content { flex: 1; }
-  .header h1 { font-size: 24px; margin: 0; }
-  .header .title { font-size: 14px; color: #39ff14; font-weight: 600; margin: 2px 0; }
-  .header .contact { font-size: 10px; color: #4a4a6a; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px; }
-  .header .contact a { color: #39ff14; text-decoration: none; }
-  .photo { width: 60px; height: 60px; border-radius: 50%; overflow: hidden; border: 2px solid #39ff14; flex-shrink: 0; }
-  .photo img { width: 100%; height: 100%; object-fit: cover; }
-  .summary { font-size: 11px; color: #4a4a6a; margin-bottom: 12px; line-height: 1.4; }
-  .section { margin-bottom: 10px; }
+  .header h1 { font-size: 26px; color: #000; margin: 0; }
+  .header .title { font-size: 15px; color: #39ff14; font-weight: 600; margin: 3px 0; }
+  .header .contact { font-size: 11px; color: #000; display: flex; flex-wrap: wrap; gap: 14px; margin-top: 5px; }
+  .header .contact a { color: #000; text-decoration: none; border-bottom: 1px solid #ccc; }
+  .photo { width: 72px; height: 72px; border-radius: 50%; overflow: hidden; border: 2px solid #39ff14; flex-shrink: 0; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .summary { font-size: 12px; color: #000; margin-bottom: 14px; line-height: 1.45; }
+  .section { margin-bottom: 12px; }
   .section-title {
-    font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
-    display: flex; align-items: center; gap: 6px; margin-bottom: 6px; color: #1a1a2e;
+    font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    display: flex; align-items: center; gap: 7px; margin-bottom: 7px; color: #000;
   }
-  .section-title .bar { width: 4px; height: 14px; background: #39ff14; border-radius: 2px; display: inline-block; }
-  .exp-item { margin-bottom: 6px; }
-  .exp-header { display: flex; align-items: baseline; gap: 6px; }
-  .exp-header h3 { font-size: 12px; font-weight: 700; color: #1a1a2e; }
-  .exp-company { font-size: 10px; color: #39ff14; font-weight: 600; }
-  .exp-period { font-size: 9px; color: #4a4a6a; margin-left: auto; white-space: nowrap; }
-  .exp-desc { font-size: 10px; color: #4a4a6a; margin-top: 1px; }
-  .edu-item { margin-bottom: 4px; }
-  .edu-header { display: flex; align-items: baseline; gap: 6px; }
-  .edu-header h3 { font-size: 12px; font-weight: 700; color: #1a1a2e; }
-  .edu-school { font-size: 10px; color: #39ff14; font-weight: 600; }
-  .edu-period { font-size: 9px; color: #4a4a6a; margin-left: auto; white-space: nowrap; }
-  .skills-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
-  .skill-group h4 { font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; color: #39ff14; margin-bottom: 1px; }
-  .skill-group p { font-size: 10px; color: #4a4a6a; }
+  .section-title .bar { width: 4px; height: 15px; background: #39ff14; border-radius: 2px; display: inline-block; }
+  .exp-item { margin-bottom: 8px; }
+  .exp-header { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+  .exp-header h3 { font-size: 13px; font-weight: 700; color: #000; }
+  .exp-company { font-size: 11px; color: #39ff14; font-weight: 600; }
+  .exp-period { font-size: 10px; color: #000; margin-left: auto; white-space: nowrap; }
+  .exp-desc { font-size: 11px; color: #000; margin-top: 2px; line-height: 1.4; }
+  .exp-points { margin: 4px 0 0 16px; }
+  .exp-points li { font-size: 10.5px; color: #000; line-height: 1.4; margin-bottom: 1px; }
+  .edu-item { margin-bottom: 6px; }
+  .edu-header { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+  .edu-header h3 { font-size: 13px; font-weight: 700; color: #000; }
+  .edu-school { font-size: 11px; color: #39ff14; font-weight: 600; }
+  .edu-period { font-size: 10px; color: #000; margin-left: auto; white-space: nowrap; }
+  .edu-desc { font-size: 11px; color: #000; margin-top: 2px; }
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 20px; }
+  .skill-group { margin-bottom: 2px; }
+  .skill-group h4 { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: #000; border-bottom: 1px solid #ddd; padding-bottom: 1px; margin-bottom: 2px; }
+  .skill-group p { font-size: 10.5px; color: #000; }
 </style>
 </head>
 <body>
   <div class="header">
+    <div class="photo"><img src="data:image/jpeg;base64,${imgBase64}" alt="Yoseph Ayalew"></div>
     <div class="header-content">
       <h1>Yoseph Ayalew</h1>
       <div class="title">Junior Software Engineer</div>
@@ -69,7 +78,7 @@ const html = `<!DOCTYPE html>
   </div>
 
   <div class="summary">
-    Motivated Computer Science graduate and Junior Software Developer with professional experience building web applications using <strong>Java, Vert.x, Angular, PostgreSQL,</strong> and <strong>SQL</strong>. Skilled in full-stack development, debugging, testing, and collaboration. Currently expanding backend expertise with <strong>Go</strong>.
+    Computer Science graduate and Junior Software Developer with professional experience building full-stack web applications using <strong>Java, Vert.x, Angular, PostgreSQL,</strong> and <strong>SQL</strong>. Skilled in frontend and backend development, debugging, testing, and collaboration with Git and GitLab. Currently expanding backend expertise with <strong>Go</strong>.
   </div>
 
   <div class="section">
@@ -80,7 +89,14 @@ const html = `<!DOCTYPE html>
         <span class="exp-company">eTech SC</span>
         <span class="exp-period">Mar 2026 &ndash; Present</span>
       </div>
-      <div class="exp-desc">Developing full-stack features using Java, Vert.x, Angular, and PostgreSQL. Debugging, testing, and collaborating via Git/GitLab. Participating in code reviews and feature implementation.</div>
+      <div class="exp-desc">Developing and maintaining software features across the full stack.</div>
+      <ul class="exp-points">
+        <li>Build and improve frontend components using Angular</li>
+        <li>Develop backend APIs and services using Java and Vert.x</li>
+        <li>Work with PostgreSQL databases and write complex SQL queries</li>
+        <li>Debug, test, and resolve software defects</li>
+        <li>Collaborate with developers using Git and GitLab; participate in code reviews</li>
+      </ul>
     </div>
   </div>
 
@@ -89,33 +105,34 @@ const html = `<!DOCTYPE html>
     <div class="edu-item">
       <div class="edu-header">
         <h3>BSc in Computer Science</h3>
-        <span class="edu-school">St. Mary's University</span>
+        <span class="edu-school">St. Mary's University &mdash; Addis Ababa</span>
         <span class="edu-period">2020 &ndash; 2023</span>
       </div>
+      <div class="edu-desc">Focused on software development, algorithms, database systems, and data structures.</div>
     </div>
   </div>
 
   <div class="section">
-    <div class="section-title"><span class="bar"></span>Skills</div>
+    <div class="section-title"><span class="bar"></span>Technical Skills</div>
     <div class="skills-grid">
       <div class="skill-group">
         <h4>Languages</h4>
         <p>Java, JavaScript, TypeScript, SQL, Go</p>
       </div>
       <div class="skill-group">
-        <h4>Frontend</h4>
-        <p>Angular, React, Next.js, Tailwind CSS, Redux, Material UI</p>
-      </div>
-      <div class="skill-group">
         <h4>Backend</h4>
         <p>Vert.x, Node.js, Express.js, REST APIs, JWT</p>
+      </div>
+      <div class="skill-group">
+        <h4>Frontend</h4>
+        <p>Angular, React, Next.js, Tailwind CSS, Redux, Material UI</p>
       </div>
       <div class="skill-group">
         <h4>Databases</h4>
         <p>PostgreSQL, MongoDB</p>
       </div>
       <div class="skill-group">
-        <h4>Tools</h4>
+        <h4>Tools &amp; Platforms</h4>
         <p>Git, GitLab, GitHub, Postman, Figma, Vercel, Render</p>
       </div>
     </div>
@@ -126,7 +143,7 @@ const html = `<!DOCTYPE html>
 const htmlPath = path.join(__dirname, '..', 'public', 'cv-temp.html');
 const pdfPath = path.join(__dirname, '..', 'public', 'cv.pdf');
 
-require('fs').writeFileSync(htmlPath, html);
+fs.writeFileSync(htmlPath, html);
 
 try {
   execSync(
@@ -137,5 +154,5 @@ try {
 } catch (e) {
   console.error('PDF generation failed:', e.message);
 } finally {
-  try { require('fs').unlinkSync(htmlPath); } catch {}
+  try { fs.unlinkSync(htmlPath); } catch {}
 }
