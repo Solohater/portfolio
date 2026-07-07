@@ -3,11 +3,11 @@ import { useState, useContext, useEffect } from 'react'
 import { ThemeContext } from '@/context/ThemeContext'
 
 const links = [
-  { href: '#hero', title: 'Home' },
-  { href: '#about', title: 'About' },
-  { href: '#experience', title: 'Experience' },
-  { href: '#projects', title: 'Projects' },
-  { href: '#contact', title: 'Contact' },
+  { href: '/#hero', title: 'Home' },
+  { href: '/#about', title: 'About' },
+  { href: '/#experience', title: 'Experience' },
+  { href: '/#projects', title: 'Projects' },
+  { href: '/#contact', title: 'Contact' },
   { href: '/cv', title: 'CV' },
 ]
 
@@ -32,7 +32,7 @@ const Navbar = () => {
     >
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 h-16">
         <a
-          href="#hero"
+          href="/#hero"
           className="text-xl font-bold"
           style={{ color: 'var(--accent)' }}
         >
