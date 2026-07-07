@@ -34,7 +34,7 @@ function HeroSection() {
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
             className="text-lg sm:text-xl text-blue-300 font-medium"
-          >Junior Software Engineer</motion.p>
+          >Software Engineer</motion.p>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
             className="text-sm sm:text-base text-gray-300 max-w-lg"

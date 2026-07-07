@@ -66,7 +66,7 @@ const html = `<!DOCTYPE html>
     <div class="photo"><img src="data:image/jpeg;base64,${imgBase64}" alt="Yoseph Ayalew"></div>
     <div class="header-content">
       <h1>Yoseph Ayalew</h1>
-      <div class="title">Junior Software Engineer</div>
+      <div class="title">Software Engineer</div>
       <div class="contact">
         <span>yosefayalew56@gmail.com</span>
         <span>Addis Ababa, Ethiopia</span>

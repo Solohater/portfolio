@@ -6,11 +6,11 @@ import { ThemeProvider } from "@/context/ThemeContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Yoseph Ayalew — Junior Software Engineer | Portfolio",
+  title: "Yoseph Ayalew — Software Engineer | Portfolio",
   description:
-    "Portfolio of Yoseph Ayalew — Junior Software Engineer specializing in Java, Vert.x, Angular, React, and PostgreSQL. Full-stack developer based in Addis Ababa, Ethiopia.",
+    "Portfolio of Yoseph Ayalew — Software Engineer specializing in Java, Vert.x, Angular, React, and PostgreSQL. Full-stack developer based in Addis Ababa, Ethiopia.",
   openGraph: {
-    title: "Yoseph Ayalew — Junior Software Engineer",
+    title: "Yoseph Ayalew — Software Engineer",
     description:
       "Full-stack developer specializing in Java, Vert.x, Angular, React, and PostgreSQL. Based in Addis Ababa, Ethiopia.",
     url: "https://portfolio-7ypn.onrender.com",
@@ -21,7 +21,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Yoseph Ayalew — Junior Software Engineer",
+    title: "Yoseph Ayalew — Software Engineer",
     description:
       "Full-stack developer specializing in Java, Vert.x, Angular, React, and PostgreSQL.",
     images: ["/og-image.png"],

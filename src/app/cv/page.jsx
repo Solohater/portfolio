@@ -42,7 +42,7 @@ export default function CVPage() {
           <Image src="/photojo.jpg" alt="Yoseph Ayalew" width={100} height={100} className="w-24 h-24 rounded-full object-cover shrink-0 ring-2" style={{ boxShadow: '0 0 0 2px var(--accent)' }} />
           <div className="text-center sm:text-left">
             <h1 className="text-3xl font-bold mb-1" style={{ color: 'var(--text-h)' }}>Yoseph Ayalew</h1>
-            <p className="text-lg font-medium mb-2" style={{ color: 'var(--accent)' }}>Junior Software Engineer</p>
+            <p className="text-lg font-medium mb-2" style={{ color: 'var(--accent)' }}>Software Engineer</p>
             <p className="text-sm max-w-lg" style={{ color: 'var(--text)' }}>
               Computer Science graduate with professional experience building full-stack web applications.
               Skilled in Java, Vert.x, Angular, React, PostgreSQL, and modern web technologies.

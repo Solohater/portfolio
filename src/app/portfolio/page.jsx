@@ -126,7 +126,7 @@ const PortfolioPage = () => {
             </defs>
             <text fill="currentColor">
               <textPath xlinkHref="#circlePath" className="text-xl">
-                Junior Software Engineer
+                Software Engineer
               </textPath>
             </text>
           </motion.svg>
