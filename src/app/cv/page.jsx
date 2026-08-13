@@ -39,7 +39,7 @@ export default function CVPage() {
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-10 pb-8" style={{ borderBottom: '2px solid var(--border)' }}>
-          <Image src="/photojo.jpg" alt="Yoseph Ayalew" width={100} height={100} className="w-24 h-24 rounded-full object-cover shrink-0 ring-2" style={{ boxShadow: '0 0 0 2px var(--accent)' }} />
+          <Image src="/photojo.jpg" alt="Yoseph Ayalew" width={100} height={100} className="w-24 h-24 rounded-full object-cover shrink-0 ring-2" style={{ boxShadow: '0 0 0 2px var(--bg)' }} />
           <div className="text-center sm:text-left">
             <h1 className="text-3xl font-bold mb-1" style={{ color: 'var(--text-h)' }}>Yoseph Ayalew</h1>
             <p className="text-lg font-medium mb-2" style={{ color: 'var(--accent-text)' }}>Software Engineer</p>
@@ -68,7 +68,7 @@ export default function CVPage() {
         {/* Experience */}
         <section className="mb-10">
           <h2 className="text-xl font-bold mb-5 flex items-center gap-2" style={{ color: 'var(--text-h)' }}>
-            <span className="w-1.5 h-5 rounded-sm inline-block" style={{ background: 'var(--accent)' }} />
+            <span className="w-1.5 h-5 rounded-sm inline-block" style={{ background: 'var(--accent-text)' }} />
             Experience
           </h2>
           {experience.map((exp, i) => (
@@ -92,7 +92,7 @@ export default function CVPage() {
         {/* Education */}
         <section className="mb-10">
           <h2 className="text-xl font-bold mb-5 flex items-center gap-2" style={{ color: 'var(--text-h)' }}>
-            <span className="w-1.5 h-5 rounded-sm inline-block" style={{ background: 'var(--accent)' }} />
+            <span className="w-1.5 h-5 rounded-sm inline-block" style={{ background: 'var(--accent-text)' }} />
             Education
           </h2>
           {education.map((edu, i) => (
@@ -114,7 +114,7 @@ export default function CVPage() {
         {/* Skills */}
         <section className="mb-10">
           <h2 className="text-xl font-bold mb-5 flex items-center gap-2" style={{ color: 'var(--text-h)' }}>
-            <span className="w-1.5 h-5 rounded-sm inline-block" style={{ background: 'var(--accent)' }} />
+            <span className="w-1.5 h-5 rounded-sm inline-block" style={{ background: 'var(--accent-text)' }} />
             Skills
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -135,7 +135,7 @@ export default function CVPage() {
 
         {/* Download hint */}
         <p className="text-center text-xs mt-8" style={{ color: 'var(--text)' }}>
-          <a href="/cv.pdf" download className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition" style={{ background: 'var(--accent)', color: '#fff' }}>
+          <a href="/cv.pdf" download className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
             Download PDF
           </a>
         </p>

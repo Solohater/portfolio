@@ -45,7 +45,7 @@ function HeroSection() {
             <a href="#projects" className="px-6 py-3 bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-lg font-medium transition text-sm sm:text-base">
               View My Work
             </a>
-            <a href="#contact" className="px-6 py-3 ring-1 ring-black text-black hover:bg-black/5 dark:ring-white dark:text-white dark:hover:bg-white/10 rounded-lg font-medium transition text-sm sm:text-base">
+            <a href="#contact" className="px-6 py-3 bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-lg font-medium transition text-sm sm:text-base">
               Get In Touch
             </a>
           </motion.div>
@@ -78,7 +78,7 @@ function HeroSection() {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="relative w-56 h-56 sm:w-72 sm:h-72 rounded-full overflow-hidden ring-4 ring-blue-500/30 shadow-2xl"
+              className="relative w-56 h-56 sm:w-72 sm:h-72 rounded-full overflow-hidden ring-4 ring-[var(--bg)] shadow-2xl"
             >
               <Image src="/photojo.jpg" alt="Yoseph Ayalew" fill className="object-cover" priority />
             </motion.div>
@@ -118,7 +118,7 @@ function AboutSection() {
         <h2 className="section-title">About Me</h2>
 
         <div className="flex flex-col sm:flex-row gap-6 items-start mb-8">
-          <Image src="/photojo.jpg" alt="" width={100} height={100} className="w-24 h-24 rounded-full object-cover flex-shrink-0 ring-2" style={{ ringColor: 'var(--accent)' }} />
+          <Image src="/photojo.jpg" alt="" width={100} height={100} className="w-24 h-24 rounded-full object-cover flex-shrink-0 ring-2" style={{ ringColor: 'var(--bg)' }} />
           <p className="text-base leading-relaxed" style={{ color: 'var(--text)' }}>
             Motivated Computer Science graduate and Junior Software Developer with professional experience
             building web applications using <strong>Java, Vert.x, Angular, PostgreSQL,</strong> and <strong>SQL</strong>.
@@ -170,7 +170,7 @@ function ExperienceSection() {
         {/* Git Branch Timeline */}
         <div className="relative">
           {/* Main branch line */}
-          <div className="absolute left-[23px] top-0 bottom-0 w-[3px]" style={{ background: 'var(--accent)' }} />
+          <div className="absolute left-[23px] top-0 bottom-0 w-[3px]" style={{ background: 'var(--accent-text)' }} />
 
           <div className="space-y-16">
             {experiences.map((exp, i) => (
@@ -183,7 +183,7 @@ function ExperienceSection() {
                 className="relative pl-16"
               >
                 {/* Branch connector line (horizontal + angle) */}
-                <svg className="absolute left-[23px] top-5 w-12 h-8 overflow-visible" style={{ color: 'var(--accent)' }}>
+                <svg className="absolute left-[23px] top-5 w-12 h-8 overflow-visible" style={{ color: 'var(--accent-text)' }}>
                   <path d="M0 0 L24 0 L48 24" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="4 3" opacity="0.6" />
                 </svg>
 
@@ -196,7 +196,7 @@ function ExperienceSection() {
                   transition={{ duration: 0.3, delay: i * 0.25 + 0.2 }}
                   viewport={{ once: true }}
                 >
-                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: 'var(--accent)' }} />
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: 'var(--accent-text)' }} />
                 </motion.div>
 
                 {/* Experience card */}
@@ -418,10 +418,7 @@ function ContactSection() {
             <textarea name="message" placeholder="Your Message" rows={4} required
               className="px-4 py-3 rounded-lg text-sm outline-none transition resize-none" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', color: 'var(--text-h)' }} />
             <button type="submit"
-              className="self-start px-5 py-2.5 rounded-lg text-sm font-medium transition border-2"
-              style={{ background: 'var(--accent)', color: '#fff', borderColor: 'var(--accent)' }}
-              onMouseEnter={(e) => { e.target.style.background = 'var(--accent-hover)'; e.target.style.borderColor = 'var(--accent-hover)'; }}
-              onMouseLeave={(e) => { e.target.style.background = 'var(--accent)'; e.target.style.borderColor = 'var(--accent)'; }}
+              className="self-start px-5 py-2.5 rounded-lg text-sm font-medium transition border-2 bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 border-black dark:border-white"
             >
               Send Message
             </button>
