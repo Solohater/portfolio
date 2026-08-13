@@ -39,7 +39,7 @@ export default function CVPage() {
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-10 pb-8" style={{ borderBottom: '2px solid var(--border)' }}>
-          <Image src="/photojo.png" alt="Yoseph Ayalew" width={100} height={100} className="w-24 h-24 rounded-full object-cover shrink-0 ring-2" style={{ boxShadow: '0 0 0 2px var(--bg)' }} />
+          <Image src="/photojo.png" alt="Yoseph Ayalew" width={100} height={100} className="w-24 h-24 rounded-full object-cover object-top shrink-0 ring-2" style={{ boxShadow: '0 0 0 2px var(--bg)' }} />
           <div className="text-center sm:text-left">
             <h1 className="text-3xl font-bold mb-1" style={{ color: 'var(--text-h)' }}>Yoseph Ayalew</h1>
             <p className="text-lg font-medium mb-2" style={{ color: 'var(--accent-text)' }}>Software Engineer</p>

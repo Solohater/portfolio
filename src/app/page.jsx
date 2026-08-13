@@ -80,7 +80,7 @@ function HeroSection() {
               transition={{ delay: 0.3, duration: 0.5 }}
               className="relative w-56 h-56 sm:w-72 sm:h-72 rounded-full overflow-hidden ring-4 ring-[var(--bg)] shadow-2xl"
             >
-              <Image src="/photojo.png" alt="Yoseph Ayalew" fill className="object-cover" priority />
+              <Image src="/photojo.png" alt="Yoseph Ayalew" fill className="object-cover object-top -rotate-6 scale-110" priority />
             </motion.div>
 
             {floatingTags.map((tag, i) => {
@@ -118,7 +118,7 @@ function AboutSection() {
         <h2 className="section-title">About Me</h2>
 
         <div className="flex flex-col sm:flex-row gap-6 items-start mb-8">
-          <Image src="/photojo.png" alt="" width={100} height={100} className="w-24 h-24 rounded-full object-cover flex-shrink-0 ring-2" style={{ ringColor: 'var(--bg)' }} />
+          <Image src="/photojo.png" alt="" width={100} height={100} className="w-24 h-24 rounded-full object-cover object-top flex-shrink-0 ring-2" style={{ ringColor: 'var(--bg)' }} />
           <p className="text-base leading-relaxed" style={{ color: 'var(--text)' }}>
             Motivated Computer Science graduate and Junior Software Developer with professional experience
             building web applications using <strong>Java, Vert.x, Angular, PostgreSQL,</strong> and <strong>SQL</strong>.

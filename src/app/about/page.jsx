@@ -35,7 +35,7 @@ const AboutPage = () => {
               alt=""
               width={112}
               height={112}
-              className="w-28 h-28 rounded-full object-cover"
+              className="w-28 h-28 rounded-full object-cover object-top"
             />
             {/* BIOGRAPHY TITLE */}
             <h1 className="font-bold text-2xl dark:text-white">BIOGRAPHY</h1>
