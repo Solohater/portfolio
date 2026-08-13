@@ -13,31 +13,25 @@ const floatingTags = [
 function HeroSection() {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 py-24 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 dark:from-black dark:via-gray-900 dark:to-black -z-10" />
-      <div className="absolute inset-0 opacity-20 -z-10">
-        <Image src="/hero-bg.jpg" alt="" fill className="object-cover" />
-      </div>
-
       <div className="max-w-6xl w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-20 z-10">
         {/* Text */}
         <div className="flex-1 flex flex-col gap-5 text-center lg:text-left">
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="text-xs uppercase tracking-widest text-gray-400"
+            className="font-display text-xs uppercase tracking-widest text-black dark:text-white"
           >Hello, I&apos;m</motion.p>
 
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white"
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-black dark:text-white"
           >
-            Yoseph<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-400">Ayalew</span>
+            Yoseph<br />Ayalew
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
-            className="text-lg sm:text-xl text-blue-300 font-medium"
+            className="font-display text-lg sm:text-xl text-black dark:text-white font-medium"
           >Software Engineer</motion.p>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
-            className="text-sm sm:text-base text-gray-300 max-w-lg"
+            className="font-display text-sm sm:text-base text-black dark:text-white max-w-lg"
           >
             I specialize in developing full-stack web applications using Java, Vert.x,
             Angular, React, and PostgreSQL. Currently working at eTech SC, I build and
@@ -48,10 +42,10 @@ function HeroSection() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
             className="flex flex-wrap gap-4 justify-center lg:justify-start"
           >
-            <a href="#projects" className="px-6 py-3 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg font-medium hover:opacity-90 transition text-sm sm:text-base">
+            <a href="#projects" className="px-6 py-3 bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-lg font-medium transition text-sm sm:text-base">
               View My Work
             </a>
-            <a href="#contact" className="px-6 py-3 ring-1 ring-white/30 text-white rounded-lg font-medium hover:bg-white/10 transition text-sm sm:text-base">
+            <a href="#contact" className="px-6 py-3 ring-1 ring-black text-black hover:bg-black/5 dark:ring-white dark:text-white dark:hover:bg-white/10 rounded-lg font-medium transition text-sm sm:text-base">
               Get In Touch
             </a>
           </motion.div>
@@ -59,19 +53,19 @@ function HeroSection() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}
             className="flex gap-4 justify-center lg:justify-start pt-2"
           >
-            <Link href="https://github.com/Solohater" target="_blank" className="text-gray-400 hover:text-white transition">
+            <Link href="https://github.com/Solohater" target="_blank" className="text-black hover:text-gray-600 dark:text-gray-400 dark:hover:text-white transition">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
             </Link>
-            <Link href="https://www.linkedin.com/in/yoseph-ayalew-65247b291" target="_blank" className="text-gray-400 hover:text-white transition">
+            <Link href="https://www.linkedin.com/in/yoseph-ayalew-65247b291" target="_blank" className="text-black hover:text-gray-600 dark:text-gray-400 dark:hover:text-white transition">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             </Link>
-            <Link href="mailto:yosefayalew56@gmail.com" className="text-gray-400 hover:text-white transition">
+            <Link href="mailto:yosefayalew56@gmail.com" className="text-black hover:text-gray-600 dark:text-gray-400 dark:hover:text-white transition">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
             </Link>
-            <Link href="https://gitlab.com/yosephh" target="_blank" className="text-gray-400 hover:text-white transition">
+            <Link href="https://gitlab.com/yosephh" target="_blank" className="text-black hover:text-gray-600 dark:text-gray-400 dark:hover:text-white transition">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M21 14.07a1.42 1.42 0 0 1-.41.73l-4.42 4.42a2.82 2.82 0 0 1-2 .82 2.79 2.79 0 0 1-2-.82l-4.42-4.42a1.41 1.41 0 0 1 0-2l4.42-4.42a2.82 2.82 0 0 1 2-.82c.75 0 1.5.27 2 .82l4.42 4.42c.19.19.4.44.41.72z"/><path d="M3.29 14.07c0 .2.07.5.41.73l4.42 4.42a2.82 2.82 0 0 0 2 .82V5.97c-.75 0-1.5.27-2 .82L3.7 11.21a1.41 1.41 0 0 0-.41.72v2.14z"/></svg>
             </Link>
-            <Link href="https://t.me/YOSEP015" target="_blank" className="text-gray-400 hover:text-white transition">
+            <Link href="https://t.me/YOSEP015" target="_blank" className="text-black hover:text-gray-600 dark:text-gray-400 dark:hover:text-white transition">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
             </Link>
           </motion.div>
@@ -100,7 +94,7 @@ function HeroSection() {
                   initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 + i * 0.1 }}
                 >
                   <motion.div
-                    className="absolute px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 backdrop-blur-sm border border-white/20 text-white whitespace-nowrap"
+                    className="absolute px-3 py-1.5 rounded-full text-xs font-medium bg-black/10 border border-black/20 text-black dark:bg-white/10 dark:border-white/20 dark:text-white whitespace-nowrap"
                     animate={{ x: [x, x + 10, x], y: [y, y - 10, y] }}
                     transition={{ duration: 4, repeat: Infinity, delay: i * 0.3, ease: "easeInOut" }}
                   >
@@ -300,46 +294,48 @@ function SkillsSection() {
 /* ───── Projects ───── */
 const projects = [
   {
-    title: 'Dave Phone Repair Management System',
-    desc: 'A full-stack MERN repair shop management system with role-based authentication, repair tracking, dashboards, and REST APIs.',
-    tech: ['React', 'Node.js', 'Express', 'MongoDB'],
-    link: 'https://daveprojfront.onrender.com',
-    github: 'https://github.com/Solohater/DaveProjFront',
+    title: 'Document Manager',
+    desc: 'A document management platform where users post documents and a reviewer role reviews and approves them.',
+    tech: ['React', 'Node.js', 'Prisma', 'PostgreSQL'],
+    link: 'https://blog-app-seven-bice-50.vercel.app',
+    github: 'https://github.com/Solohater/Document-Management',
+    demo: 'admin / admin123',
   },
   {
-    title: 'E-Commerce Store',
-    desc: 'A responsive storefront built with Next.js featuring product filtering, sorting, shopping cart functionality, and a clean modern UI.',
-    tech: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-    link: 'https://e-commerce-m6g8.vercel.app',
-    github: 'https://github.com/Solohater/e-commerce',
+    title: 'TechShop',
+    desc: 'A commercial tech store for phones, tablets and laptops — product catalog, shopping cart, wishlist, order tracking, and customer accounts.',
+    tech: ['TypeScript', 'Next.js', 'Tailwind CSS'],
+    link: 'https://techshop-peach.vercel.app',
+    demo: 'admin@techshop.com / Admin@12345',
   },
   {
-    title: 'Food Delivery Platform',
-    desc: 'A food delivery web application for browsing restaurants, managing orders, and tracking deliveries.',
+    title: 'Ethio Kemem — Food Menu',
+    desc: 'A bilingual (Amharic/English) traditional Ethiopian food menu — categorized dishes, order cart, and an admin dashboard.',
     tech: ['TypeScript', 'Next.js', 'Tailwind CSS'],
     link: 'https://fastfood-amber-chi.vercel.app',
     github: 'https://github.com/Solohater/Food-Delivery-Platform',
+    demo: 'admin / admin123',
   },
   {
-    title: 'Document Management System',
-    desc: 'A document management application with React frontend, Node.js/Express backend, Prisma ORM, and Neon PostgreSQL database.',
-    tech: ['React', 'Node.js', 'Prisma', 'PostgreSQL'],
-    link: 'https://github.com/Solohater/Document-Management',
-    github: 'https://github.com/Solohater/Document-Management',
+    title: 'JODEV Blog',
+    desc: 'A blog platform with categories, post management and newsletter subscription, backed by a REST API.',
+    tech: ['Next.js', 'Node.js', 'Express'],
+    link: 'https://materialtut-web.vercel.app',
+    demo: 'admin@blog.com / admin123 (user: john@blog.com / user123)',
   },
   {
-    title: 'Acme Rockets',
-    desc: 'A rocket-themed landing page built with Tailwind CSS showcasing responsive design and modern CSS techniques.',
-    tech: ['Tailwind CSS'],
-    link: 'https://acme-rockets-cwqd.onrender.com/#hero',
-    github: 'https://github.com/Solohater/tailwind-tut-first-project',
+    title: 'Repair Management System',
+    desc: 'A full-stack MERN repair shop management system with role-based authentication, repair tracking, dashboards, and REST APIs.',
+    tech: ['React', 'Node.js', 'Express', 'MongoDB'],
+    link: 'https://web-seven-woad-99.vercel.app',
+    github: 'https://github.com/Solohater/DaveProjFront',
+    demo: 'admin / admin123',
   },
   {
-    title: 'Grocery Reminder App',
-    desc: 'A simple grocery list reminder app — my first React project.',
+    title: 'Reminder & Notes App',
+    desc: 'A reminder and scheduling app for keeping track of tasks, notes, and deadlines.',
     tech: ['React'],
-    link: 'https://groceryreminder.netlify.app',
-    github: 'https://github.com/Solohater/react_deploy_netlify',
+    link: 'https://reminder-schedule-eight.vercel.app',
   },
 ];
 
@@ -353,6 +349,11 @@ function ProjectsSection() {
             <div key={i} className="p-6 rounded-xl transition-transform hover:-translate-y-1" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)' }}>
               <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-h)' }}>{p.title}</h3>
               <p className="text-sm mb-4 leading-relaxed" style={{ color: 'var(--text)' }}>{p.desc}</p>
+              {p.demo && (
+              <p className="text-xs mb-4" style={{ color: 'var(--text)' }}>
+                <span style={{ color: 'var(--accent)', fontWeight: 600 }}>Demo login:</span> {p.demo}
+              </p>
+              )}
               <div className="flex flex-wrap gap-2 mb-4">
                 {p.tech.map((t) => (
                   <span key={t} className="px-2.5 py-0.5 rounded text-xs font-medium" style={{ background: 'var(--accent-bg)', color: 'var(--accent)' }}>
@@ -361,12 +362,14 @@ function ProjectsSection() {
                 ))}
               </div>
               <div className="flex gap-3">
+                {p.github && (
                 <a href={p.github} target="_blank" className="text-xs font-medium px-3 py-1.5 rounded transition" style={{ background: 'var(--accent-bg)', color: 'var(--accent)' }}
                   onMouseEnter={(e) => { e.target.style.background = 'var(--accent)'; e.target.style.color = '#fff'; }}
                   onMouseLeave={(e) => { e.target.style.background = 'var(--accent-bg)'; e.target.style.color = 'var(--accent)'; }}
                 >
                   Source Code
                 </a>
+                )}
                 <a href={p.link} target="_blank" className="text-xs font-medium px-3 py-1.5 rounded transition" style={{ border: '1px solid var(--border)', color: 'var(--text-h)' }}
                   onMouseEnter={(e) => { e.target.style.borderColor = 'var(--accent)'; e.target.style.color = 'var(--accent)'; }}
                   onMouseLeave={(e) => { e.target.style.borderColor = 'var(--border)'; e.target.style.color = 'var(--text-h)'; }}

@@ -1,5 +1,6 @@
 'use client'
 import { useState, useContext, useEffect } from 'react'
+import Image from 'next/image'
 import { ThemeContext } from '@/context/ThemeContext'
 
 const links = [
@@ -57,31 +58,20 @@ const Navbar = () => {
         <div className="flex items-center gap-4">
           <button
             onClick={toggle}
-            className="px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 border"
+            className="relative w-10 h-10 p-0 rounded-lg transition-all duration-200 border hover:bg-black/5 dark:hover:bg-white/10"
             style={{
-              background: 'var(--accent-bg)',
-              color: 'var(--accent)',
+              background: 'transparent',
               borderColor: 'var(--border)',
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.background = 'var(--accent)'
-              e.target.style.color = '#fff'
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.background = 'var(--accent-bg)'
-              e.target.style.color = 'var(--accent)'
             }}
             aria-label="Toggle theme"
           >
-            {mode === 'dark' ? (
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-            ) : (
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-              </svg>
-            )}
+            <Image
+              src={mode === 'dark' ? '/sun.png' : '/moon.png'}
+              alt=""
+              width={28}
+              height={28}
+              className="w-7 h-7 object-cover rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+            />
           </button>
 
           <button

@@ -18,7 +18,7 @@ const AboutPage = () => {
 
   return (
     <motion.div
-      className="h-full overflow-x-hidden"
+      className="h-full overflow-x-hidden page-muted"
       initial={{ y: "-200vh" }}
       animate={{ y: "0%" }}
       transition={{ duration: 1 }}

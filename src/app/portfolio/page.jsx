@@ -7,64 +7,66 @@ import Link from 'next/link'
 const items = [
   {
     id: 1,
-    color: "from-green-700 to-yellow-700",
-    title: "Dave Phone Repair Management System",
-    desc: "A full-stack MERN repair shop management system with role-based authentication, repair tracking, dashboards, and REST APIs. Built with React, Node.js, Express, and MongoDB.",
-    img: '/DanD.PNG',
-    link: "https://daveprojfront.onrender.com",
-    github: "https://github.com/Solohater/DaveProjFront",
+    color: "from-purple-700 to-red-700",
+    title: "Document Manager",
+    desc: "A document management platform where users post documents and a reviewer role reviews and approves them.",
+    img: '/hero3.jpg',
+    link: "https://blog-app-seven-bice-50.vercel.app",
+    github: "https://github.com/Solohater/Document-Management",
+    demo: "admin / admin123",
   },
   {
     id: 2,
     color: "from-blue-700 to-violet-700",
-    title: "E-Commerce Store",
-    desc: "A responsive storefront built with Next.js featuring product filtering, sorting, shopping cart functionality, and a clean modern UI.",
+    title: "TechShop",
+    desc: "A commercial tech store for phones, tablets and laptops — product catalog, shopping cart, wishlist, order tracking, and customer accounts.",
     img: "/e-com.PNG",
-    link: "https://e-commerce-m6g8.vercel.app",
-    github: "https://github.com/Solohater/e-commerce",
+    link: "https://techshop-peach.vercel.app",
+    demo: "admin@techshop.com / Admin@12345",
   },
   {
     id: 3,
-    color: "from-violet-700 to-purple-700",
-    title: "Food Delivery Platform",
-    desc: "A food delivery web application for browsing restaurants, managing orders, and tracking deliveries with a modern tech stack.",
+    color: "from-orange-700 to-yellow-700",
+    title: "Ethio Kemem — Food Menu",
+    desc: "A bilingual (Amharic/English) traditional Ethiopian food menu — categorized dishes, order cart, and an admin dashboard.",
     img: "/resturant.PNG",
     link: "https://fastfood-amber-chi.vercel.app",
     github: "https://github.com/Solohater/Food-Delivery-Platform",
+    demo: "admin / admin123",
   },
   {
     id: 4,
-    color: "from-purple-700 to-red-700",
-    title: "Document Management System",
-    desc: "A document management application with React frontend, Node.js/Express backend, Prisma ORM, and Neon PostgreSQL database.",
-    img: "/hero3.jpg",
-    link: "https://github.com/Solohater/Document-Management",
-    github: "https://github.com/Solohater/Document-Management",
+    color: "from-green-700 to-teal-700",
+    title: "JODEV Blog",
+    desc: "A blog platform with categories, post management and newsletter subscription, backed by a REST API.",
+    img: "/hero4.jpg",
+    link: "https://materialtut-web.vercel.app",
+    demo: "admin@blog.com / admin123 (user: john@blog.com / user123)",
   },
   {
     id: 5,
-    color: "from-purple-700 to-yellow-700",
-    title: "Acme Rockets",
-    desc: "A rocket-themed landing page showcasing responsive design with Tailwind CSS.",
-    img: "/acam rockets.PNG",
-    link: "https://acme-rockets-cwqd.onrender.com/#hero",
-    github: "https://github.com/Solohater/tailwind-tut-first-project",
+    color: "from-amber-700 to-yellow-700",
+    title: "Repair Management System",
+    desc: "A full-stack MERN repair shop management system with role-based authentication, repair tracking, dashboards, and REST APIs.",
+    img: '/DanD.PNG',
+    link: "https://web-seven-woad-99.vercel.app",
+    github: "https://github.com/Solohater/DaveProjFront",
+    demo: "admin / admin123",
   },
   {
     id: 6,
-    color: "from-yellow-700 to-red-700",
-    title: "Grocery Reminder",
-    desc: "A simple grocery list reminder app built with React — my first React project.",
+    color: "from-fuchsia-700 to-purple-700",
+    title: "Reminder & Notes App",
+    desc: "A reminder and scheduling app for keeping track of tasks, notes, and deadlines.",
     img: "/Grocery list.PNG",
-    link: "https://groceryreminder.netlify.app",
-    github: "https://github.com/Solohater/react_deploy_netlify",
+    link: "https://reminder-schedule-eight.vercel.app",
   },
 ];
 
 const PortfolioPage = () => {
   return (
     <motion.div 
-      className="min-h-screen" 
+      className="min-h-screen page-muted" 
       initial={{ y: "-200vh" }} 
       animate={{ y: "0%" }} 
       transition={{ duration: 1 }}
@@ -90,6 +92,11 @@ const PortfolioPage = () => {
               <Image src={item.img} alt={item.title} fill className="rounded-xl object-cover" />
             </div>
             <p className="w-80 md:w-96 lg:w-[500px] xl:w-[600px] mb-4 text-white/90">{item.desc}</p>
+            {item.demo && (
+              <p className="w-80 md:w-96 lg:w-[500px] xl:w-[600px] mb-4 text-white/70 text-sm">
+                Demo login: {item.demo}
+              </p>
+            )}
             <div className="flex gap-3">
               {item.github && (
                 <Link href={item.github} target="_blank">

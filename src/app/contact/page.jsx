@@ -36,7 +36,7 @@ const ContactPage = () => {
 
   return (
     <motion.div
-      className="h-full"
+      className="h-full page-muted"
       initial={{ y: "-200vh" }}
       animate={{ y: "0%" }}
       transition={{ duration: 1 }}
@@ -65,21 +65,21 @@ const ContactPage = () => {
           <div className="flex flex-col gap-4 text-base sm:text-lg">
             <Link
               href="mailto:yosefayalew56@gmail.com"
-              className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition"
+              className="text-black dark:text-white hover:text-black dark:hover:text-white transition"
             >
               yosefayalew56@gmail.com
             </Link>
             <Link
               href="https://www.linkedin.com/in/yoseph-ayalew-65247b291"
               target="_blank"
-              className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition"
+              className="text-black dark:text-white hover:text-black dark:hover:text-white transition"
             >
               LinkedIn
             </Link>
             <Link
               href="https://github.com/Solohater"
               target="_blank"
-              className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition"
+              className="text-black dark:text-white hover:text-black dark:hover:text-white transition"
             >
               GitHub
             </Link>

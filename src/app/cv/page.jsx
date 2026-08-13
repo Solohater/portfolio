@@ -34,7 +34,7 @@ export default function CVPage() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen px-4 pt-20 pb-6"
+      className="min-h-screen px-4 pt-20 pb-6 page-muted"
     >
       <div className="max-w-3xl mx-auto">
         {/* Header */}

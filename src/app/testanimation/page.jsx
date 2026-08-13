@@ -14,7 +14,7 @@ const TestPage = () => {
         }
     }
   return (
-    <div className='h-full flex items-center  justify-center'>
+    <div className='h-full flex items-center justify-center page-muted'>
         <motion.div 
         className='w-60 h-60 bg-red-400 rounded' 
         initial={{ x: -100 }}
