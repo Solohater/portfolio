@@ -80,7 +80,7 @@ function HeroSection() {
               transition={{ delay: 0.3, duration: 0.5 }}
               className="relative w-56 h-56 sm:w-72 sm:h-72 rounded-full overflow-hidden ring-4 ring-[var(--bg)] shadow-2xl"
             >
-              <Image src="/photojo.png" alt="Yoseph Ayalew" fill className="object-cover object-[50%_25%] -rotate-10 scale-105" priority />
+              <Image src="/photojo.png" alt="Yoseph Ayalew" fill className="object-cover object-[50%_5%] -rotate-10 scale-100" priority />
             </motion.div>
 
             {floatingTags.map((tag, i) => {
