@@ -42,7 +42,7 @@ export default function CVPage() {
           <Image src="/photojo.jpg" alt="Yoseph Ayalew" width={100} height={100} className="w-24 h-24 rounded-full object-cover shrink-0 ring-2" style={{ boxShadow: '0 0 0 2px var(--accent)' }} />
           <div className="text-center sm:text-left">
             <h1 className="text-3xl font-bold mb-1" style={{ color: 'var(--text-h)' }}>Yoseph Ayalew</h1>
-            <p className="text-lg font-medium mb-2" style={{ color: 'var(--accent)' }}>Software Engineer</p>
+            <p className="text-lg font-medium mb-2" style={{ color: 'var(--accent-text)' }}>Software Engineer</p>
             <p className="text-sm max-w-lg" style={{ color: 'var(--text)' }}>
               Computer Science graduate with professional experience building full-stack web applications.
               Skilled in Java, Vert.x, Angular, React, PostgreSQL, and modern web technologies.
@@ -50,9 +50,9 @@ export default function CVPage() {
             <div className="flex flex-wrap gap-3 mt-3 justify-center sm:justify-start text-xs">
               <span style={{ color: 'var(--text)' }}>yosefayalew56@gmail.com</span>
               <span style={{ color: 'var(--text)' }}>Addis Ababa, Ethiopia</span>
-              <a href="https://github.com/Solohater" target="_blank" style={{ color: 'var(--accent)' }}>GitHub</a>
-              <a href="https://gitlab.com/yosephh" target="_blank" style={{ color: 'var(--accent)' }}>GitLab</a>
-              <a href="https://www.linkedin.com/in/yoseph-ayalew-65247b291" target="_blank" style={{ color: 'var(--accent)' }}>LinkedIn</a>
+              <a href="https://github.com/Solohater" target="_blank" style={{ color: 'var(--accent-text)' }}>GitHub</a>
+              <a href="https://gitlab.com/yosephh" target="_blank" style={{ color: 'var(--accent-text)' }}>GitLab</a>
+              <a href="https://www.linkedin.com/in/yoseph-ayalew-65247b291" target="_blank" style={{ color: 'var(--accent-text)' }}>LinkedIn</a>
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@ export default function CVPage() {
             >
               <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mb-2">
                 <h3 className="font-bold" style={{ color: 'var(--text-h)' }}>{exp.title}</h3>
-                <span className="text-xs font-mono px-2 py-0.5 rounded" style={{ background: 'var(--accent-bg)', color: 'var(--accent)' }}>{exp.company}</span>
+                <span className="text-xs font-mono px-2 py-0.5 rounded" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>{exp.company}</span>
               </div>
               <p className="text-xs mb-2 font-mono" style={{ color: 'var(--text)' }}>{exp.period}</p>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--text)' }}>{exp.desc}</p>
@@ -104,7 +104,7 @@ export default function CVPage() {
               className="p-5 rounded-xl mb-4" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)' }}
             >
               <h3 className="font-bold" style={{ color: 'var(--text-h)' }}>{edu.degree}</h3>
-              <p className="text-sm font-medium" style={{ color: 'var(--accent)' }}>{edu.school}</p>
+              <p className="text-sm font-medium" style={{ color: 'var(--accent-text)' }}>{edu.school}</p>
               <p className="text-xs mb-2 font-mono" style={{ color: 'var(--text)' }}>{edu.period}</p>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--text)' }}>{edu.desc}</p>
             </motion.div>
@@ -120,10 +120,10 @@ export default function CVPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {skills.map((group) => (
               <div key={group.category} className="p-4 rounded-xl" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)' }}>
-                <h3 className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--accent)' }}>{group.category}</h3>
+                <h3 className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--accent-text)' }}>{group.category}</h3>
                 <div className="flex flex-wrap gap-1.5">
                   {group.items.map((skill) => (
-                    <span key={skill} className="px-2 py-0.5 rounded text-xs font-medium" style={{ background: 'var(--accent-bg)', color: 'var(--accent)' }}>
+                    <span key={skill} className="px-2 py-0.5 rounded text-xs font-medium" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
                       {skill}
                     </span>
                   ))}

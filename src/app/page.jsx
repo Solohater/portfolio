@@ -134,7 +134,7 @@ function AboutSection() {
             { label: 'Languages', value: 'Amharic (Native) — English (Fluent)' },
           ].map((item) => (
             <div key={item.label} className="p-4 rounded-xl" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)' }}>
-              <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--accent)' }}>{item.label}</p>
+              <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--accent-text)' }}>{item.label}</p>
               <p className="text-sm" style={{ color: 'var(--text-h)' }}>{item.value}</p>
             </div>
           ))}
@@ -211,7 +211,7 @@ function ExperienceSection() {
                   {/* Git commit style header */}
                   <div className="flex items-center gap-2 mb-3">
                     <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider"
-                      style={{ background: 'var(--accent-bg)', color: 'var(--accent)' }}>
+                      style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
                       {exp.company}
                     </span>
                     <span className="text-xs font-mono" style={{ color: 'var(--text)' }}>
@@ -232,7 +232,7 @@ function ExperienceSection() {
                         transition={{ duration: 0.3, delay: i * 0.25 + j * 0.1 }}
                         viewport={{ once: true }}
                       >
-                        <span className="mt-0.5 flex-shrink-0" style={{ color: 'var(--accent)' }}>▸</span>
+                        <span className="mt-0.5 flex-shrink-0" style={{ color: 'var(--accent-text)' }}>▸</span>
                         {pt}
                       </motion.li>
                     ))}
@@ -251,7 +251,7 @@ function ExperienceSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          <span style={{ color: 'var(--accent)' }}>●</span> main — scroll to view full timeline
+          <span style={{ color: 'var(--accent-text)' }}>●</span> main — scroll to view full timeline
         </motion.p>
       </div>
     </section>
@@ -275,10 +275,10 @@ function SkillsSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {skillGroups.map((group) => (
             <div key={group.category} className="p-5 rounded-xl" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)' }}>
-              <h3 className="text-sm font-bold uppercase tracking-wider mb-3" style={{ color: 'var(--accent)' }}>{group.category}</h3>
+              <h3 className="text-sm font-bold uppercase tracking-wider mb-3" style={{ color: 'var(--accent-text)' }}>{group.category}</h3>
               <div className="flex flex-wrap gap-2">
                 {group.skills.map((skill) => (
-                  <span key={skill} className="px-3 py-1 rounded-full text-xs font-medium" style={{ background: 'var(--accent-bg)', color: 'var(--accent)' }}>
+                  <span key={skill} className="px-3 py-1 rounded-full text-xs font-medium" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
                     {skill}
                   </span>
                 ))}
@@ -351,27 +351,27 @@ function ProjectsSection() {
               <p className="text-sm mb-4 leading-relaxed" style={{ color: 'var(--text)' }}>{p.desc}</p>
               {p.demo && (
               <p className="text-xs mb-4" style={{ color: 'var(--text)' }}>
-                <span style={{ color: 'var(--accent)', fontWeight: 600 }}>Demo login:</span> {p.demo}
+                <span style={{ color: 'var(--accent-text)', fontWeight: 600 }}>Demo login:</span> {p.demo}
               </p>
               )}
               <div className="flex flex-wrap gap-2 mb-4">
                 {p.tech.map((t) => (
-                  <span key={t} className="px-2.5 py-0.5 rounded text-xs font-medium" style={{ background: 'var(--accent-bg)', color: 'var(--accent)' }}>
+                  <span key={t} className="px-2.5 py-0.5 rounded text-xs font-medium" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
                     {t}
                   </span>
                 ))}
               </div>
               <div className="flex gap-3">
                 {p.github && (
-                <a href={p.github} target="_blank" className="text-xs font-medium px-3 py-1.5 rounded transition" style={{ background: 'var(--accent-bg)', color: 'var(--accent)' }}
+                <a href={p.github} target="_blank" className="text-xs font-medium px-3 py-1.5 rounded transition" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}
                   onMouseEnter={(e) => { e.target.style.background = 'var(--accent)'; e.target.style.color = '#fff'; }}
-                  onMouseLeave={(e) => { e.target.style.background = 'var(--accent-bg)'; e.target.style.color = 'var(--accent)'; }}
+                  onMouseLeave={(e) => { e.target.style.background = 'var(--accent-bg)'; e.target.style.color = 'var(--accent-text)'; }}
                 >
                   Source Code
                 </a>
                 )}
                 <a href={p.link} target="_blank" className="text-xs font-medium px-3 py-1.5 rounded transition" style={{ border: '1px solid var(--border)', color: 'var(--text-h)' }}
-                  onMouseEnter={(e) => { e.target.style.borderColor = 'var(--accent)'; e.target.style.color = 'var(--accent)'; }}
+                  onMouseEnter={(e) => { e.target.style.borderColor = 'var(--accent)'; e.target.style.color = 'var(--accent-text)'; }}
                   onMouseLeave={(e) => { e.target.style.borderColor = 'var(--border)'; e.target.style.color = 'var(--text-h)'; }}
                 >
                   Live Demo
@@ -397,16 +397,16 @@ function ContactSection() {
               Feel free to reach out for opportunities, collaboration, or just a chat.
             </p>
             <div className="flex flex-col gap-3">
-              <a href="mailto:yosefayalew56@gmail.com" className="text-sm font-medium transition" style={{ color: 'var(--accent)' }}>
+              <a href="mailto:yosefayalew56@gmail.com" className="text-sm font-medium transition" style={{ color: 'var(--accent-text)' }}>
                 yosefayalew56@gmail.com
               </a>
               <span className="text-sm" style={{ color: 'var(--text)' }}>Addis Ababa, Ethiopia</span>
             </div>
             <div className="flex gap-4 pt-2">
-              <a href="https://github.com/Solohater" target="_blank" className="text-sm font-medium" style={{ color: 'var(--accent)' }}>GitHub</a>
-              <a href="https://gitlab.com/yosephh" target="_blank" className="text-sm font-medium" style={{ color: 'var(--accent)' }}>GitLab</a>
-              <a href="https://www.linkedin.com/in/yoseph-ayalew-65247b291" target="_blank" className="text-sm font-medium" style={{ color: 'var(--accent)' }}>LinkedIn</a>
-              <a href="https://t.me/YOSEP015" target="_blank" className="text-sm font-medium" style={{ color: 'var(--accent)' }}>Telegram</a>
+              <a href="https://github.com/Solohater" target="_blank" className="text-sm font-medium" style={{ color: 'var(--accent-text)' }}>GitHub</a>
+              <a href="https://gitlab.com/yosephh" target="_blank" className="text-sm font-medium" style={{ color: 'var(--accent-text)' }}>GitLab</a>
+              <a href="https://www.linkedin.com/in/yoseph-ayalew-65247b291" target="_blank" className="text-sm font-medium" style={{ color: 'var(--accent-text)' }}>LinkedIn</a>
+              <a href="https://t.me/YOSEP015" target="_blank" className="text-sm font-medium" style={{ color: 'var(--accent-text)' }}>Telegram</a>
             </div>
           </div>
 

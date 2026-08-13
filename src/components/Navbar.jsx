@@ -35,7 +35,7 @@ const Navbar = () => {
         <a
           href="/#hero"
           className="text-xl font-bold"
-          style={{ color: 'var(--accent)' }}
+          style={{ color: 'var(--accent-text)' }}
         >
           YA
         </a>
@@ -47,7 +47,7 @@ const Navbar = () => {
               href={link.href}
               className="text-sm font-medium transition-colors"
               style={{ color: 'var(--text)' }}
-              onMouseEnter={(e) => e.target.style.color = 'var(--accent)'}
+              onMouseEnter={(e) => e.target.style.color = 'var(--accent-text)'}
               onMouseLeave={(e) => e.target.style.color = 'var(--text)'}
             >
               {link.title}
@@ -96,7 +96,7 @@ const Navbar = () => {
                 className="text-sm font-medium py-2 transition-colors"
                 style={{ color: 'var(--text)' }}
                 onClick={() => setMenuOpen(false)}
-                onMouseEnter={(e) => e.target.style.color = 'var(--accent)'}
+                onMouseEnter={(e) => e.target.style.color = 'var(--accent-text)'}
                 onMouseLeave={(e) => e.target.style.color = 'var(--text)'}
               >
                 {link.title}

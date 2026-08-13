@@ -11,6 +11,8 @@
   --accent: #000000;
   --accent-hover: #3a3a3a;
   --accent-bg: rgba(0, 0, 0, 0.08);
+  --accent-text: #000000;
+  --accent-text-hover: #3a3a3a;
   --card-bg: #ffffff;
   --page-tint: rgba(255, 255, 255, 0.75);
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
@@ -26,6 +28,8 @@
   --accent: #00cc66;
   --accent-hover: #33dd88;
   --accent-bg: rgba(0, 204, 102, 0.12);
+  --accent-text: #ffffff;
+  --accent-text-hover: #cccccc;
   --card-bg: #181820;
   --page-tint: rgba(15, 15, 21, 0.3);
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
@@ -86,13 +90,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  color: var(--accent);
+  color: var(--accent-text);
   text-decoration: none;
   transition: color 0.2s;
 }
 
 a:hover {
-  color: var(--accent-hover);
+  color: var(--accent-text-hover);
 }
 
 .section-title {
