@@ -190,7 +190,7 @@ function ExperienceSection() {
                 {/* Commit dot on main branch */}
                 <motion.div
                   className="absolute left-[13px] top-[18px] w-[23px] h-[23px] rounded-full border-[3px] flex items-center justify-center z-10"
-                  style={{ background: 'var(--bg-alt)', borderColor: 'var(--accent)' }}
+                  style={{ background: 'var(--bg-alt)', borderColor: 'var(--accent-text)' }}
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
                   transition={{ duration: 0.3, delay: i * 0.25 + 0.2 }}
