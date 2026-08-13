@@ -364,14 +364,14 @@ function ProjectsSection() {
               <div className="flex gap-3">
                 {p.github && (
                 <a href={p.github} target="_blank" className="text-xs font-medium px-3 py-1.5 rounded transition" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}
-                  onMouseEnter={(e) => { e.target.style.background = 'var(--accent)'; e.target.style.color = '#fff'; }}
+                  onMouseEnter={(e) => { e.target.style.background = 'var(--accent-text)'; e.target.style.color = 'var(--bg)'; }}
                   onMouseLeave={(e) => { e.target.style.background = 'var(--accent-bg)'; e.target.style.color = 'var(--accent-text)'; }}
                 >
                   Source Code
                 </a>
                 )}
                 <a href={p.link} target="_blank" className="text-xs font-medium px-3 py-1.5 rounded transition" style={{ border: '1px solid var(--border)', color: 'var(--text-h)' }}
-                  onMouseEnter={(e) => { e.target.style.borderColor = 'var(--accent)'; e.target.style.color = 'var(--accent-text)'; }}
+                  onMouseEnter={(e) => { e.target.style.borderColor = 'var(--accent-text)'; e.target.style.color = 'var(--accent-text)'; }}
                   onMouseLeave={(e) => { e.target.style.borderColor = 'var(--border)'; e.target.style.color = 'var(--text-h)'; }}
                 >
                   Live Demo
