@@ -154,6 +154,14 @@ body {
   background: var(--page-tint);
 }
 
+.page-cv {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.dark .page-cv {
+  background: rgba(15, 15, 21, 0.15);
+}
+
 .font-display {
   font-family: var(--font-display), Georgia, serif;
 }

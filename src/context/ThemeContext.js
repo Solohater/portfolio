@@ -11,7 +11,13 @@ export const ThemeProvider = ({ children }) => {
     setMode((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
-  // Update HTML tag class when mode changes
+  // Restore saved theme after mount
+  useEffect(() => {
+    const saved = window.localStorage.getItem("theme");
+    if (saved === "dark" || saved === "light") setMode(saved);
+  }, []);
+
+  // Update HTML tag class when mode changes and persist it
   useEffect(() => {
     const html = document.documentElement;
     if (mode === "dark") {
@@ -19,6 +25,7 @@ export const ThemeProvider = ({ children }) => {
     } else {
       html.classList.remove("dark");
     }
+    window.localStorage.setItem("theme", mode);
   }, [mode]);
 
   return (

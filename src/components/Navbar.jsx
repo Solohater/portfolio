@@ -1,6 +1,7 @@
 'use client'
 import { useState, useContext, useEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { ThemeContext } from '@/context/ThemeContext'
 
 const links = [
@@ -32,17 +33,17 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 h-16">
-        <a
+        <Link
           href="/#hero"
           className="text-xl font-bold"
           style={{ color: 'var(--accent-text)' }}
         >
           YA
-        </a>
+        </Link>
 
         <div className="hidden md:flex items-center gap-8">
           {links.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="text-sm font-medium transition-colors"
@@ -51,7 +52,7 @@ const Navbar = () => {
               onMouseLeave={(e) => e.target.style.color = 'var(--text)'}
             >
               {link.title}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -92,7 +93,7 @@ const Navbar = () => {
         <div className="md:hidden border-t" style={{ background: 'var(--bg)', borderColor: 'var(--border)' }}>
           <div className="flex flex-col gap-2 px-6 py-4">
             {links.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 className="text-sm font-medium py-2 transition-colors"
@@ -102,7 +103,7 @@ const Navbar = () => {
                 onMouseLeave={(e) => e.target.style.color = 'var(--text)'}
               >
                 {link.title}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
