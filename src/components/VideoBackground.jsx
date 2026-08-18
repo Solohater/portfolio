@@ -8,7 +8,6 @@ const VIDEOS = {
   light: { src: "/videos/light.mp4", poster: "/videos/light-poster.jpg" },
 };
 
-const AUDIO_PREF_KEY = "video-audio-enabled";
 const STALL_MS = 3000;
 
 const VideoBackground = () => {
@@ -19,7 +18,6 @@ const VideoBackground = () => {
   const [ready, setReady] = useState(false);
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [canPreload, setCanPreload] = useState(false);
-  const savedPref = useRef(false);
   const stallStrikes = useRef(0);
 
   /* Theme switch: fade out, swap source, fade back in */
@@ -50,12 +48,6 @@ const VideoBackground = () => {
     setCanPreload(true);
   };
 
-  /* Read the saved audio preference (used to re-enable sound on first gesture) */
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    savedPref.current = window.localStorage.getItem(AUDIO_PREF_KEY) === "1";
-  }, []);
-
   /* Keep the icon truthful: it follows the video's real muted state */
   useEffect(() => {
     const videoEl = videoRef.current;
@@ -64,28 +56,6 @@ const VideoBackground = () => {
     videoEl.addEventListener("volumechange", sync);
     return () => videoEl.removeEventListener("volumechange", sync);
   }, [video.src]);
-
-  /* Best-effort re-enable of saved audio on the user's first gesture */
-  useEffect(() => {
-    const reveal = () => {
-      const videoEl = videoRef.current;
-      if (!savedPref.current || !videoEl || videoEl.muted === false) return;
-      videoEl.muted = false;
-      videoEl.play().catch(() => {
-        videoEl.muted = true;
-      });
-    };
-    window.addEventListener("pointerdown", reveal);
-    window.addEventListener("mousedown", reveal);
-    window.addEventListener("touchstart", reveal);
-    window.addEventListener("keydown", reveal);
-    return () => {
-      window.removeEventListener("pointerdown", reveal);
-      window.removeEventListener("mousedown", reveal);
-      window.removeEventListener("touchstart", reveal);
-      window.removeEventListener("keydown", reveal);
-    };
-  }, []);
 
   /* Freeze recovery: stall watchdog, stall events, tab-return resume */
   useEffect(() => {
@@ -163,7 +133,6 @@ const VideoBackground = () => {
         videoEl.muted = true;
       });
     }
-    window.localStorage.setItem(AUDIO_PREF_KEY, videoEl.muted ? "0" : "1");
   };
 
   return (
