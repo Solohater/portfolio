@@ -66,11 +66,11 @@ const Navbar = () => {
             aria-label="Toggle theme"
           >
             <Image
-              src={mode === 'dark' ? '/moon.png' : '/sun.jpg'}
+              src={mode === 'dark' ? '/sun.jpg' : '/moon.png'}
               alt=""
-              width={28}
-              height={28}
-              className="w-7 h-7 object-cover rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              width={36}
+              height={36}
+              className="w-9 h-9 object-cover rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
             />
           </button>
 
