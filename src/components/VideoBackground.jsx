@@ -4,7 +4,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { ThemeContext } from "@/context/ThemeContext";
 
 const VIDEOS = {
-  dark: { src: "/videos/dark.mp4", poster: "/videos/dark-poster.jpg" },
+  dark: { src: "/videos/dark.mp4", webm: "/videos/dark.webm", poster: "/videos/dark-poster.jpg" },
   light: { src: "/videos/light.mp4", poster: "/videos/light-poster.jpg" },
 };
 
@@ -94,7 +94,6 @@ const VideoBackground = () => {
       >
         <video
           ref={videoRef}
-          src={video.src}
           poster={video.poster}
           autoPlay
           muted
@@ -103,6 +102,18 @@ const VideoBackground = () => {
           preload="auto"
           onLoadedData={markReady}
           onCanPlay={markReady}
+        >
+          {video.webm && <source src={video.webm} type="video/webm" />}
+          <source src={video.src} type="video/mp4" />
+        </video>
+        <video
+          src={VIDEOS[mode === "dark" ? "light" : "dark"].src}
+          preload="auto"
+          muted
+          playsInline
+          aria-hidden="true"
+          tabIndex={-1}
+          className="video-bg-preload"
         />
         <div className="video-overlay" />
       </div>

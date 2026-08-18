@@ -53,13 +53,34 @@ body {
   overflow: hidden;
   pointer-events: none;
   transition: opacity 0.25s ease;
-  background-image: url('/videos/dark-poster.jpg');
+  background-image: url('/videos/light-poster.jpg');
   background-size: cover;
   background-position: center;
 }
 
+.video-background::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.85;
+  background-image: linear-gradient(160deg, rgba(255, 255, 255, 0.92) 0%, rgba(219, 224, 255, 0.55) 100%);
+}
+
+.video-background--loading::before {
+  animation: video-bg-pulse 3s ease-in-out infinite;
+}
+
 .dark .video-background {
-  background-image: url('/videos/light-poster.jpg');
+  background-image: url('/videos/dark-poster.jpg');
+}
+
+.dark .video-background::before {
+  background-image: linear-gradient(160deg, rgba(15, 15, 21, 0.96) 0%, rgba(22, 34, 66, 0.82) 100%);
+}
+
+@keyframes video-bg-pulse {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; }
 }
 
 .video-background--fading {
@@ -67,6 +88,8 @@ body {
 }
 
 .video-background video {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -77,6 +100,14 @@ body {
 
 .video-background--loading video {
   opacity: 0;
+}
+
+.video-bg-preload {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .video-audio-toggle {
@@ -111,6 +142,7 @@ body {
 .video-overlay {
   position: absolute;
   inset: 0;
+  z-index: 2;
   background: rgba(255, 255, 255, 0.5);
 }
 

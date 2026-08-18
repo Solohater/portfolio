@@ -3,28 +3,42 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const floatingTags = [
   "Java", "Vert.x", "Angular", "React", "Next.js",
   "PostgreSQL", "TypeScript", "JavaScript", "Tailwind CSS", "Go"
 ];
 
-const tagRadius = () => {
-  if (typeof window === "undefined") return 170;
-  if (window.innerWidth < 640) return 100;
-  if (window.innerWidth < 1024) return 130;
-  return 170;
-};
+const CHIP_HALF_WIDTH = 27;
+const ORBIT_GAP = 36;
 
 /* ───── Hero ───── */
 function HeroSection() {
-  const [radius, setRadius] = useState(tagRadius);
+  const photoWrapRef = useRef(null);
+  const [radius, setRadius] = useState(140);
 
   useEffect(() => {
-    const onResize = () => setRadius(tagRadius());
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    const compute = () => {
+      const photo = photoWrapRef.current;
+      if (!photo) return;
+      const photoHalf = photo.offsetWidth / 2;
+      const contentHalf = window.innerWidth / 2 - 28;
+      setRadius(
+        Math.max(
+          photoHalf * 0.6,
+          Math.min(photoHalf + ORBIT_GAP, contentHalf - CHIP_HALF_WIDTH)
+        )
+      );
+    };
+    compute();
+    const ro = new ResizeObserver(compute);
+    if (photoWrapRef.current) ro.observe(photoWrapRef.current);
+    window.addEventListener("resize", compute);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", compute);
+    };
   }, []);
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 py-24 overflow-hidden">
@@ -88,7 +102,7 @@ function HeroSection() {
 
         {/* Photo */}
         <div className="flex-shrink-0 flex items-center justify-center">
-          <div className="relative">
+          <div className="relative" ref={photoWrapRef}>
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -104,15 +118,20 @@ function HeroSection() {
               const y = Math.sin((angle * Math.PI) / 180) * radius;
               return (
                 <motion.div key={tag}
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                  className="absolute top-1/2 left-1/2 pointer-events-none"
                   initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 + i * 0.1 }}
                 >
                   <motion.div
-                    className="absolute px-3 py-1.5 rounded-full text-xs font-medium bg-black/10 border border-black/20 text-black dark:bg-white/10 dark:border-white/20 dark:text-white whitespace-nowrap"
+                    className="absolute w-0 h-0"
                     animate={{ x: [x, x + 10, x], y: [y, y - 10, y] }}
                     transition={{ duration: 4, repeat: Infinity, delay: i * 0.3, ease: "easeInOut" }}
                   >
-                    {tag}
+                    <span
+                      className="absolute left-0 top-0 px-3 py-1.5 rounded-full text-xs font-medium bg-black/10 border border-black/20 text-black dark:bg-white/10 dark:border-white/20 dark:text-white whitespace-nowrap"
+                      style={{ transform: `translate(-50%, -50%)` }}
+                    >
+                      {tag}
+                    </span>
                   </motion.div>
                 </motion.div>
               );
