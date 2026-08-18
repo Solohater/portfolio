@@ -68,9 +68,11 @@ const Navbar = () => {
             <Image
               src={mode === 'dark' ? '/sun.jpg' : '/moon.png'}
               alt=""
-              width={36}
-              height={36}
-              className="w-9 h-9 object-cover rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              width={mode === 'dark' ? 38 : 36}
+              height={mode === 'dark' ? 38 : 36}
+              className={`object-cover rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${
+                mode === 'dark' ? 'w-full h-full' : 'w-9 h-9'
+              }`}
             />
           </button>
 
