@@ -3,14 +3,29 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
+import { useState, useEffect } from 'react';
 
 const floatingTags = [
   "Java", "Vert.x", "Angular", "React", "Next.js",
   "PostgreSQL", "TypeScript", "JavaScript", "Tailwind CSS", "Go"
 ];
 
+const tagRadius = () => {
+  if (typeof window === "undefined") return 170;
+  if (window.innerWidth < 640) return 100;
+  if (window.innerWidth < 1024) return 130;
+  return 170;
+};
+
 /* ───── Hero ───── */
 function HeroSection() {
+  const [radius, setRadius] = useState(tagRadius);
+
+  useEffect(() => {
+    const onResize = () => setRadius(tagRadius());
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 py-24 overflow-hidden">
       <div className="max-w-6xl w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-20 z-10">
@@ -85,7 +100,6 @@ function HeroSection() {
 
             {floatingTags.map((tag, i) => {
               const angle = (i / floatingTags.length) * 360;
-              const radius = 170;
               const x = Math.cos((angle * Math.PI) / 180) * radius;
               const y = Math.sin((angle * Math.PI) / 180) * radius;
               return (

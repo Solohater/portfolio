@@ -53,6 +53,13 @@ body {
   overflow: hidden;
   pointer-events: none;
   transition: opacity 0.25s ease;
+  background-image: url('/videos/dark-poster.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.dark .video-background {
+  background-image: url('/videos/light-poster.jpg');
 }
 
 .video-background--fading {
@@ -65,6 +72,40 @@ body {
   object-fit: cover;
   object-position: center;
   display: block;
+  transition: opacity 0.25s ease;
+}
+
+.video-background--loading video {
+  opacity: 0;
+}
+
+.video-audio-toggle {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text-h);
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s, background 0.2s;
+  box-shadow: var(--shadow-lg);
+}
+
+.video-audio-toggle:hover {
+  background: var(--accent-bg);
+  transform: scale(1.05);
+}
+
+.video-audio-toggle svg {
+  width: 20px;
+  height: 20px;
 }
 
 .video-overlay {
