@@ -66,7 +66,7 @@ const Navbar = () => {
             aria-label="Toggle theme"
           >
             <Image
-              src={mode === 'dark' ? '/sun.png' : '/moon.png'}
+              src={mode === 'dark' ? '/moon.png' : '/sun.jpg'}
               alt=""
               width={28}
               height={28}
