@@ -71,7 +71,7 @@ const Navbar = () => {
               alt=""
               width={mode === 'dark' ? 38 : 36}
               height={mode === 'dark' ? 38 : 36}
-              className={`object-cover rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${
+              className={`object-cover object-[47%_43%] rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${
                 mode === 'dark' ? 'w-full h-full' : 'w-9 h-9'
               }`}
             />
