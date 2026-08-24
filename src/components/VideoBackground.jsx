@@ -31,21 +31,54 @@ const VideoBackground = () => {
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [canPreload, setCanPreload] = useState(false);
   const stallStrikes = useRef(0);
+  const cleanupListener = useRef(null);
 
-  /* Theme/bgMode switch: fade out, swap source, fade back in */
+  /* Theme/bgMode switch: fade out, swap source when ready, fade back in */
   useEffect(() => {
     const target = VIDEOS[bgMode][mode];
     if (target === videoSrc) return;
 
-    setReady(false);
+    if (cleanupListener.current) {
+      cleanupListener.current();
+      cleanupListener.current = null;
+    }
+
     setFading(true);
+
     const fadeOut = setTimeout(() => {
       setVideoSrc(target);
       setVideoPoster(POSTERS[mode]);
-      setFading(false);
+
+      const videoEl = videoRef.current;
+      if (!videoEl) {
+        setFading(false);
+        return;
+      }
+
+      if (videoEl.readyState >= 3) {
+        setFading(false);
+        return;
+      }
+
+      const onReady = () => {
+        setFading(false);
+        cleanupListener.current = null;
+      };
+      videoEl.addEventListener("canplay", onReady);
+      videoEl.addEventListener("loadeddata", onReady);
+      cleanupListener.current = () => {
+        videoEl.removeEventListener("canplay", onReady);
+        videoEl.removeEventListener("loadeddata", onReady);
+      };
     }, 250);
 
-    return () => clearTimeout(fadeOut);
+    return () => {
+      clearTimeout(fadeOut);
+      if (cleanupListener.current) {
+        cleanupListener.current();
+        cleanupListener.current = null;
+      }
+    };
   }, [mode, bgMode, videoSrc]);
 
   /* (Re)load and start playback whenever the source changes */
