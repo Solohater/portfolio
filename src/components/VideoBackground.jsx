@@ -3,11 +3,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { ThemeContext } from "@/context/ThemeContext";
 
-const POSTERS = {
-  dark: "/videos/dark-poster.jpg",
-  light: "/videos/light-poster.jpg",
-};
-
 const VIDEOS = {
   realistic: {
     dark: "/videos/dark.mp4",
@@ -21,181 +16,168 @@ const VIDEOS = {
 
 const STALL_MS = 3000;
 
+const layerStyle = {
+  position: "absolute",
+  inset: 0,
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  objectPosition: "center",
+  display: "block",
+  transition: "opacity 0.3s ease",
+};
+
 const VideoBackground = () => {
   const { mode, bgMode } = useContext(ThemeContext);
-  const videoRef = useRef(null);
-  const [videoSrc, setVideoSrc] = useState(VIDEOS[bgMode][mode]);
-  const [videoPoster, setVideoPoster] = useState(POSTERS[mode]);
-  const [fading, setFading] = useState(false);
+  const darkRef = useRef(null);
+  const lightRef = useRef(null);
   const [ready, setReady] = useState(false);
   const [audioEnabled, setAudioEnabled] = useState(false);
-  const [canPreload, setCanPreload] = useState(false);
-  const stallStrikes = useRef(0);
-  const switching = useRef(false);
+  const stallStrikes = useRef({ dark: 0, light: 0 });
 
-  /* Theme/bgMode switch: fade out → swap source → wait for ready → fade in */
+  const darkSrc = VIDEOS[bgMode].dark;
+  const lightSrc = VIDEOS[bgMode].light;
+
+  /* Load and play both videos when bgMode changes */
   useEffect(() => {
-    const target = VIDEOS[bgMode][mode];
-    if (target === videoSrc) return;
+    const darkEl = darkRef.current;
+    const lightEl = lightRef.current;
+    if (!darkEl || !lightEl) return;
 
-    switching.current = true;
-    setFading(true);
+    darkEl.load();
+    lightEl.load();
+    darkEl.play().catch(() => {});
+    lightEl.play().catch(() => {});
+  }, [bgMode]);
 
-    const fadeOut = setTimeout(() => {
-      setVideoSrc(target);
-      setVideoPoster(POSTERS[mode]);
-    }, 300);
-
-    return () => clearTimeout(fadeOut);
-  }, [mode, bgMode, videoSrc]);
-
-  /* Load and play when source changes; fade back in once ready */
+  /* Sync audio state */
   useEffect(() => {
-    const videoEl = videoRef.current;
-    if (!videoEl) return;
-
-    videoEl.load();
-
-    const onReady = () => {
-      videoEl.removeEventListener("canplay", onReady);
-      videoEl.removeEventListener("loadeddata", onReady);
-      videoEl.play().catch(() => {});
-      if (switching.current) {
-        switching.current = false;
-        setFading(false);
-      }
-      setReady(true);
-      setCanPreload(true);
-    };
-
-    if (videoEl.readyState >= 3) {
-      onReady();
-    } else {
-      videoEl.addEventListener("canplay", onReady);
-      videoEl.addEventListener("loadeddata", onReady);
-    }
-
-    return () => {
-      videoEl.removeEventListener("canplay", onReady);
-      videoEl.removeEventListener("loadeddata", onReady);
-    };
-  }, [videoSrc]);
-
-  /* Keep the icon truthful: it follows the video's real muted state */
-  useEffect(() => {
-    const videoEl = videoRef.current;
-    if (!videoEl) return;
-    const sync = () => setAudioEnabled(!videoEl.muted);
-    videoEl.addEventListener("volumechange", sync);
-    return () => videoEl.removeEventListener("volumechange", sync);
+    const darkEl = darkRef.current;
+    if (!darkEl) return;
+    const sync = () => setAudioEnabled(!darkEl.muted);
+    darkEl.addEventListener("volumechange", sync);
+    return () => darkEl.removeEventListener("volumechange", sync);
   }, []);
 
-  /* Freeze recovery: stall watchdog, stall events, tab-return resume */
+  /* Freeze recovery for both videos */
   useEffect(() => {
-    const videoEl = videoRef.current;
-    if (!videoEl) return;
+    const els = [darkRef.current, lightRef.current].filter(Boolean);
+    if (!els.length) return;
 
-    let lastTime = videoEl.currentTime;
-    let frozenSince = 0;
+    const cleanups = els.map((el) => {
+      let lastTime = el.currentTime;
+      let frozenSince = 0;
+      const key = el === darkRef.current ? "dark" : "light";
 
-    const onTime = () => {
-      if (videoEl.currentTime !== lastTime) {
-        lastTime = videoEl.currentTime;
-        frozenSince = 0;
-        stallStrikes.current = 0;
-      }
-    };
-
-    const tick = () => {
-      if (
-        !videoEl.paused &&
-        videoEl.readyState >= 2 &&
-        videoEl.currentTime === lastTime
-      ) {
-        frozenSince += 1000;
-        if (frozenSince >= STALL_MS) {
+      const onTime = () => {
+        if (el.currentTime !== lastTime) {
+          lastTime = el.currentTime;
           frozenSince = 0;
-          stallStrikes.current += 1;
-          if (stallStrikes.current >= 2) {
-            videoEl.load();
-            stallStrikes.current = 0;
-          }
-          videoEl.play().catch(() => {});
+          stallStrikes.current[key] = 0;
         }
-      } else {
-        frozenSince = 0;
-      }
-    };
+      };
 
-    const nudge = () => {
-      if (videoEl.paused || videoEl.ended) return;
-      videoEl.play().catch(() => {});
-    };
+      const tick = () => {
+        if (!el.paused && el.readyState >= 2 && el.currentTime === lastTime) {
+          frozenSince += 1000;
+          if (frozenSince >= STALL_MS) {
+            frozenSince = 0;
+            stallStrikes.current[key] += 1;
+            if (stallStrikes.current[key] >= 2) {
+              el.load();
+              stallStrikes.current[key] = 0;
+            }
+            el.play().catch(() => {});
+          }
+        } else {
+          frozenSince = 0;
+        }
+      };
 
-    const onEnded = () => videoEl.play().catch(() => {});
+      const nudge = () => {
+        if (el.paused || el.ended) return;
+        el.play().catch(() => {});
+      };
 
-    const onVisible = () => {
-      if (!document.hidden && videoEl.paused) videoEl.play().catch(() => {});
-    };
+      const onEnded = () => el.play().catch(() => {});
 
-    videoEl.addEventListener("timeupdate", onTime);
-    videoEl.addEventListener("stalled", nudge);
-    videoEl.addEventListener("waiting", nudge);
-    videoEl.addEventListener("suspend", nudge);
-    videoEl.addEventListener("ended", onEnded);
-    document.addEventListener("visibilitychange", onVisible);
-    const timer = window.setInterval(tick, 1000);
+      const onVisible = () => {
+        if (!document.hidden && el.paused) el.play().catch(() => {});
+      };
 
-    return () => {
-      videoEl.removeEventListener("timeupdate", onTime);
-      videoEl.removeEventListener("stalled", nudge);
-      videoEl.removeEventListener("waiting", nudge);
-      videoEl.removeEventListener("suspend", nudge);
-      videoEl.removeEventListener("ended", onEnded);
-      document.removeEventListener("visibilitychange", onVisible);
-      window.clearInterval(timer);
-    };
+      el.addEventListener("timeupdate", onTime);
+      el.addEventListener("stalled", nudge);
+      el.addEventListener("waiting", nudge);
+      el.addEventListener("suspend", nudge);
+      el.addEventListener("ended", onEnded);
+      document.addEventListener("visibilitychange", onVisible);
+      const timer = window.setInterval(tick, 1000);
+
+      return () => {
+        el.removeEventListener("timeupdate", onTime);
+        el.removeEventListener("stalled", nudge);
+        el.removeEventListener("waiting", nudge);
+        el.removeEventListener("suspend", nudge);
+        el.removeEventListener("ended", onEnded);
+        document.removeEventListener("visibilitychange", onVisible);
+        window.clearInterval(timer);
+      };
+    });
+
+    return () => cleanups.forEach((fn) => fn());
   }, []);
+
+  const markReady = () => setReady(true);
 
   const toggleAudio = () => {
-    const videoEl = videoRef.current;
-    if (!videoEl) return;
-    videoEl.muted = !videoEl.muted;
-    if (!videoEl.muted) {
-      videoEl.play().catch(() => {
-        videoEl.muted = true;
+    const darkEl = darkRef.current;
+    const lightEl = lightRef.current;
+    if (!darkEl || !lightEl) return;
+    const newMuted = !darkEl.muted;
+    darkEl.muted = newMuted;
+    lightEl.muted = newMuted;
+    if (!newMuted) {
+      darkEl.play().catch(() => {
+        darkEl.muted = true;
+        lightEl.muted = true;
       });
     }
   };
 
+  const isDark = mode === "dark";
+
   return (
     <>
       <div
-        className={`video-background${fading ? " video-background--fading" : ""}${
-          ready ? "" : " video-background--loading"
-        }`}
+        className={`video-background${ready ? "" : " video-background--loading"}`}
         aria-hidden="true"
       >
         <video
-          ref={videoRef}
-          poster={videoPoster}
+          ref={darkRef}
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
+          onLoadedData={markReady}
+          onCanPlay={markReady}
+          style={{ ...layerStyle, zIndex: 1, opacity: isDark ? 1 : 0 }}
         >
-          <source src={videoSrc} type="video/mp4" />
+          <source src={darkSrc} type="video/mp4" />
         </video>
         <video
-          src={VIDEOS[bgMode][mode === "dark" ? "light" : "dark"]}
-          preload={canPreload ? "auto" : "none"}
+          ref={lightRef}
+          autoPlay
           muted
+          loop
           playsInline
-          aria-hidden="true"
-          tabIndex={-1}
-          className="video-bg-preload"
-        />
+          preload="auto"
+          onLoadedData={markReady}
+          onCanPlay={markReady}
+          style={{ ...layerStyle, zIndex: 2, opacity: isDark ? 0 : 1 }}
+        >
+          <source src={lightSrc} type="video/mp4" />
+        </video>
         <div className="video-overlay" />
       </div>
       <button
