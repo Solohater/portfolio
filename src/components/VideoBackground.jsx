@@ -3,37 +3,50 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { ThemeContext } from "@/context/ThemeContext";
 
+const POSTERS = {
+  dark: "/videos/dark-poster.jpg",
+  light: "/videos/light-poster.jpg",
+};
+
 const VIDEOS = {
-  dark: { src: "/videos/dark.mp4", poster: "/videos/dark-poster.jpg" },
-  light: { src: "/videos/light.mp4", poster: "/videos/light-poster.jpg" },
+  realistic: {
+    dark: "/videos/dark.mp4",
+    light: "/videos/light.mp4",
+  },
+  animated: {
+    dark: "/videos/aDark.mp4",
+    light: "/videos/aLight.mp4",
+  },
 };
 
 const STALL_MS = 3000;
 
 const VideoBackground = () => {
-  const { mode } = useContext(ThemeContext);
+  const { mode, bgMode } = useContext(ThemeContext);
   const videoRef = useRef(null);
-  const [video, setVideo] = useState(VIDEOS[mode]);
+  const [videoSrc, setVideoSrc] = useState(VIDEOS[bgMode][mode]);
+  const [videoPoster, setVideoPoster] = useState(POSTERS[mode]);
   const [fading, setFading] = useState(false);
   const [ready, setReady] = useState(false);
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [canPreload, setCanPreload] = useState(false);
   const stallStrikes = useRef(0);
 
-  /* Theme switch: fade out, swap source, fade back in */
+  /* Theme/bgMode switch: fade out, swap source, fade back in */
   useEffect(() => {
-    const target = VIDEOS[mode];
-    if (target.src === video.src) return;
+    const target = VIDEOS[bgMode][mode];
+    if (target === videoSrc) return;
 
     setReady(false);
     setFading(true);
     const fadeOut = setTimeout(() => {
-      setVideo(target);
+      setVideoSrc(target);
+      setVideoPoster(POSTERS[mode]);
       setFading(false);
     }, 250);
 
     return () => clearTimeout(fadeOut);
-  }, [mode, video.src]);
+  }, [mode, bgMode, videoSrc]);
 
   /* (Re)load and start playback whenever the source changes */
   useEffect(() => {
@@ -41,7 +54,7 @@ const VideoBackground = () => {
     if (!videoEl) return;
     videoEl.load();
     videoEl.play().catch(() => {});
-  }, [video.src]);
+  }, [videoSrc]);
 
   const markReady = () => {
     setReady(true);
@@ -55,7 +68,7 @@ const VideoBackground = () => {
     const sync = () => setAudioEnabled(!videoEl.muted);
     videoEl.addEventListener("volumechange", sync);
     return () => videoEl.removeEventListener("volumechange", sync);
-  }, [video.src]);
+  }, [videoSrc]);
 
   /* Freeze recovery: stall watchdog, stall events, tab-return resume */
   useEffect(() => {
@@ -122,7 +135,7 @@ const VideoBackground = () => {
       document.removeEventListener("visibilitychange", onVisible);
       window.clearInterval(timer);
     };
-  }, [video.src]);
+  }, [videoSrc]);
 
   const toggleAudio = () => {
     const videoEl = videoRef.current;
@@ -145,7 +158,7 @@ const VideoBackground = () => {
       >
         <video
           ref={videoRef}
-          poster={video.poster}
+          poster={videoPoster}
           autoPlay
           muted
           loop
@@ -154,10 +167,10 @@ const VideoBackground = () => {
           onLoadedData={markReady}
           onCanPlay={markReady}
         >
-          <source src={video.src} type="video/mp4" />
+          <source src={videoSrc} type="video/mp4" />
         </video>
         <video
-          src={VIDEOS[mode === "dark" ? "light" : "dark"].src}
+          src={VIDEOS[bgMode][mode === "dark" ? "light" : "dark"]}
           preload={canPreload ? "auto" : "none"}
           muted
           playsInline

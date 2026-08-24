@@ -14,7 +14,7 @@ const links = [
 ]
 
 const Navbar = () => {
-  const { toggle, mode } = useContext(ThemeContext)
+  const { toggle, mode, toggleBgMode, bgMode } = useContext(ThemeContext)
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -33,13 +33,30 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 h-16">
-        <Link
-          href="/#hero"
-          className="text-xl font-bold"
-          style={{ color: 'var(--accent-text)' }}
+        <button
+          onClick={toggleBgMode}
+          className="relative w-10 h-10 flex items-center justify-center rounded-lg text-sm font-bold tracking-wider transition-all duration-300 hover:scale-110"
+          style={{
+            background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+            color: '#c0c0c0',
+            boxShadow: '0 0 15px rgba(192,192,192,0.4), inset 0 1px 0 rgba(255,255,255,0.1)',
+            border: '1px solid rgba(192,192,192,0.3)',
+          }}
+          aria-label={`Switch to ${bgMode === 'realistic' ? 'animated' : 'realistic'} background`}
+          title={bgMode === 'realistic' ? 'Animated backgrounds' : 'Realistic backgrounds'}
         >
-          YA
-        </Link>
+          <span
+            className="absolute inset-0 rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-300"
+            style={{
+              boxShadow: '0 0 25px rgba(192,192,192,0.7), 0 0 50px rgba(192,192,192,0.3)',
+            }}
+          />
+          <span className="relative z-10" style={{
+            textShadow: '0 0 10px rgba(192,192,192,0.8), 0 0 20px rgba(192,192,192,0.4)',
+          }}>
+            {bgMode === 'realistic' ? 'R' : 'A'}
+          </span>
+        </button>
 
         <div className="hidden md:flex items-center gap-8">
           {links.map((link) => (
