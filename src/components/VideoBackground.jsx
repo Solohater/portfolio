@@ -31,68 +31,55 @@ const VideoBackground = () => {
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [canPreload, setCanPreload] = useState(false);
   const stallStrikes = useRef(0);
-  const cleanupListener = useRef(null);
+  const switching = useRef(false);
 
-  /* Theme/bgMode switch: fade out, swap source when ready, fade back in */
+  /* Theme/bgMode switch: fade out → swap source → wait for ready → fade in */
   useEffect(() => {
     const target = VIDEOS[bgMode][mode];
     if (target === videoSrc) return;
 
-    if (cleanupListener.current) {
-      cleanupListener.current();
-      cleanupListener.current = null;
-    }
-
+    switching.current = true;
     setFading(true);
 
     const fadeOut = setTimeout(() => {
       setVideoSrc(target);
       setVideoPoster(POSTERS[mode]);
+    }, 300);
 
-      const videoEl = videoRef.current;
-      if (!videoEl) {
-        setFading(false);
-        return;
-      }
-
-      if (videoEl.readyState >= 3) {
-        setFading(false);
-        return;
-      }
-
-      const onReady = () => {
-        setFading(false);
-        cleanupListener.current = null;
-      };
-      videoEl.addEventListener("canplay", onReady);
-      videoEl.addEventListener("loadeddata", onReady);
-      cleanupListener.current = () => {
-        videoEl.removeEventListener("canplay", onReady);
-        videoEl.removeEventListener("loadeddata", onReady);
-      };
-    }, 250);
-
-    return () => {
-      clearTimeout(fadeOut);
-      if (cleanupListener.current) {
-        cleanupListener.current();
-        cleanupListener.current = null;
-      }
-    };
+    return () => clearTimeout(fadeOut);
   }, [mode, bgMode, videoSrc]);
 
-  /* (Re)load and start playback whenever the source changes */
+  /* Load and play when source changes; fade back in once ready */
   useEffect(() => {
     const videoEl = videoRef.current;
     if (!videoEl) return;
-    videoEl.load();
-    videoEl.play().catch(() => {});
-  }, [videoSrc]);
 
-  const markReady = () => {
-    setReady(true);
-    setCanPreload(true);
-  };
+    videoEl.load();
+
+    const onReady = () => {
+      videoEl.removeEventListener("canplay", onReady);
+      videoEl.removeEventListener("loadeddata", onReady);
+      videoEl.play().catch(() => {});
+      if (switching.current) {
+        switching.current = false;
+        setFading(false);
+      }
+      setReady(true);
+      setCanPreload(true);
+    };
+
+    if (videoEl.readyState >= 3) {
+      onReady();
+    } else {
+      videoEl.addEventListener("canplay", onReady);
+      videoEl.addEventListener("loadeddata", onReady);
+    }
+
+    return () => {
+      videoEl.removeEventListener("canplay", onReady);
+      videoEl.removeEventListener("loadeddata", onReady);
+    };
+  }, [videoSrc]);
 
   /* Keep the icon truthful: it follows the video's real muted state */
   useEffect(() => {
@@ -101,7 +88,7 @@ const VideoBackground = () => {
     const sync = () => setAudioEnabled(!videoEl.muted);
     videoEl.addEventListener("volumechange", sync);
     return () => videoEl.removeEventListener("volumechange", sync);
-  }, [videoSrc]);
+  }, []);
 
   /* Freeze recovery: stall watchdog, stall events, tab-return resume */
   useEffect(() => {
@@ -168,7 +155,7 @@ const VideoBackground = () => {
       document.removeEventListener("visibilitychange", onVisible);
       window.clearInterval(timer);
     };
-  }, [videoSrc]);
+  }, []);
 
   const toggleAudio = () => {
     const videoEl = videoRef.current;
@@ -197,8 +184,6 @@ const VideoBackground = () => {
           loop
           playsInline
           preload="auto"
-          onLoadedData={markReady}
-          onCanPlay={markReady}
         >
           <source src={videoSrc} type="video/mp4" />
         </video>
