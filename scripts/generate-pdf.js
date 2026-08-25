@@ -2,7 +2,7 @@ const { execSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 
-const imgPath = path.join(__dirname, '..', 'public', 'photojo.jpg');
+const imgPath = path.join(__dirname, '..', 'public', 'photojo.png');
 const imgBase64 = fs.readFileSync(imgPath).toString('base64');
 
 const html = `<!DOCTYPE html>
