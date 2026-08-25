@@ -1,7 +1,7 @@
 services:
   - type: web
     name: portfolio
-    env: static
+    env: node
     buildCommand: npm install && npm run build
-    staticPublishPath: out
+    startCommand: npx serve@latest out
     pullRequestPreviewsEnabled: true
