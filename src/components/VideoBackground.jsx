@@ -3,14 +3,26 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { ThemeContext } from "@/context/ThemeContext";
 
-const VIDEOS = {
+const VIDEO_SOURCES = {
   realistic: {
-    dark: "/videos/dark.mp4",
-    light: "/videos/light.mp4",
+    light: {
+      mobile: "/videos/mobile/light.mp4",
+      desktop: "/videos/desktop/light.mp4",
+    },
+    dark: {
+      mobile: "/videos/mobile/dark.mp4",
+      desktop: "/videos/desktop/dark.mp4",
+    },
   },
   animated: {
-    dark: "/videos/aDark.mp4",
-    light: "/videos/aLight.mp4",
+    light: {
+      mobile: "/videos/mobile/aLight.mp4",
+      desktop: "/videos/desktop/aLight.mp4",
+    },
+    dark: {
+      mobile: "/videos/mobile/aDark.mp4",
+      desktop: "/videos/desktop/aDark.mp4",
+    },
   },
 };
 
@@ -28,27 +40,35 @@ const layerStyle = {
 };
 
 const VideoBackground = () => {
-  const { mode, bgMode } = useContext(ThemeContext);
+  const { mode, bgMode, device } = useContext(ThemeContext);
   const darkRef = useRef(null);
   const lightRef = useRef(null);
   const [ready, setReady] = useState(false);
   const [audioEnabled, setAudioEnabled] = useState(false);
   const stallStrikes = useRef({ dark: 0, light: 0 });
+  const requestIdRef = useRef(0);
 
-  const darkSrc = VIDEOS[bgMode].dark;
-  const lightSrc = VIDEOS[bgMode].light;
+  const darkSrc = VIDEO_SOURCES[bgMode].dark[device];
+  const lightSrc = VIDEO_SOURCES[bgMode].light[device];
 
-  /* Load and play both videos when bgMode changes */
+  /* Load and play both videos when bgMode or device changes */
   useEffect(() => {
     const darkEl = darkRef.current;
     const lightEl = lightRef.current;
     if (!darkEl || !lightEl) return;
 
+    const currentRequest = ++requestIdRef.current;
+
     darkEl.load();
     lightEl.load();
     darkEl.play().catch(() => {});
     lightEl.play().catch(() => {});
-  }, [bgMode]);
+
+    return () => {
+      // If a new request came in, ignore this one
+      if (requestIdRef.current !== currentRequest) return;
+    };
+  }, [bgMode, device]);
 
   /* Sync audio state */
   useEffect(() => {
@@ -158,7 +178,7 @@ const VideoBackground = () => {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           onLoadedData={markReady}
           onCanPlay={markReady}
           style={{ ...layerStyle, zIndex: 1, opacity: isDark ? 1 : 0 }}
@@ -171,7 +191,7 @@ const VideoBackground = () => {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           onLoadedData={markReady}
           onCanPlay={markReady}
           style={{ ...layerStyle, zIndex: 2, opacity: isDark ? 0 : 1 }}

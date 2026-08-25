@@ -7,6 +7,7 @@ export const ThemeContext = createContext();
 export const ThemeProvider = ({ children }) => {
   const [mode, setMode] = useState("dark");
   const [bgMode, setBgMode] = useState("realistic");
+  const [device, setDevice] = useState("mobile");
 
   const toggle = () => {
     setMode((prev) => (prev === "dark" ? "light" : "dark"));
@@ -22,6 +23,15 @@ export const ThemeProvider = ({ children }) => {
     if (saved === "dark" || saved === "light") setMode(saved);
     const savedBg = window.localStorage.getItem("bgMode");
     if (savedBg === "realistic" || savedBg === "animated") setBgMode(savedBg);
+  }, []);
+
+  // Detect device type using matchMedia (768px = Tailwind md breakpoint)
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 768px)");
+    const handler = (e) => setDevice(e.matches ? "desktop" : "mobile");
+    handler(mql); // set initial value
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
   }, []);
 
   // Update HTML tag class when mode changes and persist it
@@ -41,7 +51,7 @@ export const ThemeProvider = ({ children }) => {
   }, [bgMode]);
 
   return (
-    <ThemeContext.Provider value={{ toggle, mode, toggleBgMode, bgMode }}>
+    <ThemeContext.Provider value={{ toggle, mode, toggleBgMode, bgMode, device }}>
       {children}
     </ThemeContext.Provider>
   );
