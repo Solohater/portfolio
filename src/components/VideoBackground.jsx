@@ -27,6 +27,7 @@ const VIDEO_SOURCES = {
 };
 
 const STALL_MS = 3000;
+const STRIKE_LIMIT = 3;
 
 const layerStyle = {
   position: "absolute",
@@ -36,7 +37,7 @@ const layerStyle = {
   objectFit: "cover",
   objectPosition: "center",
   display: "block",
-  transition: "opacity 0.3s ease",
+  transition: "opacity 0.4s ease",
 };
 
 const VideoBackground = () => {
@@ -47,6 +48,7 @@ const VideoBackground = () => {
   const [audioEnabled, setAudioEnabled] = useState(false);
   const stallStrikes = useRef({ dark: 0, light: 0 });
   const requestIdRef = useRef(0);
+  const prevModeRef = useRef(mode);
 
   const darkSrc = VIDEO_SOURCES[bgMode].dark[device];
   const lightSrc = VIDEO_SOURCES[bgMode].light[device];
@@ -65,10 +67,24 @@ const VideoBackground = () => {
     lightEl.play().catch(() => {});
 
     return () => {
-      // If a new request came in, ignore this one
       if (requestIdRef.current !== currentRequest) return;
     };
   }, [bgMode, device]);
+
+  /* Sync video currentTime on theme switch so there's no jarring jump */
+  useEffect(() => {
+    const darkEl = darkRef.current;
+    const lightEl = lightRef.current;
+    if (!darkEl || !lightEl) return;
+
+    if (prevModeRef.current !== mode) {
+      prevModeRef.current = mode;
+      const t = darkEl.currentTime;
+      try {
+        lightEl.currentTime = t;
+      } catch (e) { /* currentTime may be unavailable */ }
+    }
+  }, [mode]);
 
   /* Sync audio state */
   useEffect(() => {
@@ -103,7 +119,7 @@ const VideoBackground = () => {
           if (frozenSince >= STALL_MS) {
             frozenSince = 0;
             stallStrikes.current[key] += 1;
-            if (stallStrikes.current[key] >= 2) {
+            if (stallStrikes.current[key] >= STRIKE_LIMIT) {
               el.load();
               stallStrikes.current[key] = 0;
             }

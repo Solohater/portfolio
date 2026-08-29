@@ -28,7 +28,7 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/90 dark:bg-[#0f0f15]/90 backdrop-blur-md shadow-sm'
+          ? 'backdrop-blur-md shadow-sm bg-[var(--bg)]/20 dark:bg-[var(--bg)]/30'
           : 'bg-transparent'
       }`}
     >
