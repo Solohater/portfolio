@@ -16,7 +16,7 @@ const ORBIT_GAP = 36;
 
 /* ───── Hero ───── */
 function HeroSection() {
-  const { mode } = useContext(ThemeContext);
+  const { mode, bgMode } = useContext(ThemeContext);
   const photoWrapRef = useRef(null);
   const [radius, setRadius] = useState(140);
 
@@ -43,8 +43,8 @@ function HeroSection() {
     };
   }, []);
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 py-24 overflow-hidden">
-      <div className="max-w-6xl w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-20 z-10">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 py-24">
+      <div className="max-w-6xl w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-20 z-10 lg:backdrop-blur-sm lg:bg-[var(--page-tint)] lg:rounded-2xl lg:p-8">
         {/* Text */}
         <div className="flex-1 flex flex-col gap-5 text-center lg:text-left">
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
@@ -111,7 +111,7 @@ function HeroSection() {
               transition={{ delay: 0.3, duration: 0.5 }}
               className="relative w-56 h-56 sm:w-72 sm:h-72 rounded-full overflow-hidden ring-4 ring-[var(--bg)] shadow-2xl"
             >
-              <Image src={mode === "dark" ? "/darkimg.png" : "/lightimg.png"} alt="Yoseph Ayalew" fill className="object-cover object-[50%_0%] -rotate-10 translate-y-6 scale-100" priority />
+              <Image src={bgMode === "animated" ? (mode === "dark" ? "/aDarkP.png" : "/aLightP.png") : (mode === "dark" ? "/darkimg.png" : "/lightimg.png")} alt="Yoseph Ayalew" fill className="object-cover object-[50%_0%] -rotate-10 translate-y-6 scale-100" priority />
             </motion.div>
 
             {floatingTags.map((tag, i) => {
@@ -147,14 +147,14 @@ function HeroSection() {
 
 /* ───── About ───── */
 function AboutSection() {
-  const { mode } = useContext(ThemeContext);
+  const { mode, bgMode } = useContext(ThemeContext);
   return (
     <section id="about" className="px-6 py-20 md:py-28">
       <div className="max-w-3xl mx-auto">
         <h2 className="section-title">About Me</h2>
 
         <div className="flex flex-col sm:flex-row gap-6 items-start mb-8">
-          <Image src={mode === "dark" ? "/darkimg.png" : "/lightimg.png"} alt="" width={100} height={100} className="w-24 h-24 rounded-full object-cover object-top flex-shrink-0 ring-2" style={{ ringColor: 'var(--bg)' }} />
+          <Image src={bgMode === "animated" ? (mode === "dark" ? "/aDarkP.png" : "/aLightP.png") : (mode === "dark" ? "/darkimg.png" : "/lightimg.png")} alt="" width={100} height={100} className="w-24 h-24 rounded-full object-cover object-top flex-shrink-0 ring-2" style={{ ringColor: 'var(--bg)' }} />
           <p className="text-base leading-relaxed" style={{ color: 'var(--text)' }}>
             Motivated Computer Science graduate and Junior Software Developer with professional experience
             building web applications using <strong>Java, Vert.x, Angular, PostgreSQL,</strong> and <strong>SQL</strong>.
