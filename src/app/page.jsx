@@ -17,42 +17,42 @@ const ORBIT_GAP = 8;
 /* ───── Hero ───── */
 function HeroSection() {
   const { mode, bgMode } = useContext(ThemeContext);
-  const photoWrapRef = useRef(null);
-  const [radius, setRadius] = useState(140);
+  const profileAreaRef = useRef(null);
+  const [radius, setRadius] = useState(160);
 
   useEffect(() => {
     const compute = () => {
-      const photo = photoWrapRef.current;
-      if (!photo) return;
-      const photoHalf = photo.offsetWidth / 2;
-      const contentHalf = window.innerWidth / 2 - 28;
-      setRadius(
-        Math.max(
-          photoHalf * 0.6,
-          Math.min(photoHalf + ORBIT_GAP, contentHalf - CHIP_HALF_WIDTH)
-        )
+      const area = profileAreaRef.current;
+      if (!area) return;
+      const areaWidth = area.offsetWidth;
+      const computedRadius = Math.min(
+        (areaWidth / 2) - 38,
+        Math.max(105, areaWidth * 0.37)
       );
+      setRadius(computedRadius);
     };
     compute();
     const ro = new ResizeObserver(compute);
-    if (photoWrapRef.current) ro.observe(photoWrapRef.current);
+    if (profileAreaRef.current) ro.observe(profileAreaRef.current);
     window.addEventListener("resize", compute);
     return () => {
       ro.disconnect();
       window.removeEventListener("resize", compute);
     };
   }, []);
+
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 py-24">
-      <div className="max-w-[90rem] w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-2 z-10 lg:backdrop-blur-sm lg:bg-[var(--page-tint)] lg:rounded-2xl lg:p-8">
-        {/* Text */}
-        <div className="flex-1 flex flex-col gap-5 text-center lg:text-left">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      {/* Primary Hero Container Box */}
+      <div className="max-w-5xl xl:max-w-6xl w-full flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-8 xl:gap-12 z-10 backdrop-blur-sm bg-[var(--page-tint)] rounded-2xl p-6 sm:p-8 lg:p-10 border border-[var(--border)]/40 shadow-xl">
+        {/* Intro / Text Content */}
+        <div className="flex-1 flex flex-col gap-4 sm:gap-5 text-center lg:text-left lg:max-w-xl">
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="font-display text-xs uppercase tracking-widest text-black dark:text-white"
+            className="font-display text-xs uppercase tracking-widest text-black dark:text-white font-semibold"
           >Hello, I&apos;m</motion.p>
 
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-black dark:text-white"
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold leading-tight text-black dark:text-white"
           >
             Yoseph<br />Ayalew
           </motion.h1>
@@ -62,7 +62,7 @@ function HeroSection() {
           >Software Engineer</motion.p>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
-            className="font-display text-sm sm:text-base text-black dark:text-white max-w-lg"
+            className="font-display text-sm sm:text-base text-black/80 dark:text-white/80 max-w-lg leading-relaxed"
           >
             I specialize in developing full-stack web applications using Java, Vert.x,
             Angular, React, and PostgreSQL. Currently working at eTech SC, I build and
@@ -71,12 +71,12 @@ function HeroSection() {
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
-            className="flex flex-wrap gap-4 justify-center lg:justify-start"
+            className="flex flex-wrap gap-4 justify-center lg:justify-start pt-1"
           >
-            <a href="#projects" className="px-6 py-3 bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-lg font-medium transition text-sm sm:text-base">
+            <a href="#projects" className="px-6 py-3 bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-lg font-medium transition text-sm sm:text-base shadow-sm">
               View My Work
             </a>
-            <a href="#contact" className="px-6 py-3 bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-lg font-medium transition text-sm sm:text-base">
+            <a href="#contact" className="px-6 py-3 bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-lg font-medium transition text-sm sm:text-base shadow-sm">
               Get In Touch
             </a>
           </motion.div>
@@ -102,43 +102,60 @@ function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Photo */}
-        <div className="flex-shrink-0 flex items-center justify-center">
-          <div className="relative" ref={photoWrapRef}>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="relative w-56 h-56 sm:w-72 sm:h-72 rounded-full overflow-hidden ring-4 ring-[var(--bg)] shadow-2xl"
-            >
-              <Image src={bgMode === "animated" ? (mode === "dark" ? "/aDarkP.png" : "/aLightP.png") : (mode === "dark" ? "/darkimg.png" : "/lightimg.png")} alt="Yoseph Ayalew" fill className="object-cover object-[50%_0%] -rotate-10 translate-y-6 scale-100" priority />
-            </motion.div>
+        {/* Profile Area + Floating Skills (Positioning Context) */}
+        <div className="flex-shrink-0 flex items-center justify-center relative w-[340px] h-[340px] sm:w-[400px] sm:h-[400px] lg:w-[430px] lg:h-[430px]" ref={profileAreaRef}>
+          {/* Profile Image Circle */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="relative w-52 h-52 sm:w-60 sm:h-60 lg:w-64 lg:h-64 rounded-full overflow-hidden ring-4 ring-[var(--bg)] shadow-2xl z-10"
+          >
+            <Image
+              src={bgMode === "animated" ? (mode === "dark" ? "/aDarkP.png" : "/aLightP.png") : (mode === "dark" ? "/darkimg.png" : "/lightimg.png")}
+              alt="Yoseph Ayalew"
+              fill
+              className="object-cover object-[50%_0%] -rotate-10 translate-y-6 scale-100"
+              priority
+            />
+          </motion.div>
 
-            {floatingTags.map((tag, i) => {
-              const angle = (i / floatingTags.length) * 360;
-              const x = Math.cos((angle * Math.PI) / 180) * radius;
-              const y = Math.sin((angle * Math.PI) / 180) * radius;
-              return (
-                <motion.div key={tag}
-                  className="absolute top-1/2 left-1/2 pointer-events-none"
-                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 + i * 0.1 }}
+          {/* Floating Skill Tags Orbit */}
+          {floatingTags.map((tag, i) => {
+            const angle = (i / floatingTags.length) * 360 - 90;
+            const x = Math.cos((angle * Math.PI) / 180) * radius;
+            const y = Math.sin((angle * Math.PI) / 180) * radius;
+            return (
+              <motion.div
+                key={tag}
+                className="absolute top-1/2 left-1/2 pointer-events-none z-20"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8 + i * 0.08 }}
+              >
+                <motion.div
+                  className="absolute w-0 h-0"
+                  animate={{
+                    x: [x, x + (i % 2 === 0 ? 3 : -3), x],
+                    y: [y, y + (i % 2 === 0 ? -4 : 4), y]
+                  }}
+                  transition={{
+                    duration: 3.5 + (i % 3),
+                    repeat: Infinity,
+                    delay: i * 0.2,
+                    ease: "easeInOut"
+                  }}
                 >
-                  <motion.div
-                    className="absolute w-0 h-0"
-                    animate={{ x: [x, x + 5, x], y: [y, y - 5, y] }}
-                    transition={{ duration: 4, repeat: Infinity, delay: i * 0.3, ease: "easeInOut" }}
+                  <span
+                    className="absolute left-0 top-0 px-2.5 py-1 rounded-full text-xs font-medium bg-black/10 border border-black/20 text-black dark:bg-white/10 dark:border-white/20 dark:text-white backdrop-blur-md shadow-sm whitespace-nowrap transition-all duration-300 pointer-events-auto hover:scale-110"
+                    style={{ transform: `translate(-50%, -50%)` }}
                   >
-                    <span
-                      className="absolute left-0 top-0 px-2.5 py-1 rounded-full text-xs font-medium bg-black/10 border border-black/20 text-black dark:bg-white/10 dark:border-white/20 dark:text-white whitespace-nowrap"
-                      style={{ transform: `translate(-50%, -50%)` }}
-                    >
-                      {tag}
-                    </span>
-                  </motion.div>
+                    {tag}
+                  </span>
                 </motion.div>
-              );
-            })}
-          </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
