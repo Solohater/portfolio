@@ -11,8 +11,8 @@ const floatingTags = [
   "PostgreSQL", "TypeScript", "JavaScript", "Tailwind CSS", "Go"
 ];
 
-const CHIP_HALF_WIDTH = 27;
-const ORBIT_GAP = 36;
+const CHIP_HALF_WIDTH = 24;
+const ORBIT_GAP = 8;
 
 /* ───── Hero ───── */
 function HeroSection() {
@@ -44,7 +44,7 @@ function HeroSection() {
   }, []);
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 py-24">
-      <div className="max-w-6xl w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-20 z-10 lg:backdrop-blur-sm lg:bg-[var(--page-tint)] lg:rounded-2xl lg:p-8">
+      <div className="max-w-[90rem] w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-2 z-10 lg:backdrop-blur-sm lg:bg-[var(--page-tint)] lg:rounded-2xl lg:p-8">
         {/* Text */}
         <div className="flex-1 flex flex-col gap-5 text-center lg:text-left">
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
@@ -125,11 +125,11 @@ function HeroSection() {
                 >
                   <motion.div
                     className="absolute w-0 h-0"
-                    animate={{ x: [x, x + 10, x], y: [y, y - 10, y] }}
+                    animate={{ x: [x, x + 5, x], y: [y, y - 5, y] }}
                     transition={{ duration: 4, repeat: Infinity, delay: i * 0.3, ease: "easeInOut" }}
                   >
                     <span
-                      className="absolute left-0 top-0 px-3 py-1.5 rounded-full text-xs font-medium bg-black/10 border border-black/20 text-black dark:bg-white/10 dark:border-white/20 dark:text-white whitespace-nowrap"
+                      className="absolute left-0 top-0 px-2.5 py-1 rounded-full text-xs font-medium bg-black/10 border border-black/20 text-black dark:bg-white/10 dark:border-white/20 dark:text-white whitespace-nowrap"
                       style={{ transform: `translate(-50%, -50%)` }}
                     >
                       {tag}
