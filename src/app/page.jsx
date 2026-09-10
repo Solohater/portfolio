@@ -11,9 +11,6 @@ const floatingTags = [
   "PostgreSQL", "TypeScript", "JavaScript", "Tailwind CSS", "Go"
 ];
 
-const CHIP_HALF_WIDTH = 24;
-const ORBIT_GAP = 8;
-
 /* ───── Hero ───── */
 function HeroSection() {
   const { mode, bgMode } = useContext(ThemeContext);
@@ -44,9 +41,22 @@ function HeroSection() {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
       {/* Primary Hero Container Box */}
-      <div className="max-w-5xl xl:max-w-6xl w-full flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-8 xl:gap-12 z-10 backdrop-blur-sm bg-[var(--page-tint)] rounded-2xl p-6 sm:p-8 lg:p-10 border border-[var(--border)]/40 shadow-xl">
+      <div className="max-w-5xl xl:max-w-6xl w-full flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-8 xl:gap-12 z-10 glass-card rounded-2xl p-6 sm:p-8 lg:p-10 shadow-2xl" style={{ background: 'var(--page-tint)' }}>
         {/* Intro / Text Content */}
         <div className="flex-1 flex flex-col gap-4 sm:gap-5 text-center lg:text-left lg:max-w-xl">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15 }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium self-center lg:self-start glass-card mb-1 text-black dark:text-white"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            Available for full-stack opportunities
+          </motion.div>
+
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
             className="font-display text-xs uppercase tracking-widest text-black dark:text-white font-semibold"
           >Hello, I&apos;m</motion.p>
@@ -186,9 +196,9 @@ function AboutSection() {
             { label: 'Location', value: 'Addis Ababa, Ethiopia' },
             { label: 'Languages', value: 'Amharic (Native) — English (Fluent)' },
           ].map((item) => (
-            <div key={item.label} className="p-4 rounded-xl" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)' }}>
+            <div key={item.label} className="p-4 rounded-xl glass-card">
               <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--accent-text)' }}>{item.label}</p>
-              <p className="text-sm" style={{ color: 'var(--text-h)' }}>{item.value}</p>
+              <p className="text-sm font-medium" style={{ color: 'var(--text-h)' }}>{item.value}</p>
             </div>
           ))}
         </div>
@@ -204,12 +214,12 @@ const experiences = [
     title: 'Junior Software Developer',
     company: 'eTech SC',
     points: [
-      'Develop and maintain software features using Java and Vert.x',
-      'Build and improve frontend components using Angular',
-      'Work with PostgreSQL databases and SQL queries',
-      'Debug, test, and resolve software defects',
-      'Collaborate with developers and stakeholders using Git and GitLab',
-      'Participate in feature implementation, maintenance, and code reviews',
+      'Develop and maintain high-performance full-stack features using Java and Vert.x',
+      'Build responsive, accessible frontend components and user workflows using Angular',
+      'Design relational schemas, optimize complex SQL queries, and manage PostgreSQL databases',
+      'Debug, test, and resolve critical production defects across microservices',
+      'Collaborate in an Agile environment using Git and GitLab with rigorous code reviews',
+      'Actively expand backend knowledge with Go and distributed system principles',
     ],
   },
 ];
@@ -254,8 +264,7 @@ function ExperienceSection() {
 
                 {/* Experience card */}
                 <motion.div
-                  className="p-5 rounded-xl relative"
-                  style={{ background: 'var(--card-bg)', border: '1px solid var(--border)' }}
+                  className="p-5 rounded-xl relative glass-card"
                   initial={{ opacity: 0, x: 40 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: i * 0.25 + 0.15 }}
@@ -327,11 +336,11 @@ function SkillsSection() {
         <h2 className="section-title">Tech Stack</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {skillGroups.map((group) => (
-            <div key={group.category} className="p-5 rounded-xl" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)' }}>
+            <div key={group.category} className="p-5 rounded-xl glass-card">
               <h3 className="text-sm font-bold uppercase tracking-wider mb-3" style={{ color: 'var(--accent-text)' }}>{group.category}</h3>
               <div className="flex flex-wrap gap-2">
                 {group.skills.map((skill) => (
-                  <span key={skill} className="px-3 py-1 rounded-full text-xs font-medium" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
+                  <span key={skill} className="px-3 py-1 rounded-full text-xs font-medium transition-transform hover:scale-105 cursor-default" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
                     {skill}
                   </span>
                 ))}
@@ -348,22 +357,24 @@ function SkillsSection() {
 const projects = [
   {
     title: 'Document Manager',
-    desc: 'A document management platform where users post documents and a reviewer role reviews and approves them.',
+    desc: 'Full-stack document workflow platform with role-based approvals (Admin/Reviewer/Author), PostgreSQL schema with Prisma ORM, and secure JWT authentication.',
     tech: ['React', 'Node.js', 'Prisma', 'PostgreSQL'],
     link: 'https://blog-app-seven-bice-50.vercel.app',
     github: 'https://github.com/Solohater/Document-Management',
     demo: 'admin / admin123',
+    featured: true,
   },
   {
     title: 'TechShop',
-    desc: 'A commercial tech store for phones, tablets and laptops — product catalog, shopping cart, wishlist, order tracking, and customer accounts.',
+    desc: 'Commercial tech store featuring responsive product catalog, cart, wishlist, real-time order tracking, and customer account dashboard.',
     tech: ['TypeScript', 'Next.js', 'Tailwind CSS'],
     link: 'https://techshop-peach.vercel.app',
     demo: 'admin@techshop.com / Admin@12345',
+    note: 'Enterprise Client Repo',
   },
   {
     title: 'Ethio Kemem — Food Menu',
-    desc: 'A bilingual (Amharic/English) traditional Ethiopian food menu — categorized dishes, order cart, and an admin dashboard.',
+    desc: 'Bilingual (Amharic/English) traditional culinary platform with categorized interactive menus, order cart, and administrative dashboard.',
     tech: ['TypeScript', 'Next.js', 'Tailwind CSS'],
     link: 'https://fastfood-amber-chi.vercel.app',
     github: 'https://github.com/Solohater/Food-Delivery-Platform',
@@ -371,14 +382,14 @@ const projects = [
   },
   {
     title: 'JODEV Blog',
-    desc: 'A blog platform with categories, post management and newsletter subscription, backed by a REST API.',
+    desc: 'Technical publishing platform with category indexing, post management, and newsletter subscriptions backed by a REST API.',
     tech: ['Next.js', 'Node.js', 'Express'],
     link: 'https://materialtut-web.vercel.app',
-    demo: 'admin@blog.com / admin123 (user: john@blog.com / user123)',
+    demo: 'admin@blog.com / admin123',
   },
   {
     title: 'Repair Management System',
-    desc: 'A full-stack MERN repair shop management system with role-based authentication, repair tracking, dashboards, and REST APIs.',
+    desc: 'Full-stack MERN repair service portal with technician assignment, status tracking, role-based auth, and operational analytics dashboards.',
     tech: ['React', 'Node.js', 'Express', 'MongoDB'],
     link: 'https://web-seven-woad-99.vercel.app',
     github: 'https://github.com/Solohater/DaveProjFront',
@@ -386,8 +397,8 @@ const projects = [
   },
   {
     title: 'Reminder & Notes App',
-    desc: 'A reminder and scheduling app for keeping track of tasks, notes, and deadlines.',
-    tech: ['React'],
+    desc: 'Task scheduling and notes productivity app featuring calendar reminders, deadlines, and local state persistence.',
+    tech: ['React', 'JavaScript', 'CSS3'],
     link: 'https://reminder-schedule-eight.vercel.app',
   },
 ];
@@ -399,35 +410,61 @@ function ProjectsSection() {
         <h2 className="section-title">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((p, i) => (
-            <div key={i} className="p-6 rounded-xl transition-transform hover:-translate-y-1" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)' }}>
-              <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-h)' }}>{p.title}</h3>
-              <p className="text-sm mb-4 leading-relaxed" style={{ color: 'var(--text)' }}>{p.desc}</p>
-              {p.demo && (
-              <p className="text-xs mb-4" style={{ color: 'var(--text)' }}>
-                <span style={{ color: 'var(--accent-text)', fontWeight: 600 }}>Demo login:</span> {p.demo}
-              </p>
-              )}
-              <div className="flex flex-wrap gap-2 mb-4">
-                {p.tech.map((t) => (
-                  <span key={t} className="px-2.5 py-0.5 rounded text-xs font-medium" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
-                    {t}
-                  </span>
-                ))}
-              </div>
-              <div className="flex gap-3">
-                {p.github && (
-                <a href={p.github} target="_blank" className="text-xs font-medium px-3 py-1.5 rounded transition" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}
-                  onMouseEnter={(e) => { e.target.style.background = 'var(--accent-text)'; e.target.style.color = 'var(--bg)'; }}
-                  onMouseLeave={(e) => { e.target.style.background = 'var(--accent-bg)'; e.target.style.color = 'var(--accent-text)'; }}
-                >
-                  Source Code
-                </a>
+            <div
+              key={i}
+              className={`p-6 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl glass-card flex flex-col justify-between ${
+                p.featured ? 'ring-1 ring-emerald-500/30 dark:ring-emerald-400/40' : ''
+              }`}
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <h3 className="text-lg font-bold" style={{ color: 'var(--text-h)' }}>{p.title}</h3>
+                  {p.featured && (
+                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+                      ★ Featured
+                    </span>
+                  )}
+                  {p.note && (
+                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-black/5 dark:bg-white/10 text-[var(--text)] border border-[var(--border)]">
+                      {p.note}
+                    </span>
+                  )}
+                </div>
+                <p className="text-sm mb-4 leading-relaxed" style={{ color: 'var(--text)' }}>{p.desc}</p>
+                {p.demo && (
+                  <p className="text-xs mb-4 p-2 rounded-lg bg-black/5 dark:bg-white/5 font-mono" style={{ color: 'var(--text)' }}>
+                    <span style={{ color: 'var(--accent-text)', fontWeight: 600 }}>Demo login:</span> {p.demo}
+                  </p>
                 )}
-                <a href={p.link} target="_blank" className="text-xs font-medium px-3 py-1.5 rounded transition" style={{ border: '1px solid var(--border)', color: 'var(--text-h)' }}
-                  onMouseEnter={(e) => { e.target.style.borderColor = 'var(--accent-text)'; e.target.style.color = 'var(--accent-text)'; }}
-                  onMouseLeave={(e) => { e.target.style.borderColor = 'var(--border)'; e.target.style.color = 'var(--text-h)'; }}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {p.tech.map((t) => (
+                    <span key={t} className="px-2.5 py-0.5 rounded text-xs font-medium" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 pt-2">
+                {p.github && (
+                  <a
+                    href={p.github}
+                    target="_blank"
+                    className="text-xs font-medium px-3 py-1.5 rounded transition"
+                    style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}
+                    onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--accent-text)'; e.currentTarget.style.color = 'var(--bg)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--accent-bg)'; e.currentTarget.style.color = 'var(--accent-text)'; }}
+                  >
+                    Source Code
+                  </a>
+                )}
+                <a
+                  href={p.link}
+                  target="_blank"
+                  className="text-xs font-medium px-3 py-1.5 rounded transition border border-[var(--border)] hover:border-[var(--border-focus)] hover:scale-105"
+                  style={{ color: 'var(--text-h)' }}
                 >
-                  Live Demo
+                  Live Demo ↗
                 </a>
               </div>
             </div>
@@ -440,41 +477,125 @@ function ProjectsSection() {
 
 /* ───── Contact ───── */
 function ContactSection() {
+  const [formStatus, setFormStatus] = useState('idle');
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText('yosefayalew56@gmail.com');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormStatus('submitting');
+    const form = e.target;
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch('https://formspree.io/f/xqeoarld', {
+        method: 'POST',
+        body: data,
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+      if (res.ok) {
+        setFormStatus('success');
+        form.reset();
+      } else {
+        setFormStatus('error');
+      }
+    } catch {
+      setFormStatus('error');
+    }
+  };
+
   return (
     <section id="contact" className="px-6 py-20 md:py-28">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <h2 className="section-title">Get In Touch</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="flex flex-col gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+          <div className="glass-card p-6 sm:p-8 rounded-2xl flex flex-col gap-5">
             <p className="text-sm leading-relaxed" style={{ color: 'var(--text)' }}>
-              Feel free to reach out for opportunities, collaboration, or just a chat.
+              Feel free to reach out for software engineering roles, project collaboration, or tech inquiries. I typically respond within 24 hours.
             </p>
             <div className="flex flex-col gap-3">
-              <a href="mailto:yosefayalew56@gmail.com" className="text-sm font-medium transition" style={{ color: 'var(--accent-text)' }}>
-                yosefayalew56@gmail.com
-              </a>
+              <div className="flex items-center gap-2">
+                <a href="mailto:yosefayalew56@gmail.com" className="text-sm font-medium transition hover:underline" style={{ color: 'var(--accent-text)' }}>
+                  yosefayalew56@gmail.com
+                </a>
+                <button
+                  type="button"
+                  onClick={copyEmail}
+                  className="px-2 py-0.5 text-[11px] rounded glass-card hover:bg-black/5 dark:hover:bg-white/10 transition cursor-pointer"
+                  title="Copy email address"
+                >
+                  {copied ? '✓ Copied' : 'Copy'}
+                </button>
+              </div>
               <span className="text-sm" style={{ color: 'var(--text)' }}>Addis Ababa, Ethiopia</span>
             </div>
-            <div className="flex gap-4 pt-2">
-              <a href="https://github.com/Solohater" target="_blank" className="text-sm font-medium" style={{ color: 'var(--accent-text)' }}>GitHub</a>
-              <a href="https://gitlab.com/yosephh" target="_blank" className="text-sm font-medium" style={{ color: 'var(--accent-text)' }}>GitLab</a>
-              <a href="https://www.linkedin.com/in/yoseph-ayalew-65247b291" target="_blank" className="text-sm font-medium" style={{ color: 'var(--accent-text)' }}>LinkedIn</a>
-              <a href="https://t.me/YOSEP015" target="_blank" className="text-sm font-medium" style={{ color: 'var(--accent-text)' }}>Telegram</a>
+            <div className="flex flex-wrap gap-3 pt-2 border-t border-[var(--border)]">
+              <a href="https://github.com/Solohater" target="_blank" className="text-xs font-semibold px-3 py-1.5 rounded-lg glass-card hover:scale-105 transition" style={{ color: 'var(--accent-text)' }}>GitHub</a>
+              <a href="https://gitlab.com/yosephh" target="_blank" className="text-xs font-semibold px-3 py-1.5 rounded-lg glass-card hover:scale-105 transition" style={{ color: 'var(--accent-text)' }}>GitLab</a>
+              <a href="https://www.linkedin.com/in/yoseph-ayalew-65247b291" target="_blank" className="text-xs font-semibold px-3 py-1.5 rounded-lg glass-card hover:scale-105 transition" style={{ color: 'var(--accent-text)' }}>LinkedIn</a>
+              <a href="https://t.me/YOSEP015" target="_blank" className="text-xs font-semibold px-3 py-1.5 rounded-lg glass-card hover:scale-105 transition" style={{ color: 'var(--accent-text)' }}>Telegram</a>
             </div>
           </div>
 
-          <form className="flex flex-col gap-4" action="https://formspree.io/f/xqeoarld" method="POST">
-            <input type="text" name="name" placeholder="Your Name" required
-              className="px-4 py-3 rounded-lg text-sm outline-none transition" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', color: 'var(--text-h)' }} />
-            <input type="email" name="email" placeholder="Your Email" required
-              className="px-4 py-3 rounded-lg text-sm outline-none transition" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', color: 'var(--text-h)' }} />
-            <textarea name="message" placeholder="Your Message" rows={4} required
-              className="px-4 py-3 rounded-lg text-sm outline-none transition resize-none" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', color: 'var(--text-h)' }} />
-            <button type="submit"
-              className="self-start px-5 py-2.5 rounded-lg text-sm font-medium transition border-2 bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 border-black dark:border-white"
+          <form onSubmit={handleSubmit} className="glass-card p-6 sm:p-8 rounded-2xl flex flex-col gap-4">
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              required
+              disabled={formStatus === 'submitting'}
+              className="glass-input px-4 py-3 rounded-lg text-sm outline-none transition"
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              required
+              disabled={formStatus === 'submitting'}
+              className="glass-input px-4 py-3 rounded-lg text-sm outline-none transition"
+            />
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              rows={4}
+              required
+              disabled={formStatus === 'submitting'}
+              className="glass-input px-4 py-3 rounded-lg text-sm outline-none transition resize-none"
+            />
+            <button
+              type="submit"
+              disabled={formStatus === 'submitting'}
+              className="self-start px-6 py-2.5 rounded-lg text-sm font-medium transition bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 border-2 border-black dark:border-white disabled:opacity-50 cursor-pointer"
             >
-              Send Message
+              {formStatus === 'submitting' ? 'Sending...' : 'Send Message'}
             </button>
+
+            {formStatus === 'success' && (
+              <motion.div
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-3 rounded-lg text-xs font-medium bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300"
+              >
+                Thank you! Your message has been sent successfully. I will get back to you soon.
+              </motion.div>
+            )}
+
+            {formStatus === 'error' && (
+              <motion.div
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-3 rounded-lg text-xs font-medium bg-rose-500/15 border border-rose-500/30 text-rose-700 dark:text-rose-300"
+              >
+                Something went wrong. Please try again or email me directly at yosefayalew56@gmail.com
+              </motion.div>
+            )}
           </form>
         </div>
       </div>

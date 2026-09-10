@@ -70,6 +70,7 @@ const displayFont = localFont({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://portfolio-7ypn.onrender.com"),
   title: "Yoseph Ayalew — Software Engineer | Portfolio",
   description:
     "Portfolio of Yoseph Ayalew — Software Engineer specializing in Java, Vert.x, Angular, React, and PostgreSQL. Full-stack developer based in Addis Ababa, Ethiopia.",

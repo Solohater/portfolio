@@ -80,7 +80,7 @@ export default function CVPage() {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="p-5 rounded-xl mb-4" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)' }}
+              className="p-5 rounded-xl mb-4 glass-card"
             >
               <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mb-2">
                 <h3 className="font-bold" style={{ color: 'var(--text-h)' }}>{exp.title}</h3>
@@ -104,7 +104,7 @@ export default function CVPage() {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="p-5 rounded-xl mb-4" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)' }}
+              className="p-5 rounded-xl mb-4 glass-card"
             >
               <h3 className="font-bold" style={{ color: 'var(--text-h)' }}>{edu.degree}</h3>
               <p className="text-sm font-medium" style={{ color: 'var(--accent-text)' }}>{edu.school}</p>
@@ -122,7 +122,7 @@ export default function CVPage() {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {skills.map((group) => (
-              <div key={group.category} className="p-4 rounded-xl" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)' }}>
+              <div key={group.category} className="p-4 rounded-xl glass-card">
                 <h3 className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--accent-text)' }}>{group.category}</h3>
                 <div className="flex flex-wrap gap-1.5">
                   {group.items.map((skill) => (

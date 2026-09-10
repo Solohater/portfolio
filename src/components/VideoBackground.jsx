@@ -47,7 +47,6 @@ const VideoBackground = () => {
   const [ready, setReady] = useState(false);
   const [audioEnabled, setAudioEnabled] = useState(false);
   const stallStrikes = useRef({ dark: 0, light: 0 });
-  const requestIdRef = useRef(0);
   const prevModeRef = useRef(mode);
 
   const darkSrc = VIDEO_SOURCES[bgMode].dark[device];
@@ -59,16 +58,10 @@ const VideoBackground = () => {
     const lightEl = lightRef.current;
     if (!darkEl || !lightEl) return;
 
-    const currentRequest = ++requestIdRef.current;
-
     darkEl.load();
     lightEl.load();
     darkEl.play().catch(() => {});
     lightEl.play().catch(() => {});
-
-    return () => {
-      if (requestIdRef.current !== currentRequest) return;
-    };
   }, [bgMode, device]);
 
   /* Sync video currentTime on theme switch so there's no jarring jump */

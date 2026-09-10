@@ -35,27 +35,21 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 h-16">
         <button
           onClick={toggleBgMode}
-          className="relative w-10 h-10 flex items-center justify-center rounded-lg text-sm font-bold tracking-wider transition-all duration-300 hover:scale-110"
-          style={{
-            background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
-            color: '#c0c0c0',
-            boxShadow: '0 0 15px rgba(192,192,192,0.4), inset 0 1px 0 rgba(255,255,255,0.1)',
-            border: '1px solid rgba(192,192,192,0.3)',
-          }}
-          aria-label={`Switch to ${bgMode === 'realistic' ? 'animated' : 'realistic'} background`}
-          title={bgMode === 'realistic' ? 'Animated backgrounds' : 'Realistic backgrounds'}
+          className="group relative flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold glass-card transition-all duration-300 hover:scale-105"
+          aria-label={`Current: ${bgMode} background. Click to switch to ${bgMode === 'realistic' ? 'animated' : 'realistic'}`}
+          title={`Switch to ${bgMode === 'realistic' ? 'animated' : 'realistic'} background video`}
         >
-          <span
-            className="absolute inset-0 rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-300"
-            style={{
-              boxShadow: '0 0 25px rgba(192,192,192,0.7), 0 0 50px rgba(192,192,192,0.3)',
-            }}
-          />
-          <span className="relative z-10" style={{
-            textShadow: '0 0 10px rgba(192,192,192,0.8), 0 0 20px rgba(192,192,192,0.4)',
-          }}>
-            {bgMode === 'realistic' ? 'R' : 'A'}
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
+          <span className="hidden sm:inline font-mono tracking-wide text-xs" style={{ color: 'var(--text-h)' }}>
+            BG: {bgMode === 'realistic' ? 'Realistic' : 'Animated'}
+          </span>
+          <span className="sm:hidden font-mono font-bold text-xs" style={{ color: 'var(--text-h)' }}>
+            {bgMode === 'realistic' ? 'REAL' : 'ANIM'}
+          </span>
+          <span className="text-[10px] opacity-60 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--text)' }}>⇄</span>
         </button>
 
         <div className="hidden md:flex items-center gap-8">
