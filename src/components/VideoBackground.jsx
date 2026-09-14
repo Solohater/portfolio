@@ -6,22 +6,22 @@ import { ThemeContext } from "@/context/ThemeContext";
 const VIDEO_SOURCES = {
   realistic: {
     light: {
-      mobile: "/videos/mobile/light.mp4",
-      desktop: "/videos/desktop/light.mp4",
+      src: "/videos/snowy-sunny.mp4",
+      poster: "/videos/posters/snowy-sunny.jpg",
     },
     dark: {
-      mobile: "/videos/mobile/dark.mp4",
-      desktop: "/videos/desktop/dark.mp4",
+      src: "/videos/rainy-night.mp4",
+      poster: "/videos/posters/rainy-night.jpg",
     },
   },
   animated: {
     light: {
-      mobile: "/videos/mobile/aLight.mp4",
-      desktop: "/videos/desktop/aLight.mp4",
+      src: "/videos/snowy-animated.mp4",
+      poster: "/videos/posters/snowy-animated.jpg",
     },
     dark: {
-      mobile: "/videos/mobile/aDark.mp4",
-      desktop: "/videos/desktop/aDark.mp4",
+      src: "/videos/rainy-night-animated.mp4",
+      poster: "/videos/posters/rainy-night-animated.jpg",
     },
   },
 };
@@ -37,77 +37,104 @@ const layerStyle = {
   objectFit: "cover",
   objectPosition: "center",
   display: "block",
-  transition: "opacity 0.4s ease",
+  transition: "opacity 0.8s ease-in-out",
 };
 
 const VideoBackground = () => {
-  const { mode, bgMode, device } = useContext(ThemeContext);
-  const darkRef = useRef(null);
-  const lightRef = useRef(null);
+  const { mode = "dark", bgMode = "realistic" } = useContext(ThemeContext);
+  const currentMode = mode === "light" ? "light" : "dark";
+  const currentBgMode = bgMode === "animated" ? "animated" : "realistic";
+
+  const currentAsset = VIDEO_SOURCES[currentBgMode][currentMode];
+
+  // Two video slots for smooth crossfade without keeping multiple videos active in memory
+  const slot0Ref = useRef(null);
+  const slot1Ref = useRef(null);
+
+  const [activeSlot, setActiveSlot] = useState(0);
+  const [slot0, setSlot0] = useState({ src: currentAsset.src, poster: currentAsset.poster });
+  const [slot1, setSlot1] = useState({ src: "", poster: "" });
+
   const [ready, setReady] = useState(false);
   const [audioEnabled, setAudioEnabled] = useState(false);
-  const stallStrikes = useRef({ dark: 0, light: 0 });
-  const prevModeRef = useRef(mode);
+  const audioEnabledRef = useRef(false);
 
-  const darkSrc = VIDEO_SOURCES[bgMode].dark[device];
-  const lightSrc = VIDEO_SOURCES[bgMode].light[device];
+  const stallStrikes = useRef({ slot0: 0, slot1: 0 });
+  const activeSrcRef = useRef(currentAsset.src);
 
-  /* Load and play both videos when bgMode or device changes */
+  // Keep audioEnabledRef in sync
   useEffect(() => {
-    const darkEl = darkRef.current;
-    const lightEl = lightRef.current;
-    if (!darkEl || !lightEl) return;
+    audioEnabledRef.current = audioEnabled;
+  }, [audioEnabled]);
 
-    darkEl.load();
-    lightEl.load();
-    darkEl.play().catch(() => {});
-    lightEl.play().catch(() => {});
-  }, [bgMode, device]);
-
-  /* Sync video currentTime on theme switch so there's no jarring jump */
+  // Handle theme or bgMode change with graceful crossfade
   useEffect(() => {
-    const darkEl = darkRef.current;
-    const lightEl = lightRef.current;
-    if (!darkEl || !lightEl) return;
+    const nextAsset = VIDEO_SOURCES[currentBgMode][currentMode];
+    if (nextAsset.src === activeSrcRef.current) return;
 
-    if (prevModeRef.current !== mode) {
-      prevModeRef.current = mode;
-      const t = darkEl.currentTime;
-      try {
-        lightEl.currentTime = t;
-      } catch (e) { /* currentTime may be unavailable */ }
+    activeSrcRef.current = nextAsset.src;
+    const targetSlot = activeSlot === 0 ? 1 : 0;
+    const targetRef = targetSlot === 0 ? slot0Ref : slot1Ref;
+    const prevRef = activeSlot === 0 ? slot0Ref : slot1Ref;
+
+    // Load new asset into target slot
+    if (targetSlot === 0) {
+      setSlot0({ src: nextAsset.src, poster: nextAsset.poster });
+    } else {
+      setSlot1({ src: nextAsset.src, poster: nextAsset.poster });
     }
-  }, [mode]);
 
-  /* Sync audio state */
+    // Play target video and transition opacity
+    const targetEl = targetRef.current;
+    if (targetEl) {
+      targetEl.src = nextAsset.src;
+      targetEl.volume = 1.0;
+      targetEl.muted = !audioEnabledRef.current;
+      targetEl.play().catch(() => {
+        // Fallback if browser autoplay blocks unmuted transition
+        targetEl.muted = true;
+        targetEl.play().catch(() => {});
+      });
+    }
+
+    setActiveSlot(targetSlot);
+
+    // After transition duration (850ms), pause and mute previous video to free GPU decoding resources
+    const timer = setTimeout(() => {
+      const prevEl = prevRef.current;
+      if (prevEl) {
+        prevEl.pause();
+        prevEl.muted = true;
+      }
+    }, 850);
+
+    return () => clearTimeout(timer);
+  }, [currentMode, currentBgMode, activeSlot]);
+
+  // Initial playback on mount
   useEffect(() => {
-    const darkEl = darkRef.current;
-    if (!darkEl) return;
-    const sync = () => setAudioEnabled(!darkEl.muted);
-    darkEl.addEventListener("volumechange", sync);
-    return () => darkEl.removeEventListener("volumechange", sync);
+    const el = slot0Ref.current;
+    if (el) {
+      el.muted = true;
+      el.play().catch(() => {});
+    }
   }, []);
 
-  /* Freeze recovery for both videos */
+  // Freeze / stall recovery for both slots
   useEffect(() => {
-    const els = [darkRef.current, lightRef.current].filter(Boolean);
-    if (!els.length) return;
+    const els = [
+      { key: "slot0", ref: slot0Ref },
+      { key: "slot1", ref: slot1Ref },
+    ];
 
-    const cleanups = els.map((el) => {
-      let lastTime = el.currentTime;
+    const cleanups = els.map(({ key, ref }) => {
+      let lastTime = 0;
       let frozenSince = 0;
-      const key = el === darkRef.current ? "dark" : "light";
-
-      const onTime = () => {
-        if (el.currentTime !== lastTime) {
-          lastTime = el.currentTime;
-          frozenSince = 0;
-          stallStrikes.current[key] = 0;
-        }
-      };
 
       const tick = () => {
-        if (!el.paused && el.readyState >= 2 && el.currentTime === lastTime) {
+        const el = ref.current;
+        if (!el || el.paused || el.readyState < 2) return;
+        if (el.currentTime === lastTime) {
           frozenSince += 1000;
           if (frozenSince >= STALL_MS) {
             frozenSince = 0;
@@ -119,61 +146,69 @@ const VideoBackground = () => {
             el.play().catch(() => {});
           }
         } else {
+          lastTime = el.currentTime;
           frozenSince = 0;
+          stallStrikes.current[key] = 0;
         }
       };
 
       const nudge = () => {
-        if (el.paused || el.ended) return;
-        el.play().catch(() => {});
+        const el = ref.current;
+        if (el && !el.paused && !el.ended) return;
+        if (el) el.play().catch(() => {});
       };
-
-      const onEnded = () => el.play().catch(() => {});
 
       const onVisible = () => {
-        if (!document.hidden && el.paused) el.play().catch(() => {});
+        const activeRef = activeSlot === 0 ? slot0Ref : slot1Ref;
+        const el = activeRef.current;
+        if (!document.hidden && el && el.paused) {
+          el.play().catch(() => {});
+        }
       };
 
-      el.addEventListener("timeupdate", onTime);
-      el.addEventListener("stalled", nudge);
-      el.addEventListener("waiting", nudge);
-      el.addEventListener("suspend", nudge);
-      el.addEventListener("ended", onEnded);
+      const el = ref.current;
+      if (el) {
+        el.addEventListener("stalled", nudge);
+        el.addEventListener("waiting", nudge);
+      }
       document.addEventListener("visibilitychange", onVisible);
       const timer = window.setInterval(tick, 1000);
 
       return () => {
-        el.removeEventListener("timeupdate", onTime);
-        el.removeEventListener("stalled", nudge);
-        el.removeEventListener("waiting", nudge);
-        el.removeEventListener("suspend", nudge);
-        el.removeEventListener("ended", onEnded);
+        if (el) {
+          el.removeEventListener("stalled", nudge);
+          el.removeEventListener("waiting", nudge);
+        }
         document.removeEventListener("visibilitychange", onVisible);
         window.clearInterval(timer);
       };
     });
 
     return () => cleanups.forEach((fn) => fn());
-  }, []);
+  }, [activeSlot]);
 
   const markReady = () => setReady(true);
 
   const toggleAudio = () => {
-    const darkEl = darkRef.current;
-    const lightEl = lightRef.current;
-    if (!darkEl || !lightEl) return;
-    const newMuted = !darkEl.muted;
-    darkEl.muted = newMuted;
-    lightEl.muted = newMuted;
-    if (!newMuted) {
-      darkEl.play().catch(() => {
-        darkEl.muted = true;
-        lightEl.muted = true;
-      });
+    const activeRef = activeSlot === 0 ? slot0Ref : slot1Ref;
+    const activeEl = activeRef.current;
+    if (!activeEl) return;
+
+    const nextAudioEnabled = !audioEnabled;
+    activeEl.volume = 1.0;
+    activeEl.muted = !nextAudioEnabled;
+    setAudioEnabled(nextAudioEnabled);
+
+    if (nextAudioEnabled) {
+      const playPromise = activeEl.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          activeEl.muted = true;
+          setAudioEnabled(false);
+        });
+      }
     }
   };
-
-  const isDark = mode === "dark";
 
   return (
     <>
@@ -182,30 +217,44 @@ const VideoBackground = () => {
         aria-hidden="true"
       >
         <video
-          ref={darkRef}
+          ref={slot0Ref}
+          src={slot0.src || undefined}
           autoPlay
-          muted
+          muted={!audioEnabled || activeSlot !== 0}
           loop
           playsInline
           preload="metadata"
+          poster={slot0.poster}
           onLoadedData={markReady}
           onCanPlay={markReady}
-          style={{ ...layerStyle, zIndex: 1, opacity: isDark ? 1 : 0 }}
+          style={{
+            ...layerStyle,
+            zIndex: activeSlot === 0 ? 2 : 1,
+            opacity: activeSlot === 0 ? 1 : 0,
+            pointerEvents: "none",
+          }}
         >
-          <source src={darkSrc} type="video/mp4" />
+          {slot0.src && <source src={slot0.src} type="video/mp4" />}
         </video>
         <video
-          ref={lightRef}
+          ref={slot1Ref}
+          src={slot1.src || undefined}
           autoPlay
-          muted
+          muted={!audioEnabled || activeSlot !== 1}
           loop
           playsInline
           preload="metadata"
+          poster={slot1.poster}
           onLoadedData={markReady}
           onCanPlay={markReady}
-          style={{ ...layerStyle, zIndex: 2, opacity: isDark ? 0 : 1 }}
+          style={{
+            ...layerStyle,
+            zIndex: activeSlot === 1 ? 2 : 1,
+            opacity: activeSlot === 1 ? 1 : 0,
+            pointerEvents: "none",
+          }}
         >
-          <source src={lightSrc} type="video/mp4" />
+          {slot1.src && <source src={slot1.src} type="video/mp4" />}
         </video>
         <div className="video-overlay" />
       </div>

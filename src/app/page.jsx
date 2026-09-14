@@ -520,21 +520,87 @@ function ContactSection() {
             <p className="text-sm leading-relaxed" style={{ color: 'var(--text)' }}>
               Feel free to reach out for software engineering roles, project collaboration, or tech inquiries. I typically respond within 24 hours.
             </p>
-            <div className="flex flex-col gap-3">
-              <div className="flex items-center gap-2">
-                <a href="mailto:yosefayalew56@gmail.com" className="text-sm font-medium transition hover:underline" style={{ color: 'var(--accent-text)' }}>
-                  yosefayalew56@gmail.com
-                </a>
+            <div className="flex flex-col gap-3.5">
+              {/* Copy Email Interactive Button */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                 <button
                   type="button"
                   onClick={copyEmail}
-                  className="px-2 py-0.5 text-[11px] rounded glass-card hover:bg-black/5 dark:hover:bg-white/10 transition cursor-pointer"
-                  title="Copy email address"
+                  className={`group relative flex-1 flex items-center justify-between gap-3 px-4 py-3 rounded-xl glass-card transition-all duration-300 border hover:scale-[1.01] active:scale-[0.98] text-left cursor-pointer ${
+                    copied
+                      ? 'border-emerald-500/50 bg-emerald-500/10 shadow-[0_0_15px_rgba(16,185,129,0.15)]'
+                      : 'border-[var(--border)] hover:border-[var(--border-focus)]'
+                  }`}
+                  aria-label="Copy email address to clipboard"
+                  title="Click to copy email address"
                 >
-                  {copied ? '✓ Copied' : 'Copy'}
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className={`p-2 rounded-lg transition-colors ${
+                      copied ? 'bg-emerald-500/20 text-emerald-500' : 'bg-black/5 dark:bg-white/10 text-[var(--accent-text)]'
+                    }`}>
+                      <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div className="flex flex-col min-w-0">
+                      <span className="text-[10px] font-mono uppercase tracking-wider opacity-60" style={{ color: 'var(--text)' }}>
+                        Email Address
+                      </span>
+                      <span className="text-sm font-mono font-medium truncate" style={{ color: 'var(--text-h)' }}>
+                        yosefayalew56@gmail.com
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center shrink-0 pl-2">
+                    <span
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
+                        copied
+                          ? 'bg-emerald-500 text-white shadow-sm'
+                          : 'bg-black/5 dark:bg-white/10 text-[var(--text)] group-hover:bg-black/10 dark:group-hover:bg-white/20'
+                      }`}
+                    >
+                      {copied ? (
+                        <>
+                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                            <polyline points="20 6 9 17 4 12" />
+                          </svg>
+                          <span>Copied!</span>
+                        </>
+                      ) : (
+                        <>
+                          <svg className="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                          </svg>
+                          <span>Copy</span>
+                        </>
+                      )}
+                    </span>
+                  </div>
                 </button>
+
+                <a
+                  href="mailto:yosefayalew56@gmail.com"
+                  className="flex items-center justify-center gap-1.5 px-3.5 py-3 rounded-xl glass-card hover:scale-105 active:scale-95 transition-all text-xs font-semibold border border-[var(--border)] hover:border-[var(--border-focus)] shrink-0"
+                  style={{ color: 'var(--text-h)' }}
+                  title="Open in your email client"
+                  aria-label="Send email directly"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  <span className="sm:hidden md:inline">Mail</span>
+                </a>
               </div>
-              <span className="text-sm" style={{ color: 'var(--text)' }}>Addis Ababa, Ethiopia</span>
+
+              <div className="flex items-center gap-2 text-sm opacity-80 pt-0.5" style={{ color: 'var(--text)' }}>
+                <svg className="w-4 h-4 opacity-60 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span>Addis Ababa, Ethiopia</span>
+              </div>
             </div>
             <div className="flex flex-wrap gap-3 pt-2 border-t border-[var(--border)]">
               <a href="https://github.com/Solohater" target="_blank" className="text-xs font-semibold px-3 py-1.5 rounded-lg glass-card hover:scale-105 transition" style={{ color: 'var(--accent-text)' }}>GitHub</a>
