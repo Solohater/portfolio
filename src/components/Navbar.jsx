@@ -56,10 +56,10 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md border-b ${
         scrolled
-          ? 'backdrop-blur-md shadow-sm bg-[var(--bg)]/30 dark:bg-[var(--bg)]/40 border-b border-[var(--border)]'
-          : 'bg-transparent'
+          ? 'bg-[var(--bg)]/50 dark:bg-[var(--bg)]/60 border-[var(--border)] shadow-sm'
+          : 'bg-[var(--bg)]/30 dark:bg-[var(--bg)]/40 border-[var(--border)]'
       }`}
     >
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 h-16">

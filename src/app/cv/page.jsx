@@ -37,36 +37,38 @@ export default function CVPage() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen px-4 pt-20 pb-6 page-cv"
+      className="min-h-screen px-4 pt-8 pb-16"
     >
       <div className="max-w-3xl mx-auto">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-10 pb-8" style={{ borderBottom: '2px solid var(--border)' }}>
-          <Image src={mode === "dark" ? "/darkimg.png" : "/lightimg.png"} alt="Yoseph Ayalew" width={100} height={100} className="w-24 h-24 rounded-full object-cover object-top shrink-0 ring-2" style={{ boxShadow: '0 0 0 2px var(--bg)' }} />
-          <div className="text-center sm:text-left">
-            <h1 className="text-3xl font-bold mb-1" style={{ color: 'var(--text-h)' }}>Yoseph Ayalew</h1>
-            <p className="text-lg font-medium mb-2" style={{ color: 'var(--accent-text)' }}>Software Engineer</p>
-            <p className="text-sm max-w-lg" style={{ color: 'var(--text)' }}>
-              Computer Science graduate with professional experience building full-stack web applications.
-              Skilled in Java, Vert.x, Angular, React, PostgreSQL, and modern web technologies.
-            </p>
-            <div className="flex flex-wrap gap-3 mt-3 justify-center sm:justify-start text-xs">
-              <span style={{ color: 'var(--text)' }}>yosefayalew56@gmail.com</span>
-              <span style={{ color: 'var(--text)' }}>Addis Ababa, Ethiopia</span>
-              <a href="https://github.com/Solohater" target="_blank" style={{ color: 'var(--accent-text)' }}>GitHub</a>
-              <a href="https://gitlab.com/yosephh" target="_blank" style={{ color: 'var(--accent-text)' }}>GitLab</a>
-              <a href="https://www.linkedin.com/in/yoseph-ayalew-65247b291" target="_blank" style={{ color: 'var(--accent-text)' }}>LinkedIn</a>
+        {/* Header Card */}
+        <div className="glass-card p-6 sm:p-8 rounded-2xl mb-8 shadow-xl" style={{ background: 'var(--page-tint)' }}>
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 pb-6 border-b border-[var(--border)]">
+            <Image src={mode === "dark" ? "/darkimg.png" : "/lightimg.png"} alt="Yoseph Ayalew" width={100} height={100} className="w-24 h-24 rounded-full object-cover object-top shrink-0 ring-2" style={{ boxShadow: '0 0 0 2px var(--bg)' }} />
+            <div className="text-center sm:text-left">
+              <h1 className="text-3xl font-bold mb-1" style={{ color: 'var(--text-h)' }}>Yoseph Ayalew</h1>
+              <p className="text-lg font-medium mb-2" style={{ color: 'var(--accent-text)' }}>Software Engineer</p>
+              <p className="text-sm max-w-lg" style={{ color: 'var(--text)' }}>
+                Computer Science graduate with professional experience building full-stack web applications.
+                Skilled in Java, Vert.x, Angular, React, PostgreSQL, and modern web technologies.
+              </p>
+              <div className="flex flex-wrap gap-3 mt-3 justify-center sm:justify-start text-xs">
+                <span style={{ color: 'var(--text)' }}>yosefayalew56@gmail.com</span>
+                <span style={{ color: 'var(--text)' }}>Addis Ababa, Ethiopia</span>
+                <a href="https://github.com/Solohater" target="_blank" style={{ color: 'var(--accent-text)' }}>GitHub</a>
+                <a href="https://gitlab.com/yosephh" target="_blank" style={{ color: 'var(--accent-text)' }}>GitLab</a>
+                <a href="https://www.linkedin.com/in/yoseph-ayalew-65247b291" target="_blank" style={{ color: 'var(--accent-text)' }}>LinkedIn</a>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Summary */}
-        <p className="text-sm leading-relaxed mb-8" style={{ color: 'var(--text)' }}>
-          Motivated Computer Science graduate and Junior Software Developer with professional experience
-          building web applications using <strong>Java, Vert.x, Angular, PostgreSQL,</strong> and <strong>SQL</strong>.
-          Skilled in frontend and backend development, debugging, testing, Git, and GitLab.
-          Currently expanding backend expertise with <strong>Go</strong>.
-        </p>
+          {/* Summary */}
+          <p className="text-sm leading-relaxed pt-5" style={{ color: 'var(--text)' }}>
+            Motivated Computer Science graduate and Junior Software Developer with professional experience
+            building web applications using <strong>Java, Vert.x, Angular, PostgreSQL,</strong> and <strong>SQL</strong>.
+            Skilled in frontend and backend development, debugging, testing, Git, and GitLab.
+            Currently expanding backend expertise with <strong>Go</strong>.
+          </p>
+        </div>
 
         {/* Experience */}
         <section className="mb-10">
