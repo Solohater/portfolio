@@ -58,8 +58,8 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md border-b ${
         scrolled
-          ? 'bg-[var(--bg)]/50 dark:bg-[var(--bg)]/60 border-[var(--border)] shadow-sm'
-          : 'bg-[var(--bg)]/30 dark:bg-[var(--bg)]/40 border-[var(--border)]'
+          ? 'bg-[var(--bg)]/45 dark:bg-[var(--bg)]/55 border-[var(--border)] shadow-sm'
+          : 'bg-[var(--bg)]/20 dark:bg-[var(--bg)]/25 border-[var(--border)]'
       }`}
     >
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 h-16">
@@ -153,33 +153,33 @@ const Navbar = () => {
       <AnimatePresence>
         {menuOpen && (
           <>
-            {/* Backdrop Blur Overlay */}
+            {/* Backdrop Blur Overlay - Light and transparent */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={() => setMenuOpen(false)}
-              className="fixed inset-0 top-16 bg-black/40 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 top-16 bg-black/15 dark:bg-black/25 backdrop-blur-[2px] z-40 md:hidden"
               aria-hidden="true"
             />
 
-            {/* Floating Glass Dropdown Panel */}
+            {/* Floating Glass Dropdown Panel - High Transparency Glass */}
             <motion.div
               initial={{ opacity: 0, y: -12, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -12, scale: 0.98 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed top-18 left-3 right-3 sm:left-6 sm:right-6 z-50 md:hidden rounded-2xl glass-card overflow-hidden shadow-2xl border border-[var(--border)]"
+              className="fixed top-18 left-3 right-3 sm:left-6 sm:right-6 z-50 md:hidden rounded-2xl overflow-hidden shadow-2xl border border-black/10 dark:border-white/20"
               style={{
-                background: 'var(--card-bg)',
-                backdropFilter: 'blur(24px)',
-                WebkitBackdropFilter: 'blur(24px)',
+                background: mode === 'dark' ? 'rgba(15, 15, 23, 0.32)' : 'rgba(255, 255, 255, 0.28)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
               }}
             >
               <div className="p-4 flex flex-col gap-1">
                 <div className="flex items-center justify-between px-3 py-1.5 mb-1 border-b border-[var(--border)]">
-                  <span className="text-[10px] font-mono tracking-widest uppercase opacity-60" style={{ color: 'var(--text)' }}>
+                  <span className="text-[10px] font-mono tracking-widest uppercase font-semibold opacity-75" style={{ color: 'var(--text)' }}>
                     Navigation
                   </span>
                   <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-[var(--accent-bg)]" style={{ color: 'var(--accent-text)' }}>
@@ -192,14 +192,14 @@ const Navbar = () => {
                     key={link.href}
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="group flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-all duration-200 hover:bg-black/5 dark:hover:bg-white/10 active:scale-[0.99]"
+                    className="group flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-all duration-200 hover:bg-black/10 dark:hover:bg-white/15 active:scale-[0.99]"
                   >
-                    <span className="text-sm font-semibold tracking-wide transition-colors group-hover:translate-x-1 duration-200" style={{ color: 'var(--text-h)' }}>
+                    <span className="text-sm font-semibold tracking-wide transition-colors group-hover:translate-x-1 duration-200 drop-shadow-sm" style={{ color: 'var(--text-h)' }}>
                       {link.title}
                     </span>
 
                     {link.title === 'CV' ? (
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-[var(--accent-bg)] text-[var(--accent-text)]">
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-[var(--accent-bg)] text-[var(--accent-text)] shadow-sm">
                         Resume
                       </span>
                     ) : (
