@@ -223,7 +223,7 @@ const VideoBackground = () => {
           muted={!audioEnabled || activeSlot !== 0}
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           poster={slot0.poster}
           onLoadedData={markReady}
           onCanPlay={markReady}
@@ -233,9 +233,7 @@ const VideoBackground = () => {
             opacity: activeSlot === 0 ? 1 : 0,
             pointerEvents: "none",
           }}
-        >
-          {slot0.src && <source src={slot0.src} type="video/mp4" />}
-        </video>
+        />
         <video
           ref={slot1Ref}
           src={slot1.src || undefined}
@@ -243,7 +241,7 @@ const VideoBackground = () => {
           muted={!audioEnabled || activeSlot !== 1}
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           poster={slot1.poster}
           onLoadedData={markReady}
           onCanPlay={markReady}
@@ -253,9 +251,7 @@ const VideoBackground = () => {
             opacity: activeSlot === 1 ? 1 : 0,
             pointerEvents: "none",
           }}
-        >
-          {slot1.src && <source src={slot1.src} type="video/mp4" />}
-        </video>
+        />
         <div className="video-overlay" />
       </div>
       <button

@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48 py-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
-            <p className="text-sm font-medium" style={{ color: 'var(--text-h)' }}>
+            <p className="text-base font-medium" style={{ color: 'var(--text-h)' }}>
               &copy; {new Date().getFullYear()} Yoseph Ayalew. All rights reserved.
             </p>
           </div>
@@ -14,7 +14,7 @@ const Footer = () => {
           <div className="flex items-center gap-6">
             <Link
               href="mailto:yosefayalew56@gmail.com"
-              className="text-sm font-medium hover:underline transition"
+              className="text-base font-medium hover:underline transition"
               style={{ color: 'var(--text-h)' }}
             >
               yosefayalew56@gmail.com

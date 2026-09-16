@@ -41,14 +41,14 @@ function HeroSection() {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
       {/* Primary Hero Container Box */}
-      <div className="max-w-5xl xl:max-w-6xl w-full flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-8 xl:gap-12 z-10 glass-card rounded-2xl p-6 sm:p-8 lg:p-10" style={{ background: 'var(--page-tint)' }}>
+      <div className="max-w-5xl xl:max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-8 lg:gap-12 z-10 glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12">
         {/* Intro / Text Content */}
-        <div className="flex-1 flex flex-col gap-4 sm:gap-5 text-center lg:text-left lg:max-w-xl">
+        <div className="flex flex-col gap-4 sm:gap-5 text-center lg:text-left justify-center w-full max-w-lg mx-auto lg:mx-0">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium self-center lg:self-start glass-card mb-1"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium self-center lg:self-start glass-card mb-1"
             style={{ color: 'var(--text-h)' }}
           >
             <span className="relative flex h-2 w-2">
@@ -59,7 +59,7 @@ function HeroSection() {
           </motion.div>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="font-display text-xs uppercase tracking-widest font-semibold"
+            className="font-display text-sm sm:text-base uppercase tracking-widest font-bold"
             style={{ color: 'var(--accent-text)' }}
           >Hello, I&apos;m</motion.p>
 
@@ -71,12 +71,12 @@ function HeroSection() {
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
-            className="font-display text-lg sm:text-xl font-medium"
+            className="font-display text-xl sm:text-2xl font-bold"
             style={{ color: 'var(--accent-text)' }}
           >Software Engineer</motion.p>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
-            className="font-display text-sm sm:text-base max-w-lg leading-relaxed"
+            className="font-display text-base sm:text-lg max-w-xl leading-relaxed"
             style={{ color: 'var(--text)' }}
           >
             I specialize in developing full-stack web applications using Java, Vert.x,
@@ -88,10 +88,10 @@ function HeroSection() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
             className="flex flex-wrap gap-4 justify-center lg:justify-start pt-1"
           >
-            <a href="#projects" className="px-6 py-3 rounded-lg font-medium transition text-sm sm:text-base hover:opacity-90" style={{ background: 'var(--text-h)', color: 'var(--bg)' }}>
+            <a href="#projects" className="px-7 py-3.5 rounded-lg font-semibold transition text-base sm:text-lg hover:opacity-90" style={{ background: 'var(--text-h)', color: 'var(--bg)' }}>
               View My Work
             </a>
-            <a href="#contact" className="px-6 py-3 rounded-lg font-medium transition text-sm sm:text-base hover:opacity-90 border border-[var(--border)] glass-card" style={{ color: 'var(--text-h)' }}>
+            <a href="#contact" className="px-7 py-3.5 rounded-lg font-semibold transition text-base sm:text-lg hover:opacity-90 border border-[var(--border)] glass-card" style={{ color: 'var(--text-h)' }}>
               Get In Touch
             </a>
           </motion.div>
@@ -118,7 +118,7 @@ function HeroSection() {
         </div>
 
         {/* Profile Area + Floating Skills (Positioning Context) */}
-        <div className="flex-shrink-0 flex items-center justify-center relative w-[340px] h-[340px] sm:w-[400px] sm:h-[400px] lg:w-[430px] lg:h-[430px]" ref={profileAreaRef}>
+        <div className="flex items-center justify-center relative w-full h-[340px] sm:h-[400px] lg:h-[430px] max-w-[430px] mx-auto" ref={profileAreaRef}>
           {/* Profile Image Circle */}
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -162,7 +162,7 @@ function HeroSection() {
                   }}
                 >
                   <span
-                    className="absolute left-0 top-0 px-2.5 py-1 rounded-full text-xs font-semibold glass-card whitespace-nowrap transition-all duration-300 pointer-events-auto hover:scale-110"
+                    className="absolute left-0 top-0 px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold glass-card whitespace-nowrap transition-all duration-300 pointer-events-auto hover:scale-110"
                     style={{ transform: `translate(-50%, -50%)`, color: 'var(--text-h)' }}
                   >
                     {tag}
@@ -185,9 +185,9 @@ function AboutSection() {
       <div className="max-w-3xl mx-auto">
         <h2 className="section-title">About Me</h2>
 
-        <div className="glass-card p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row gap-6 items-center sm:items-start mb-8" style={{ background: 'var(--page-tint)' }}>
+        <div className="glass-card p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row gap-6 items-center sm:items-start mb-8">
           <Image src={bgMode === "animated" ? (mode === "dark" ? "/aDarkP.png" : "/aLightP.png") : (mode === "dark" ? "/darkimg.png" : "/lightimg.png")} alt="Yoseph Ayalew" width={100} height={100} className="w-24 h-24 rounded-full object-cover object-top flex-shrink-0 ring-4" style={{ ringColor: 'var(--bg)' }} />
-          <p className="text-base leading-relaxed" style={{ color: 'var(--text)' }}>
+          <p className="text-base sm:text-lg leading-relaxed" style={{ color: 'var(--text)' }}>
             Motivated Computer Science graduate and Junior Software Developer with professional experience
             building web applications using <strong>Java, Vert.x, Angular, PostgreSQL,</strong> and <strong>SQL</strong>.
             Skilled in frontend and backend development, debugging, testing, Git, and GitLab.
@@ -202,8 +202,8 @@ function AboutSection() {
             { label: 'Languages', value: 'Amharic (Native) — English (Fluent)' },
           ].map((item) => (
             <div key={item.label} className="p-4 rounded-xl glass-card">
-              <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--accent-text)' }}>{item.label}</p>
-              <p className="text-sm font-medium" style={{ color: 'var(--text-h)' }}>{item.value}</p>
+              <p className="text-sm font-bold uppercase tracking-wider mb-1.5" style={{ color: 'var(--accent-text)' }}>{item.label}</p>
+              <p className="text-base font-medium" style={{ color: 'var(--text-h)' }}>{item.value}</p>
             </div>
           ))}
         </div>
@@ -277,22 +277,22 @@ function ExperienceSection() {
                 >
                   {/* Git commit style header */}
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider border border-[var(--accent-border)]"
+                    <span className="px-3 py-1 rounded text-xs font-mono font-bold uppercase tracking-wider border border-[var(--accent-border)]"
                       style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
                       {exp.company}
                     </span>
-                    <span className="text-xs font-mono" style={{ color: 'var(--text)' }}>
+                    <span className="text-sm font-mono" style={{ color: 'var(--text)' }}>
                       {exp.period}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-bold mb-3" style={{ color: 'var(--text-h)' }}>{exp.title}</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold mb-3" style={{ color: 'var(--text-h)' }}>{exp.title}</h3>
 
-                  <ul className="space-y-2">
+                  <ul className="space-y-2.5">
                     {exp.points.map((pt, j) => (
                       <motion.li
                         key={j}
-                        className="text-sm flex gap-2"
+                        className="text-base flex gap-2.5 leading-relaxed"
                         style={{ color: 'var(--text)' }}
                         initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -342,10 +342,10 @@ function SkillsSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {skillGroups.map((group) => (
             <div key={group.category} className="p-5 rounded-xl glass-card">
-              <h3 className="text-sm font-bold uppercase tracking-wider mb-3" style={{ color: 'var(--accent-text)' }}>{group.category}</h3>
-              <div className="flex flex-wrap gap-2">
+              <h3 className="text-base font-bold uppercase tracking-wider mb-3.5" style={{ color: 'var(--accent-text)' }}>{group.category}</h3>
+              <div className="flex flex-wrap gap-2.5">
                 {group.skills.map((skill) => (
-                  <span key={skill} className="px-3 py-1 rounded-full text-xs font-semibold transition-transform hover:scale-105 cursor-default border border-[var(--accent-border)]" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
+                  <span key={skill} className="px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-transform hover:scale-105 cursor-default border border-[var(--accent-border)]" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
                     {skill}
                   </span>
                 ))}
@@ -423,27 +423,27 @@ function ProjectsSection() {
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <h3 className="text-lg font-bold" style={{ color: 'var(--text-h)' }}>{p.title}</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold" style={{ color: 'var(--text-h)' }}>{p.title}</h3>
                   {p.featured && (
-                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-600/20 text-emerald-900 dark:text-emerald-300 border border-emerald-600/40">
+                    <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-600/20 text-emerald-900 dark:text-emerald-300 border border-emerald-600/40">
                       ★ Featured
                     </span>
                   )}
                   {p.note && (
-                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-black/5 dark:bg-white/10 text-[var(--text)] border border-[var(--border)]">
+                    <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-black/5 dark:bg-white/10 text-[var(--text)] border border-[var(--border)]">
                       {p.note}
                     </span>
                   )}
                 </div>
-                <p className="text-sm mb-4 leading-relaxed" style={{ color: 'var(--text)' }}>{p.desc}</p>
+                <p className="text-base mb-4 leading-relaxed" style={{ color: 'var(--text)' }}>{p.desc}</p>
                 {p.demo && (
-                  <p className="text-xs mb-4 p-2 rounded-lg bg-black/5 dark:bg-white/5 font-mono" style={{ color: 'var(--text)' }}>
+                  <p className="text-sm mb-4 p-2.5 rounded-lg bg-black/5 dark:bg-white/5 font-mono" style={{ color: 'var(--text)' }}>
                     <span style={{ color: 'var(--accent-text)', fontWeight: 600 }}>Demo login:</span> {p.demo}
                   </p>
                 )}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {p.tech.map((t) => (
-                    <span key={t} className="px-2.5 py-0.5 rounded text-xs font-semibold border border-[var(--accent-border)]" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
+                    <span key={t} className="px-3.5 py-1 rounded-full text-xs sm:text-sm font-semibold border border-[var(--accent-border)] transition-transform hover:scale-105 cursor-default" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
                       {t}
                     </span>
                   ))}
@@ -455,7 +455,7 @@ function ProjectsSection() {
                   <a
                     href={p.github}
                     target="_blank"
-                    className="text-xs font-semibold px-3 py-1.5 rounded transition border border-[var(--accent-border)]"
+                    className="text-sm font-semibold px-4 py-2 rounded-lg transition border border-[var(--accent-border)]"
                     style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}
                     onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--accent-text)'; e.currentTarget.style.color = 'var(--bg)'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--accent-bg)'; e.currentTarget.style.color = 'var(--accent-text)'; }}
@@ -466,7 +466,7 @@ function ProjectsSection() {
                 <a
                   href={p.link}
                   target="_blank"
-                  className="text-xs font-medium px-3 py-1.5 rounded transition border border-[var(--border)] hover:border-[var(--border-focus)] hover:scale-105"
+                  className="text-sm font-semibold px-4 py-2 rounded-lg transition border border-[var(--border)] hover:border-[var(--border-focus)] hover:scale-105"
                   style={{ color: 'var(--text-h)' }}
                 >
                   Live Demo ↗
@@ -522,29 +522,29 @@ function ContactSection() {
         <h2 className="section-title">Get In Touch</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           <div className="glass-card p-6 sm:p-8 rounded-2xl flex flex-col gap-5 min-w-0 w-full">
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--text)' }}>
+            <p className="text-base sm:text-lg leading-relaxed" style={{ color: 'var(--text)' }}>
               Feel free to reach out for software engineering roles, project collaboration, or tech inquiries. I typically respond within 24 hours.
             </p>
             <div className="flex flex-col gap-3.5 min-w-0">
               {/* Email Card with direct mailto link and integrated Copy button */}
-              <div className="flex items-center justify-between gap-3 p-3 sm:p-4 rounded-xl glass-card border border-[var(--border)] min-w-0">
+              <div className="flex items-center justify-between gap-3 p-3.5 sm:p-4 rounded-xl glass-card border border-[var(--border)] min-w-0">
                 <a
                   href="mailto:yosefayalew56@gmail.com"
                   className="flex items-center gap-3 min-w-0 group/email hover:opacity-80 transition"
                   title="Send email to yosefayalew56@gmail.com"
                 >
-                  <div className={`p-2 rounded-lg transition-colors shrink-0 ${
+                  <div className={`p-2.5 rounded-lg transition-colors shrink-0 ${
                     copied ? 'bg-emerald-500/20 text-emerald-500' : 'bg-black/5 dark:bg-white/10 text-[var(--accent-text)]'
                   }`}>
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
                   <div className="flex flex-col min-w-0">
-                    <span className="text-[10px] font-mono uppercase tracking-wider opacity-60" style={{ color: 'var(--text)' }}>
+                    <span className="text-xs font-mono uppercase tracking-wider opacity-70" style={{ color: 'var(--text)' }}>
                       Email Address
                     </span>
-                    <span className="text-xs sm:text-sm font-mono font-medium truncate group-hover/email:underline" style={{ color: 'var(--text-h)' }}>
+                    <span className="text-sm sm:text-base font-mono font-semibold truncate group-hover/email:underline" style={{ color: 'var(--text-h)' }}>
                       yosefayalew56@gmail.com
                     </span>
                   </div>
@@ -553,7 +553,7 @@ function ContactSection() {
                 <button
                   type="button"
                   onClick={copyEmail}
-                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold shrink-0 transition-all cursor-pointer ${
+                  className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold shrink-0 transition-all cursor-pointer ${
                     copied
                       ? 'bg-emerald-500 text-white'
                       : 'bg-black/5 dark:bg-white/10 text-[var(--text)] hover:bg-black/10 dark:hover:bg-white/20'
@@ -563,14 +563,14 @@ function ContactSection() {
                 >
                   {copied ? (
                     <>
-                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                       <span>Copied!</span>
                     </>
                   ) : (
                     <>
-                      <svg className="w-3.5 h-3.5 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                      <svg className="w-4 h-4 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                       </svg>
@@ -580,8 +580,8 @@ function ContactSection() {
                 </button>
               </div>
 
-              <div className="flex items-center gap-2 text-sm opacity-80 pt-0.5" style={{ color: 'var(--text)' }}>
-                <svg className="w-4 h-4 opacity-60 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <div className="flex items-center gap-2 text-base opacity-80 pt-0.5" style={{ color: 'var(--text)' }}>
+                <svg className="w-5 h-5 opacity-60 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
@@ -589,10 +589,10 @@ function ContactSection() {
               </div>
             </div>
             <div className="flex flex-wrap gap-3 pt-2 border-t border-[var(--border)]">
-              <a href="https://github.com/Solohater" target="_blank" className="text-xs font-semibold px-3 py-1.5 rounded-lg glass-card hover:scale-105 transition" style={{ color: 'var(--accent-text)' }}>GitHub</a>
-              <a href="https://gitlab.com/yosephh" target="_blank" className="text-xs font-semibold px-3 py-1.5 rounded-lg glass-card hover:scale-105 transition" style={{ color: 'var(--accent-text)' }}>GitLab</a>
-              <a href="https://www.linkedin.com/in/yoseph-ayalew-65247b291" target="_blank" className="text-xs font-semibold px-3 py-1.5 rounded-lg glass-card hover:scale-105 transition" style={{ color: 'var(--accent-text)' }}>LinkedIn</a>
-              <a href="https://t.me/YOSEP015" target="_blank" className="text-xs font-semibold px-3 py-1.5 rounded-lg glass-card hover:scale-105 transition" style={{ color: 'var(--accent-text)' }}>Telegram</a>
+              <a href="https://github.com/Solohater" target="_blank" className="text-sm font-semibold px-3.5 py-2 rounded-lg glass-card hover:scale-105 transition" style={{ color: 'var(--accent-text)' }}>GitHub</a>
+              <a href="https://gitlab.com/yosephh" target="_blank" className="text-sm font-semibold px-3.5 py-2 rounded-lg glass-card hover:scale-105 transition" style={{ color: 'var(--accent-text)' }}>GitLab</a>
+              <a href="https://www.linkedin.com/in/yoseph-ayalew-65247b291" target="_blank" className="text-sm font-semibold px-3.5 py-2 rounded-lg glass-card hover:scale-105 transition" style={{ color: 'var(--accent-text)' }}>LinkedIn</a>
+              <a href="https://t.me/YOSEP015" target="_blank" className="text-sm font-semibold px-3.5 py-2 rounded-lg glass-card hover:scale-105 transition" style={{ color: 'var(--accent-text)' }}>Telegram</a>
             </div>
           </div>
 
@@ -603,7 +603,7 @@ function ContactSection() {
               placeholder="Your Name"
               required
               disabled={formStatus === 'submitting'}
-              className="glass-input px-4 py-3 rounded-lg text-sm outline-none transition"
+              className="glass-input px-4 py-3 rounded-lg text-base outline-none transition"
             />
             <input
               type="email"
@@ -611,7 +611,7 @@ function ContactSection() {
               placeholder="Your Email"
               required
               disabled={formStatus === 'submitting'}
-              className="glass-input px-4 py-3 rounded-lg text-sm outline-none transition"
+              className="glass-input px-4 py-3 rounded-lg text-base outline-none transition"
             />
             <textarea
               name="message"
@@ -619,12 +619,12 @@ function ContactSection() {
               rows={4}
               required
               disabled={formStatus === 'submitting'}
-              className="glass-input px-4 py-3 rounded-lg text-sm outline-none transition resize-none"
+              className="glass-input px-4 py-3 rounded-lg text-base outline-none transition resize-none"
             />
             <button
               type="submit"
               disabled={formStatus === 'submitting'}
-              className="self-start px-6 py-2.5 rounded-lg text-sm font-medium transition bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 border-2 border-black dark:border-white disabled:opacity-50 cursor-pointer"
+              className="self-start px-7 py-3 rounded-lg text-base font-semibold transition bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 border-2 border-black dark:border-white disabled:opacity-50 cursor-pointer"
             >
               {formStatus === 'submitting' ? 'Sending...' : 'Send Message'}
             </button>
@@ -633,7 +633,7 @@ function ContactSection() {
               <motion.div
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="p-3 rounded-lg text-xs font-medium bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300"
+                className="p-3.5 rounded-lg text-sm font-medium bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300"
               >
                 Thank you! Your message has been sent successfully. I will get back to you soon.
               </motion.div>
@@ -643,7 +643,7 @@ function ContactSection() {
               <motion.div
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="p-3 rounded-lg text-xs font-medium bg-rose-500/15 border border-rose-500/30 text-rose-700 dark:text-rose-300"
+                className="p-3.5 rounded-lg text-sm font-medium bg-rose-500/15 border border-rose-500/30 text-rose-700 dark:text-rose-300"
               >
                 Something went wrong. Please try again or email me directly at yosefayalew56@gmail.com
               </motion.div>

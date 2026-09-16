@@ -88,7 +88,7 @@ const Navbar = () => {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium transition-colors"
+              className="text-base font-semibold transition-colors"
               style={{ color: 'var(--text)' }}
               onMouseEnter={(e) => e.target.style.color = 'var(--accent-text)'}
               onMouseLeave={(e) => e.target.style.color = 'var(--text)'}
