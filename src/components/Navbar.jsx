@@ -56,11 +56,12 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md border-b ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
         scrolled
-          ? 'bg-[var(--bg)]/45 dark:bg-[var(--bg)]/55 border-[var(--border)] shadow-sm'
-          : 'bg-[var(--bg)]/20 dark:bg-[var(--bg)]/25 border-[var(--border)]'
+          ? 'bg-[var(--card-bg-hover)] border-[var(--border)]'
+          : 'bg-[var(--card-bg)] border-[var(--border)]'
       }`}
+      style={{ backdropFilter: 'blur(var(--glass-blur))', WebkitBackdropFilter: 'blur(var(--glass-blur))' }}
     >
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 h-16">
         <button
@@ -170,9 +171,9 @@ const Navbar = () => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -12, scale: 0.98 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed top-18 left-3 right-3 sm:left-6 sm:right-6 z-50 md:hidden rounded-2xl overflow-hidden shadow-2xl border border-[var(--border)] bg-white dark:bg-[#14141e]"
+              className="fixed top-18 left-3 right-3 sm:left-6 sm:right-6 z-50 md:hidden rounded-2xl overflow-hidden border border-[var(--border)] bg-white dark:bg-[#14141e]"
               style={{
-                boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border)',
+                boxShadow: 'none',
               }}
             >
               <div className="p-4 flex flex-col gap-1.5">
@@ -180,7 +181,7 @@ const Navbar = () => {
                   <span className="text-[11px] font-mono tracking-widest uppercase font-bold" style={{ color: 'var(--text)' }}>
                     Navigation
                   </span>
-                  <span className="text-[11px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-[var(--accent-bg)]" style={{ color: 'var(--accent-text)' }}>
+                  <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full border border-[var(--accent-border)]" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
                     {bgMode === 'realistic' ? 'Realistic BG' : 'Animated BG'}
                   </span>
                 </div>
@@ -197,7 +198,7 @@ const Navbar = () => {
                     </span>
 
                     {link.title === 'CV' ? (
-                      <span className="text-[11px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-[var(--accent-bg)] text-[var(--accent-text)] shadow-sm">
+                      <span className="text-[11px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md border border-[var(--accent-border)]" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
                         Resume
                       </span>
                     ) : (
@@ -251,7 +252,7 @@ const Navbar = () => {
                     }}
                     className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${
                       menuCopied
-                        ? 'bg-emerald-500 text-white shadow-sm'
+                        ? 'bg-emerald-500 text-white'
                         : 'bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20'
                     }`}
                     style={{ color: menuCopied ? '#ffffff' : 'var(--text-h)' }}

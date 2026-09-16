@@ -41,14 +41,15 @@ function HeroSection() {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
       {/* Primary Hero Container Box */}
-      <div className="max-w-5xl xl:max-w-6xl w-full flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-8 xl:gap-12 z-10 glass-card rounded-2xl p-6 sm:p-8 lg:p-10 shadow-2xl" style={{ background: 'var(--page-tint)' }}>
+      <div className="max-w-5xl xl:max-w-6xl w-full flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-8 xl:gap-12 z-10 glass-card rounded-2xl p-6 sm:p-8 lg:p-10" style={{ background: 'var(--page-tint)' }}>
         {/* Intro / Text Content */}
         <div className="flex-1 flex flex-col gap-4 sm:gap-5 text-center lg:text-left lg:max-w-xl">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium self-center lg:self-start glass-card mb-1 text-black dark:text-white"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium self-center lg:self-start glass-card mb-1"
+            style={{ color: 'var(--text-h)' }}
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -58,21 +59,25 @@ function HeroSection() {
           </motion.div>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="font-display text-xs uppercase tracking-widest text-black dark:text-white font-semibold"
+            className="font-display text-xs uppercase tracking-widest font-semibold"
+            style={{ color: 'var(--accent-text)' }}
           >Hello, I&apos;m</motion.p>
 
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold leading-tight text-black dark:text-white"
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold leading-tight"
+            style={{ color: 'var(--text-h)' }}
           >
             Yoseph<br />Ayalew
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
-            className="font-display text-lg sm:text-xl text-black dark:text-white font-medium"
+            className="font-display text-lg sm:text-xl font-medium"
+            style={{ color: 'var(--accent-text)' }}
           >Software Engineer</motion.p>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
-            className="font-display text-sm sm:text-base text-black/80 dark:text-white/80 max-w-lg leading-relaxed"
+            className="font-display text-sm sm:text-base max-w-lg leading-relaxed"
+            style={{ color: 'var(--text)' }}
           >
             I specialize in developing full-stack web applications using Java, Vert.x,
             Angular, React, and PostgreSQL. Currently working at eTech SC, I build and
@@ -83,10 +88,10 @@ function HeroSection() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
             className="flex flex-wrap gap-4 justify-center lg:justify-start pt-1"
           >
-            <a href="#projects" className="px-6 py-3 bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-lg font-medium transition text-sm sm:text-base shadow-sm">
+            <a href="#projects" className="px-6 py-3 rounded-lg font-medium transition text-sm sm:text-base hover:opacity-90" style={{ background: 'var(--text-h)', color: 'var(--bg)' }}>
               View My Work
             </a>
-            <a href="#contact" className="px-6 py-3 bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-lg font-medium transition text-sm sm:text-base shadow-sm">
+            <a href="#contact" className="px-6 py-3 rounded-lg font-medium transition text-sm sm:text-base hover:opacity-90 border border-[var(--border)] glass-card" style={{ color: 'var(--text-h)' }}>
               Get In Touch
             </a>
           </motion.div>
@@ -94,19 +99,19 @@ function HeroSection() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}
             className="flex gap-4 justify-center lg:justify-start pt-2"
           >
-            <Link href="https://github.com/Solohater" target="_blank" className="text-black hover:text-gray-600 dark:text-gray-400 dark:hover:text-white transition">
+            <Link href="https://github.com/Solohater" target="_blank" className="transition hover:scale-110" style={{ color: 'var(--text)' }} aria-label="GitHub">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
             </Link>
-            <Link href="https://www.linkedin.com/in/yoseph-ayalew-65247b291" target="_blank" className="text-black hover:text-gray-600 dark:text-gray-400 dark:hover:text-white transition">
+            <Link href="https://www.linkedin.com/in/yoseph-ayalew-65247b291" target="_blank" className="transition hover:scale-110" style={{ color: 'var(--text)' }} aria-label="LinkedIn">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             </Link>
-            <Link href="mailto:yosefayalew56@gmail.com" className="text-black hover:text-gray-600 dark:text-gray-400 dark:hover:text-white transition">
+            <Link href="mailto:yosefayalew56@gmail.com" className="transition hover:scale-110" style={{ color: 'var(--text)' }} aria-label="Email">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
             </Link>
-            <Link href="https://gitlab.com/yosephh" target="_blank" className="text-black hover:text-gray-600 dark:text-gray-400 dark:hover:text-white transition">
+            <Link href="https://gitlab.com/yosephh" target="_blank" className="transition hover:scale-110" style={{ color: 'var(--text)' }} aria-label="GitLab">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M21 14.07a1.42 1.42 0 0 1-.41.73l-4.42 4.42a2.82 2.82 0 0 1-2 .82 2.79 2.79 0 0 1-2-.82l-4.42-4.42a1.41 1.41 0 0 1 0-2l4.42-4.42a2.82 2.82 0 0 1 2-.82c.75 0 1.5.27 2 .82l4.42 4.42c.19.19.4.44.41.72z"/><path d="M3.29 14.07c0 .2.07.5.41.73l4.42 4.42a2.82 2.82 0 0 0 2 .82V5.97c-.75 0-1.5.27-2 .82L3.7 11.21a1.41 1.41 0 0 0-.41.72v2.14z"/></svg>
             </Link>
-            <Link href="https://t.me/YOSEP015" target="_blank" className="text-black hover:text-gray-600 dark:text-gray-400 dark:hover:text-white transition">
+            <Link href="https://t.me/YOSEP015" target="_blank" className="transition hover:scale-110" style={{ color: 'var(--text)' }} aria-label="Telegram">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
             </Link>
           </motion.div>
@@ -119,7 +124,7 @@ function HeroSection() {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
-            className="relative w-52 h-52 sm:w-60 sm:h-60 lg:w-64 lg:h-64 rounded-full overflow-hidden ring-4 ring-[var(--bg)] shadow-2xl z-10"
+            className="relative w-52 h-52 sm:w-60 sm:h-60 lg:w-64 lg:h-64 rounded-full overflow-hidden ring-4 ring-[var(--bg)] z-10"
           >
             <Image
               src={bgMode === "animated" ? (mode === "dark" ? "/aDarkP.png" : "/aLightP.png") : (mode === "dark" ? "/darkimg.png" : "/lightimg.png")}
@@ -157,8 +162,8 @@ function HeroSection() {
                   }}
                 >
                   <span
-                    className="absolute left-0 top-0 px-2.5 py-1 rounded-full text-xs font-medium bg-black/10 border border-black/20 text-black dark:bg-white/10 dark:border-white/20 dark:text-white backdrop-blur-md shadow-sm whitespace-nowrap transition-all duration-300 pointer-events-auto hover:scale-110"
-                    style={{ transform: `translate(-50%, -50%)` }}
+                    className="absolute left-0 top-0 px-2.5 py-1 rounded-full text-xs font-semibold glass-card whitespace-nowrap transition-all duration-300 pointer-events-auto hover:scale-110"
+                    style={{ transform: `translate(-50%, -50%)`, color: 'var(--text-h)' }}
                   >
                     {tag}
                   </span>
@@ -180,8 +185,8 @@ function AboutSection() {
       <div className="max-w-3xl mx-auto">
         <h2 className="section-title">About Me</h2>
 
-        <div className="flex flex-col sm:flex-row gap-6 items-start mb-8">
-          <Image src={bgMode === "animated" ? (mode === "dark" ? "/aDarkP.png" : "/aLightP.png") : (mode === "dark" ? "/darkimg.png" : "/lightimg.png")} alt="" width={100} height={100} className="w-24 h-24 rounded-full object-cover object-top flex-shrink-0 ring-2" style={{ ringColor: 'var(--bg)' }} />
+        <div className="glass-card p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row gap-6 items-center sm:items-start mb-8" style={{ background: 'var(--page-tint)' }}>
+          <Image src={bgMode === "animated" ? (mode === "dark" ? "/aDarkP.png" : "/aLightP.png") : (mode === "dark" ? "/darkimg.png" : "/lightimg.png")} alt="Yoseph Ayalew" width={100} height={100} className="w-24 h-24 rounded-full object-cover object-top flex-shrink-0 ring-4" style={{ ringColor: 'var(--bg)' }} />
           <p className="text-base leading-relaxed" style={{ color: 'var(--text)' }}>
             Motivated Computer Science graduate and Junior Software Developer with professional experience
             building web applications using <strong>Java, Vert.x, Angular, PostgreSQL,</strong> and <strong>SQL</strong>.
@@ -226,7 +231,7 @@ const experiences = [
 
 function ExperienceSection() {
   return (
-    <section id="experience" className="px-6 py-20 md:py-28 overflow-hidden" style={{ background: 'var(--bg-alt)' }}>
+    <section id="experience" className="px-6 py-20 md:py-28 overflow-hidden">
       <div className="max-w-4xl mx-auto">
         <h2 className="section-title">Experience</h2>
 
@@ -253,7 +258,7 @@ function ExperienceSection() {
                 {/* Commit dot on main branch */}
                 <motion.div
                   className="absolute left-[13px] top-[18px] w-[23px] h-[23px] rounded-full border-[3px] flex items-center justify-center z-10"
-                  style={{ background: 'var(--bg-alt)', borderColor: 'var(--accent-text)' }}
+                  style={{ background: 'var(--card-bg)', borderColor: 'var(--accent-text)' }}
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
                   transition={{ duration: 0.3, delay: i * 0.25 + 0.2 }}
@@ -272,7 +277,7 @@ function ExperienceSection() {
                 >
                   {/* Git commit style header */}
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider"
+                    <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider border border-[var(--accent-border)]"
                       style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
                       {exp.company}
                     </span>
@@ -340,7 +345,7 @@ function SkillsSection() {
               <h3 className="text-sm font-bold uppercase tracking-wider mb-3" style={{ color: 'var(--accent-text)' }}>{group.category}</h3>
               <div className="flex flex-wrap gap-2">
                 {group.skills.map((skill) => (
-                  <span key={skill} className="px-3 py-1 rounded-full text-xs font-medium transition-transform hover:scale-105 cursor-default" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
+                  <span key={skill} className="px-3 py-1 rounded-full text-xs font-semibold transition-transform hover:scale-105 cursor-default border border-[var(--accent-border)]" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
                     {skill}
                   </span>
                 ))}
@@ -405,14 +410,14 @@ const projects = [
 
 function ProjectsSection() {
   return (
-    <section id="projects" className="px-6 py-20 md:py-28" style={{ background: 'var(--bg-alt)' }}>
+    <section id="projects" className="px-6 py-20 md:py-28">
       <div className="max-w-5xl mx-auto">
         <h2 className="section-title">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((p, i) => (
             <div
               key={i}
-              className={`p-6 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl glass-card flex flex-col justify-between ${
+              className={`p-6 rounded-xl transition-all duration-300 hover:-translate-y-1 glass-card flex flex-col justify-between ${
                 p.featured ? 'ring-1 ring-emerald-500/30 dark:ring-emerald-400/40' : ''
               }`}
             >
@@ -420,7 +425,7 @@ function ProjectsSection() {
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <h3 className="text-lg font-bold" style={{ color: 'var(--text-h)' }}>{p.title}</h3>
                   {p.featured && (
-                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-600/20 text-emerald-900 dark:text-emerald-300 border border-emerald-600/40">
                       ★ Featured
                     </span>
                   )}
@@ -438,7 +443,7 @@ function ProjectsSection() {
                 )}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {p.tech.map((t) => (
-                    <span key={t} className="px-2.5 py-0.5 rounded text-xs font-medium" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
+                    <span key={t} className="px-2.5 py-0.5 rounded text-xs font-semibold border border-[var(--accent-border)]" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
                       {t}
                     </span>
                   ))}
@@ -450,7 +455,7 @@ function ProjectsSection() {
                   <a
                     href={p.github}
                     target="_blank"
-                    className="text-xs font-medium px-3 py-1.5 rounded transition"
+                    className="text-xs font-semibold px-3 py-1.5 rounded transition border border-[var(--accent-border)]"
                     style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}
                     onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--accent-text)'; e.currentTarget.style.color = 'var(--bg)'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--accent-bg)'; e.currentTarget.style.color = 'var(--accent-text)'; }}
@@ -550,7 +555,7 @@ function ContactSection() {
                   onClick={copyEmail}
                   className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold shrink-0 transition-all cursor-pointer ${
                     copied
-                      ? 'bg-emerald-500 text-white shadow-sm'
+                      ? 'bg-emerald-500 text-white'
                       : 'bg-black/5 dark:bg-white/10 text-[var(--text)] hover:bg-black/10 dark:hover:bg-white/20'
                   }`}
                   aria-label="Copy email address to clipboard"

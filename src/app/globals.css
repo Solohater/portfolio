@@ -3,43 +3,129 @@
 @tailwind utilities;
 
 :root {
-  --text: #000000;
-  --text-h: #000000;
+  --text: #1e293b;
+  --text-h: #0f172a;
+  --text-muted: #475569;
   --bg: #ffffff;
   --bg-alt: transparent;
-  --border: rgba(0, 0, 0, 0.08);
-  --border-focus: rgba(0, 0, 0, 0.2);
-  --accent: #000000;
-  --accent-hover: #3a3a3a;
-  --accent-bg: rgba(0, 0, 0, 0.06);
-  --accent-text: #000000;
-  --accent-text-hover: #3a3a3a;
-  --card-bg: rgba(255, 255, 255, 0.42);
-  --card-bg-hover: rgba(255, 255, 255, 0.58);
-  --page-tint: rgba(255, 255, 255, 0.32);
+  --border: rgba(255, 255, 255, 0.65);
+  --border-focus: rgba(4, 120, 87, 0.45);
+  --accent: #047857;
+  --accent-hover: #064e3b;
+  --accent-bg: rgba(5, 150, 105, 0.22);
+  --accent-border: rgba(5, 150, 105, 0.38);
+  --accent-text: #064e3b;
+  --accent-text-hover: #022c22;
+  --card-bg: rgba(255, 255, 255, 0.48);
+  --card-bg-hover: rgba(255, 255, 255, 0.64);
+  --page-tint: rgba(255, 255, 255, 0.42);
   --glass-blur: 14px;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --overlay-bg: rgba(255, 255, 255, 0.10);
+  --shadow: none;
+  --shadow-lg: none;
 }
 
 .dark {
-  --text: #ffffff;
-  --text-h: #ffffff;
-  --bg: #0f0f15;
+  --text: #cbd5e1;
+  --text-h: #f8fafc;
+  --text-muted: #94a3b8;
+  --bg: #080b12;
   --bg-alt: transparent;
-  --border: rgba(255, 255, 255, 0.1);
-  --border-focus: rgba(0, 204, 102, 0.4);
-  --accent: #00cc66;
-  --accent-hover: #33dd88;
-  --accent-bg: rgba(0, 204, 102, 0.12);
-  --accent-text: #ffffff;
-  --accent-text-hover: #cccccc;
-  --card-bg: rgba(20, 20, 28, 0.45);
-  --card-bg-hover: rgba(28, 28, 40, 0.6);
-  --page-tint: rgba(12, 12, 18, 0.24);
+  --border: rgba(56, 189, 248, 0.18);
+  --border-focus: rgba(56, 189, 248, 0.50);
+  --accent: #38bdf8;
+  --accent-hover: #7dd3fc;
+  --accent-bg: rgba(56, 189, 248, 0.14);
+  --accent-border: rgba(56, 189, 248, 0.25);
+  --accent-text: #38bdf8;
+  --accent-text-hover: #7dd3fc;
+  --card-bg: rgba(10, 15, 26, 0.52);
+  --card-bg-hover: rgba(15, 23, 38, 0.68);
+  --page-tint: rgba(10, 15, 26, 0.46);
+  --glass-blur: 16px;
+  --overlay-bg: rgba(6, 9, 15, 0.36);
+  --shadow: none;
+  --shadow-lg: none;
+}
+
+/* 1. Realistic Light — Alpine Winter Frosted Glass */
+html[data-bg-mode="realistic"]:not(.dark) {
+  --text: #1e293b;
+  --text-h: #0f172a;
+  --text-muted: #475569;
+  --border: rgba(255, 255, 255, 0.65);
+  --border-focus: rgba(4, 120, 87, 0.45);
+  --accent: #047857;
+  --accent-hover: #064e3b;
+  --accent-bg: rgba(5, 150, 105, 0.22);
+  --accent-border: rgba(5, 150, 105, 0.38);
+  --accent-text: #064e3b;
+  --accent-text-hover: #022c22;
+  --card-bg: rgba(255, 255, 255, 0.48);
+  --card-bg-hover: rgba(255, 255, 255, 0.64);
+  --page-tint: rgba(255, 255, 255, 0.42);
   --glass-blur: 14px;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  --overlay-bg: rgba(255, 255, 255, 0.10);
+}
+
+/* 2. Realistic Dark — Shinjuku Midnight Obsidian Glass */
+html.dark[data-bg-mode="realistic"] {
+  --text: #cbd5e1;
+  --text-h: #f8fafc;
+  --text-muted: #94a3b8;
+  --border: rgba(56, 189, 248, 0.18);
+  --border-focus: rgba(56, 189, 248, 0.50);
+  --accent: #38bdf8;
+  --accent-hover: #7dd3fc;
+  --accent-bg: rgba(56, 189, 248, 0.14);
+  --accent-border: rgba(56, 189, 248, 0.25);
+  --accent-text: #38bdf8;
+  --accent-text-hover: #7dd3fc;
+  --card-bg: rgba(10, 15, 26, 0.52);
+  --card-bg-hover: rgba(15, 23, 38, 0.68);
+  --page-tint: rgba(10, 15, 26, 0.46);
+  --glass-blur: 16px;
+  --overlay-bg: rgba(6, 9, 15, 0.36);
+}
+
+/* 3. Animated Light — Sunset Amber Pearl Glass */
+html[data-bg-mode="animated"]:not(.dark) {
+  --text: #1f2937;
+  --text-h: #111827;
+  --text-muted: #4b5563;
+  --border: rgba(249, 115, 22, 0.22);
+  --border-focus: rgba(234, 88, 12, 0.50);
+  --accent: #ea580c;
+  --accent-hover: #c2410c;
+  --accent-bg: rgba(234, 88, 12, 0.12);
+  --accent-border: rgba(234, 88, 12, 0.28);
+  --accent-text: #ea580c;
+  --accent-text-hover: #c2410c;
+  --card-bg: rgba(255, 249, 242, 0.56);
+  --card-bg-hover: rgba(255, 252, 248, 0.74);
+  --page-tint: rgba(255, 248, 240, 0.48);
+  --glass-blur: 18px;
+  --overlay-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 245, 230, 0.15) 100%);
+}
+
+/* 4. Animated Dark — Lo-Fi Botanical Rain Glass */
+html.dark[data-bg-mode="animated"] {
+  --text: #cbd5e1;
+  --text-h: #fffef7;
+  --text-muted: #8da2b5;
+  --border: rgba(251, 191, 36, 0.20);
+  --border-focus: rgba(251, 191, 36, 0.50);
+  --accent: #fbbf24;
+  --accent-hover: #f59e0b;
+  --accent-bg: rgba(251, 191, 36, 0.14);
+  --accent-border: rgba(251, 191, 36, 0.25);
+  --accent-text: #fbbf24;
+  --accent-text-hover: #f59e0b;
+  --card-bg: rgba(12, 24, 38, 0.52);
+  --card-bg-hover: rgba(18, 34, 52, 0.68);
+  --page-tint: rgba(12, 24, 38, 0.46);
+  --glass-blur: 16px;
+  --overlay-bg: rgba(8, 16, 26, 0.30);
 }
 
 * {
@@ -105,7 +191,7 @@ body {
   color: var(--text-h);
   cursor: pointer;
   transition: opacity 0.2s, transform 0.2s, background 0.2s, border-color 0.2s;
-  box-shadow: var(--shadow-lg);
+  box-shadow: none;
 }
 
 .video-audio-toggle:hover {
@@ -123,19 +209,17 @@ body {
   position: absolute;
   inset: 0;
   z-index: 2;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.dark .video-overlay {
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--overlay-bg);
+  pointer-events: none;
 }
 
 .glass-card {
   background: var(--card-bg);
-  backdrop-filter: blur(var(--glass-blur, 14px));
-  -webkit-backdrop-filter: blur(var(--glass-blur, 14px));
+  backdrop-filter: blur(var(--glass-blur, 16px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 16px));
   border: 1px solid var(--border);
-  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  box-shadow: none;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
 }
 
 .glass-card:hover {
@@ -144,8 +228,8 @@ body {
 
 .glass-input {
   background: var(--card-bg);
-  backdrop-filter: blur(var(--glass-blur, 14px));
-  -webkit-backdrop-filter: blur(var(--glass-blur, 14px));
+  backdrop-filter: blur(var(--glass-blur, 16px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 16px));
   border: 1px solid var(--border);
   color: var(--text-h);
   transition: border-color 0.2s ease, background 0.2s ease;

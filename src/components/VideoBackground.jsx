@@ -16,8 +16,8 @@ const VIDEO_SOURCES = {
   },
   animated: {
     light: {
-      src: "/videos/snowy-animated.mp4",
-      poster: "/videos/posters/snowy-animated.jpg",
+      src: "/videos/daylight-animated.mp4",
+      poster: "/videos/posters/daylight-animated.jpg",
     },
     dark: {
       src: "/videos/rainy-night-animated.mp4",

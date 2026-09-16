@@ -41,9 +41,9 @@ export default function CVPage() {
     >
       <div className="max-w-3xl mx-auto">
         {/* Header Card */}
-        <div className="glass-card p-6 sm:p-8 rounded-2xl mb-8 shadow-xl" style={{ background: 'var(--page-tint)' }}>
+        <div className="glass-card p-6 sm:p-8 rounded-2xl mb-8" style={{ background: 'var(--page-tint)' }}>
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 pb-6 border-b border-[var(--border)]">
-            <Image src={mode === "dark" ? "/darkimg.png" : "/lightimg.png"} alt="Yoseph Ayalew" width={100} height={100} className="w-24 h-24 rounded-full object-cover object-top shrink-0 ring-2" style={{ boxShadow: '0 0 0 2px var(--bg)' }} />
+            <Image src={mode === "dark" ? "/darkimg.png" : "/lightimg.png"} alt="Yoseph Ayalew" width={100} height={100} className="w-24 h-24 rounded-full object-cover object-top shrink-0 ring-2 ring-[var(--border)]" />
             <div className="text-center sm:text-left">
               <h1 className="text-3xl font-bold mb-1" style={{ color: 'var(--text-h)' }}>Yoseph Ayalew</h1>
               <p className="text-lg font-medium mb-2" style={{ color: 'var(--accent-text)' }}>Software Engineer</p>
@@ -86,7 +86,7 @@ export default function CVPage() {
             >
               <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mb-2">
                 <h3 className="font-bold" style={{ color: 'var(--text-h)' }}>{exp.title}</h3>
-                <span className="text-xs font-mono px-2 py-0.5 rounded" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>{exp.company}</span>
+                <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded border border-[var(--accent-border)]" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>{exp.company}</span>
               </div>
               <p className="text-xs mb-2 font-mono" style={{ color: 'var(--text)' }}>{exp.period}</p>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--text)' }}>{exp.desc}</p>
@@ -128,7 +128,7 @@ export default function CVPage() {
                 <h3 className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--accent-text)' }}>{group.category}</h3>
                 <div className="flex flex-wrap gap-1.5">
                   {group.items.map((skill) => (
-                    <span key={skill} className="px-2 py-0.5 rounded text-xs font-medium" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
+                    <span key={skill} className="px-2 py-0.5 rounded text-xs font-semibold border border-[var(--accent-border)]" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
                       {skill}
                     </span>
                   ))}
@@ -140,7 +140,7 @@ export default function CVPage() {
 
         {/* Download hint */}
         <p className="text-center text-xs mt-8" style={{ color: 'var(--text)' }}>
-          <a href="/cv.pdf" download className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+          <a href="/cv.pdf" download className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition hover:opacity-90" style={{ background: 'var(--text-h)', color: 'var(--bg)' }}>
             Download PDF
           </a>
         </p>

@@ -22,7 +22,12 @@ export const ThemeProvider = ({ children }) => {
     const saved = window.localStorage.getItem("theme");
     if (saved === "dark" || saved === "light") setMode(saved);
     const savedBg = window.localStorage.getItem("bgMode");
-    if (savedBg === "realistic" || savedBg === "animated") setBgMode(savedBg);
+    if (savedBg === "realistic" || savedBg === "animated") {
+      setBgMode(savedBg);
+      document.documentElement.setAttribute("data-bg-mode", savedBg);
+    } else {
+      document.documentElement.setAttribute("data-bg-mode", "realistic");
+    }
   }, []);
 
   // Detect device type using matchMedia (768px = Tailwind md breakpoint)
@@ -45,8 +50,10 @@ export const ThemeProvider = ({ children }) => {
     window.localStorage.setItem("theme", mode);
   }, [mode]);
 
-  // Persist bgMode
+  // Persist and apply bgMode
   useEffect(() => {
+    const html = document.documentElement;
+    html.setAttribute("data-bg-mode", bgMode);
     window.localStorage.setItem("bgMode", bgMode);
   }, [bgMode]);
 
