@@ -26,8 +26,21 @@ const VIDEO_SOURCES = {
   },
 };
 
+const ALL_VIDEO_URLS = [
+  "/videos/snowy-sunny.mp4",
+  "/videos/rainy-night.mp4",
+  "/videos/daylight-animated.mp4",
+  "/videos/rainy-night-animated.mp4",
+];
+
+const ALL_POSTER_URLS = [
+  "/videos/posters/snowy-sunny.jpg",
+  "/videos/posters/rainy-night.jpg",
+  "/videos/posters/daylight-animated.jpg",
+  "/videos/posters/rainy-night-animated.jpg",
+];
+
 const STALL_MS = 3000;
-const STRIKE_LIMIT = 3;
 
 const layerStyle = {
   position: "absolute",
@@ -59,15 +72,41 @@ const VideoBackground = () => {
   const [audioEnabled, setAudioEnabled] = useState(false);
   const audioEnabledRef = useRef(false);
 
-  const stallStrikes = useRef({ slot0: 0, slot1: 0 });
   const activeSrcRef = useRef(currentAsset.src);
+  const switchTimeoutRef = useRef(null);
 
   // Keep audioEnabledRef in sync
   useEffect(() => {
     audioEnabledRef.current = audioEnabled;
   }, [audioEnabled]);
 
-  // Handle theme or bgMode change with graceful crossfade
+  // Pre-load all posters immediately and pre-warm remaining videos during idle
+  useEffect(() => {
+    // 1. Preload posters immediately so theme switching has instant visual backing
+    ALL_POSTER_URLS.forEach((url) => {
+      const img = new Image();
+      img.src = url;
+    });
+
+    // 2. Pre-warm remaining videos in browser HTTP cache when CPU/network is idle
+    const prewarmVideos = () => {
+      ALL_VIDEO_URLS.forEach((url) => {
+        fetch(url, { priority: "low", cache: "force-cache" }).catch(() => {});
+      });
+    };
+
+    if (typeof window !== "undefined") {
+      if ("requestIdleCallback" in window) {
+        const id = window.requestIdleCallback(prewarmVideos, { timeout: 4000 });
+        return () => window.cancelIdleCallback(id);
+      } else {
+        const timer = setTimeout(prewarmVideos, 2000);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, []);
+
+  // Handle theme or bgMode change with graceful, ready-gated crossfade
   useEffect(() => {
     const nextAsset = VIDEO_SOURCES[currentBgMode][currentMode];
     if (nextAsset.src === activeSrcRef.current) return;
@@ -77,38 +116,81 @@ const VideoBackground = () => {
     const targetRef = targetSlot === 0 ? slot0Ref : slot1Ref;
     const prevRef = activeSlot === 0 ? slot0Ref : slot1Ref;
 
-    // Load new asset into target slot
+    // Clear any pending switch cleanup
+    if (switchTimeoutRef.current) {
+      clearTimeout(switchTimeoutRef.current);
+      switchTimeoutRef.current = null;
+    }
+
+    // Load new asset into target slot state
     if (targetSlot === 0) {
       setSlot0({ src: nextAsset.src, poster: nextAsset.poster });
     } else {
       setSlot1({ src: nextAsset.src, poster: nextAsset.poster });
     }
 
-    // Play target video and transition opacity
     const targetEl = targetRef.current;
-    if (targetEl) {
-      targetEl.src = nextAsset.src;
-      targetEl.volume = 1.0;
-      targetEl.muted = !audioEnabledRef.current;
-      targetEl.play().catch(() => {
-        // Fallback if browser autoplay blocks unmuted transition
-        targetEl.muted = true;
-        targetEl.play().catch(() => {});
-      });
-    }
+    if (!targetEl) return;
 
-    setActiveSlot(targetSlot);
+    // Configure new target video
+    targetEl.src = nextAsset.src;
+    targetEl.volume = 1.0;
+    targetEl.muted = !audioEnabledRef.current;
 
-    // After transition duration (850ms), pause and mute previous video to free GPU decoding resources
-    const timer = setTimeout(() => {
-      const prevEl = prevRef.current;
-      if (prevEl) {
-        prevEl.pause();
-        prevEl.muted = true;
-      }
-    }, 850);
+    let hasTransitioned = false;
 
-    return () => clearTimeout(timer);
+    const performTransition = () => {
+      if (hasTransitioned) return;
+      hasTransitioned = true;
+
+      // Start crossfade to new video
+      setActiveSlot(targetSlot);
+      setReady(true);
+
+      // Once crossfade duration finishes (850ms), safely pause old video
+      switchTimeoutRef.current = setTimeout(() => {
+        const prevEl = prevRef.current;
+        if (prevEl) {
+          prevEl.pause();
+          prevEl.muted = true;
+        }
+      }, 850);
+    };
+
+    // Listen for when target video can smoothly play
+    const onTargetPlaying = () => {
+      performTransition();
+      targetEl.removeEventListener("playing", onTargetPlaying);
+      targetEl.removeEventListener("canplay", onTargetCanPlay);
+    };
+
+    const onTargetCanPlay = () => {
+      performTransition();
+      targetEl.removeEventListener("playing", onTargetPlaying);
+      targetEl.removeEventListener("canplay", onTargetCanPlay);
+    };
+
+    targetEl.addEventListener("playing", onTargetPlaying);
+    targetEl.addEventListener("canplay", onTargetCanPlay);
+
+    // Start playback attempt
+    targetEl.play().catch(() => {
+      targetEl.muted = true;
+      targetEl.play().catch(() => {});
+    });
+
+    // Fallback: If network buffering takes >3.5s, transition anyway so poster displays
+    const fallbackTimer = setTimeout(() => {
+      performTransition();
+      targetEl.removeEventListener("playing", onTargetPlaying);
+      targetEl.removeEventListener("canplay", onTargetCanPlay);
+    }, 3500);
+
+    return () => {
+      clearTimeout(fallbackTimer);
+      targetEl.removeEventListener("playing", onTargetPlaying);
+      targetEl.removeEventListener("canplay", onTargetCanPlay);
+    };
   }, [currentMode, currentBgMode, activeSlot]);
 
   // Initial playback on mount
@@ -120,35 +202,31 @@ const VideoBackground = () => {
     }
   }, []);
 
-  // Freeze / stall recovery for both slots
+  // Freeze / stall recovery for both slots without destructive el.load() resets
   useEffect(() => {
     const els = [
       { key: "slot0", ref: slot0Ref },
       { key: "slot1", ref: slot1Ref },
     ];
 
-    const cleanups = els.map(({ key, ref }) => {
+    const cleanups = els.map(({ ref }) => {
       let lastTime = 0;
       let frozenSince = 0;
 
       const tick = () => {
         const el = ref.current;
         if (!el || el.paused || el.readyState < 2) return;
+
         if (el.currentTime === lastTime) {
           frozenSince += 1000;
           if (frozenSince >= STALL_MS) {
             frozenSince = 0;
-            stallStrikes.current[key] += 1;
-            if (stallStrikes.current[key] >= STRIKE_LIMIT) {
-              el.load();
-              stallStrikes.current[key] = 0;
-            }
+            // Nudge play without resetting the network stream with load()
             el.play().catch(() => {});
           }
         } else {
           lastTime = el.currentTime;
           frozenSince = 0;
-          stallStrikes.current[key] = 0;
         }
       };
 
@@ -216,6 +294,18 @@ const VideoBackground = () => {
         className={`video-background${ready ? "" : " video-background--loading"}`}
         aria-hidden="true"
       >
+        {/* Instant visual fallback: persistent backdrop image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={currentAsset.poster}
+          alt=""
+          aria-hidden="true"
+          style={{
+            ...layerStyle,
+            zIndex: 0,
+            opacity: 1,
+          }}
+        />
         <video
           ref={slot0Ref}
           src={slot0.src || undefined}
