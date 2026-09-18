@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
 import { useState, useEffect, useRef, useContext } from 'react';
@@ -655,72 +655,182 @@ function ContactSection() {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="glass-card p-6 sm:p-8 rounded-2xl flex flex-col gap-4 min-w-0 w-full">
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="contact-name" className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--accent-text)' }}>Your Name</label>
-              <input
-                id="contact-name"
-                type="text"
-                name="name"
-                placeholder="e.g. John Doe"
-                required
-                disabled={formStatus === 'submitting'}
-                className="glass-input px-4 py-3 rounded-lg text-base outline-none transition"
-              />
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="contact-email" className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--accent-text)' }}>Your Email</label>
-              <input
-                id="contact-email"
-                type="email"
-                name="email"
-                placeholder="e.g. john@example.com"
-                required
-                disabled={formStatus === 'submitting'}
-                className="glass-input px-4 py-3 rounded-lg text-base outline-none transition"
-              />
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="contact-message" className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--accent-text)' }}>Message</label>
-              <textarea
-                id="contact-message"
-                name="message"
-                placeholder="What would you like to discuss?"
-                rows={4}
-                required
-                disabled={formStatus === 'submitting'}
-                className="glass-input px-4 py-3 rounded-lg text-base outline-none transition resize-none"
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={formStatus === 'submitting'}
-              className="self-start px-7 py-3 rounded-lg text-base font-semibold transition border-2 border-[var(--accent-text)] disabled:opacity-50 cursor-pointer hover:opacity-90 active:scale-95"
-              style={{ background: 'var(--accent-text)', color: 'var(--bg)' }}
-            >
-              {formStatus === 'submitting' ? 'Sending...' : 'Send Message'}
-            </button>
+          <div className="glass-card p-6 sm:p-8 rounded-2xl flex flex-col justify-center min-w-0 w-full relative overflow-hidden">
+            <AnimatePresence mode="wait">
+              {formStatus === 'success' ? (
+                <motion.div
+                  key="success-card"
+                  initial={{ opacity: 0, scale: 0.92, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.92, y: -15 }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex flex-col items-center text-center py-6 sm:py-8 px-2 my-auto"
+                >
+                  {/* Glowing Animated Icon Badge */}
+                  <div className="relative mb-5 flex items-center justify-center">
+                    <motion.span
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: [1, 1.25, 1], opacity: [0.4, 0.15, 0.4] }}
+                      transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+                      className="absolute w-20 h-20 rounded-full"
+                      style={{ background: 'var(--accent-bg)' }}
+                    />
+                    <motion.div
+                      initial={{ scale: 0, rotate: -45 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ type: 'spring', stiffness: 260, damping: 18, delay: 0.1 }}
+                      className="relative w-16 h-16 rounded-2xl flex items-center justify-center border shadow-lg"
+                      style={{
+                        background: 'var(--card-bg-hover)',
+                        borderColor: 'var(--accent-border)',
+                        color: 'var(--accent-text)',
+                      }}
+                    >
+                      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <motion.path
+                          initial={{ pathLength: 0 }}
+                          animate={{ pathLength: 1 }}
+                          transition={{ duration: 0.45, delay: 0.2 }}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                    </motion.div>
+                  </div>
 
-            {formStatus === 'success' && (
-              <motion.div
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="p-3.5 rounded-lg text-sm font-medium bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300"
-              >
-                Thank you! Your message has been sent successfully. I will get back to you soon.
-              </motion.div>
-            )}
+                  <motion.h3
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.18 }}
+                    className="text-2xl sm:text-3xl font-bold font-display mb-2"
+                    style={{ color: 'var(--text-h)' }}
+                  >
+                    Message Received!
+                  </motion.h3>
 
-            {formStatus === 'error' && (
-              <motion.div
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="p-3.5 rounded-lg text-sm font-medium bg-rose-500/15 border border-rose-500/30 text-rose-700 dark:text-rose-300"
-              >
-                Something went wrong. Please try again or email me directly at yosefayalew56@gmail.com
-              </motion.div>
-            )}
-          </form>
+                  <motion.p
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.26 }}
+                    className="text-base sm:text-lg max-w-md leading-relaxed mb-6"
+                    style={{ color: 'var(--text)' }}
+                  >
+                    Thanks for reaching out! Your note has landed safely in my inbox. I usually review new inquiries and reply within 24 hours.
+                  </motion.p>
+
+                  {/* Delivery confirmation badge */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.32 }}
+                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono border border-[var(--accent-border)] mb-7"
+                    style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}
+                  >
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span>Delivered to yosefayalew56@gmail.com</span>
+                  </motion.div>
+
+                  {/* Reset button */}
+                  <motion.button
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.38 }}
+                    type="button"
+                    onClick={() => setFormStatus('idle')}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold transition border border-[var(--border)] hover:border-[var(--border-focus)] glass-card hover:scale-105 active:scale-95 cursor-pointer"
+                    style={{ color: 'var(--text-h)' }}
+                  >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
+                    </svg>
+                    <span>Send Another Message</span>
+                  </motion.button>
+                </motion.div>
+              ) : (
+                <motion.form
+                  key="contact-form"
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.25 }}
+                  onSubmit={handleSubmit}
+                  className="flex flex-col gap-4 min-w-0 w-full"
+                >
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="contact-name" className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--accent-text)' }}>Your Name</label>
+                    <input
+                      id="contact-name"
+                      type="text"
+                      name="name"
+                      placeholder="e.g. John Doe"
+                      required
+                      disabled={formStatus === 'submitting'}
+                      className="glass-input px-4 py-3 rounded-lg text-base outline-none transition"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="contact-email" className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--accent-text)' }}>Your Email</label>
+                    <input
+                      id="contact-email"
+                      type="email"
+                      name="email"
+                      placeholder="e.g. john@example.com"
+                      required
+                      disabled={formStatus === 'submitting'}
+                      className="glass-input px-4 py-3 rounded-lg text-base outline-none transition"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="contact-message" className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--accent-text)' }}>Message</label>
+                    <textarea
+                      id="contact-message"
+                      name="message"
+                      placeholder="What would you like to discuss?"
+                      rows={4}
+                      required
+                      disabled={formStatus === 'submitting'}
+                      className="glass-input px-4 py-3 rounded-lg text-base outline-none transition resize-none"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={formStatus === 'submitting'}
+                    className="self-start px-7 py-3 rounded-lg text-base font-semibold transition border-2 border-[var(--accent-text)] disabled:opacity-50 cursor-pointer hover:opacity-90 active:scale-95 flex items-center gap-2"
+                    style={{ background: 'var(--accent-text)', color: 'var(--bg)' }}
+                  >
+                    {formStatus === 'submitting' ? (
+                      <>
+                        <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                        </svg>
+                        <span>Delivering Message...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Send Message</span>
+                        <span className="text-sm">↗</span>
+                      </>
+                    )}
+                  </button>
+
+                  {formStatus === 'error' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-3.5 rounded-lg text-sm font-medium bg-rose-500/15 border border-rose-500/30 text-rose-700 dark:text-rose-300"
+                    >
+                      Something went wrong. Please try again or email me directly at yosefayalew56@gmail.com
+                    </motion.div>
+                  )}
+                </motion.form>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </section>
