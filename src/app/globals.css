@@ -8,7 +8,7 @@
   --text-muted: #475569;
   --bg: #ffffff;
   --bg-alt: transparent;
-  --border: rgba(255, 255, 255, 0.60);
+  --border: rgba(255, 255, 255, 0.65);
   --border-focus: rgba(6, 78, 59, 0.60);
   --accent: #065f46;
   --accent-hover: #022c22;
@@ -16,8 +16,8 @@
   --accent-border: rgba(6, 78, 59, 0.45);
   --accent-text: #022c22;
   --accent-text-hover: #064e3b;
-  --card-bg: rgba(255, 255, 255, 0.46);
-  --card-bg-hover: rgba(255, 255, 255, 0.60);
+  --card-bg: rgba(255, 255, 255, 0.58);
+  --card-bg-hover: rgba(255, 255, 255, 0.72);
   --page-tint: rgba(255, 255, 255, 0.28);
   --glass-blur: 14px;
   --overlay-bg: rgba(255, 255, 255, 0.08);
@@ -31,7 +31,7 @@
   --text-muted: #cbd5e1;
   --bg: #0c0a08;
   --bg-alt: transparent;
-  --border: rgba(245, 158, 11, 0.20);
+  --border: rgba(245, 158, 11, 0.22);
   --border-focus: rgba(245, 158, 11, 0.55);
   --accent: #f59e0b;
   --accent-hover: #fbbf24;
@@ -39,8 +39,8 @@
   --accent-border: rgba(245, 158, 11, 0.35);
   --accent-text: #fbbf24;
   --accent-text-hover: #fef08a;
-  --card-bg: rgba(18, 14, 10, 0.50);
-  --card-bg-hover: rgba(26, 20, 14, 0.65);
+  --card-bg: rgba(18, 14, 10, 0.62);
+  --card-bg-hover: rgba(26, 20, 14, 0.76);
   --page-tint: rgba(18, 14, 10, 0.28);
   --glass-blur: 14px;
   --overlay-bg: rgba(10, 8, 6, 0.24);
@@ -53,7 +53,7 @@ html[data-bg-mode="realistic"]:not(.dark) {
   --text: #1e293b;
   --text-h: #0a0f1d;
   --text-muted: #475569;
-  --border: rgba(255, 255, 255, 0.60);
+  --border: rgba(255, 255, 255, 0.65);
   --border-focus: rgba(6, 78, 59, 0.60);
   --accent: #065f46;
   --accent-hover: #022c22;
@@ -61,8 +61,8 @@ html[data-bg-mode="realistic"]:not(.dark) {
   --accent-border: rgba(6, 78, 59, 0.45);
   --accent-text: #022c22;
   --accent-text-hover: #064e3b;
-  --card-bg: rgba(255, 255, 255, 0.46);
-  --card-bg-hover: rgba(255, 255, 255, 0.60);
+  --card-bg: rgba(255, 255, 255, 0.58);
+  --card-bg-hover: rgba(255, 255, 255, 0.72);
   --page-tint: rgba(255, 255, 255, 0.28);
   --glass-blur: 14px;
   --overlay-bg: rgba(255, 255, 255, 0.08);
@@ -73,7 +73,7 @@ html.dark[data-bg-mode="realistic"] {
   --text: #f8fafc;
   --text-h: #ffffff;
   --text-muted: #cbd5e1;
-  --border: rgba(245, 158, 11, 0.22);
+  --border: rgba(245, 158, 11, 0.24);
   --border-focus: rgba(245, 158, 11, 0.55);
   --accent: #f59e0b;
   --accent-hover: #fbbf24;
@@ -81,8 +81,8 @@ html.dark[data-bg-mode="realistic"] {
   --accent-border: rgba(245, 158, 11, 0.35);
   --accent-text: #fbbf24;
   --accent-text-hover: #fef08a;
-  --card-bg: rgba(18, 14, 10, 0.50);
-  --card-bg-hover: rgba(26, 20, 14, 0.65);
+  --card-bg: rgba(18, 14, 10, 0.62);
+  --card-bg-hover: rgba(26, 20, 14, 0.76);
   --page-tint: rgba(18, 14, 10, 0.28);
   --glass-blur: 14px;
   --overlay-bg: rgba(10, 8, 6, 0.24);
@@ -93,7 +93,7 @@ html[data-bg-mode="animated"]:not(.dark) {
   --text: #1e293b;
   --text-h: #0f172a;
   --text-muted: #475569;
-  --border: rgba(29, 78, 216, 0.20);
+  --border: rgba(29, 78, 216, 0.22);
   --border-focus: rgba(29, 78, 216, 0.50);
   --accent: #2563eb;
   --accent-hover: #1d4ed8;
@@ -101,8 +101,8 @@ html[data-bg-mode="animated"]:not(.dark) {
   --accent-border: rgba(29, 78, 216, 0.32);
   --accent-text: #1e40af;
   --accent-text-hover: #172554;
-  --card-bg: rgba(255, 255, 255, 0.48);
-  --card-bg-hover: rgba(255, 255, 255, 0.62);
+  --card-bg: rgba(255, 255, 255, 0.60);
+  --card-bg-hover: rgba(255, 255, 255, 0.74);
   --page-tint: rgba(255, 255, 255, 0.28);
   --glass-blur: 14px;
   --overlay-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.04) 50%, rgba(240, 245, 255, 0.10) 100%);
@@ -113,7 +113,7 @@ html.dark[data-bg-mode="animated"] {
   --text: #f1f5f9;
   --text-h: #ffffff;
   --text-muted: #94a3b8;
-  --border: rgba(251, 191, 36, 0.22);
+  --border: rgba(251, 191, 36, 0.24);
   --border-focus: rgba(251, 191, 36, 0.50);
   --accent: #fbbf24;
   --accent-hover: #f59e0b;
@@ -121,8 +121,8 @@ html.dark[data-bg-mode="animated"] {
   --accent-border: rgba(251, 191, 36, 0.26);
   --accent-text: #fbbf24;
   --accent-text-hover: #f59e0b;
-  --card-bg: rgba(12, 24, 38, 0.48);
-  --card-bg-hover: rgba(18, 34, 52, 0.62);
+  --card-bg: rgba(12, 24, 38, 0.60);
+  --card-bg-hover: rgba(18, 34, 52, 0.74);
   --page-tint: rgba(12, 24, 38, 0.28);
   --glass-blur: 14px;
   --overlay-bg: rgba(8, 16, 26, 0.22);

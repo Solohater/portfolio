@@ -2,7 +2,7 @@ const { execSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 
-const imgPath = path.join(__dirname, '..', 'public', 'photojo.png');
+const imgPath = path.join(__dirname, '..', 'public', 'lightimg.png');
 const imgBase64 = fs.readFileSync(imgPath).toString('base64');
 
 const html = `<!DOCTYPE html>
@@ -78,7 +78,7 @@ const html = `<!DOCTYPE html>
   </div>
 
   <div class="summary">
-    Computer Science graduate and Junior Software Developer with professional experience building full-stack web applications using <strong>Java, Vert.x, Angular, PostgreSQL,</strong> and <strong>SQL</strong>. Skilled in frontend and backend development, debugging, testing, and collaboration with Git and GitLab. Currently expanding backend expertise with <strong>Go</strong>.
+    Full-Stack Software Engineer with professional experience designing and building performant web applications using <strong>Java, Vert.x, Angular, React, PostgreSQL,</strong> and <strong>SQL</strong>. Passionate about clean architecture, crafting robust backend APIs, and building responsive, intuitive user interfaces that deliver real-world impact.
   </div>
 
   <div class="section">

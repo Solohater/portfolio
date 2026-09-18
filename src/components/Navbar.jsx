@@ -2,6 +2,7 @@
 import { useState, useContext, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ThemeContext } from '@/context/ThemeContext'
 
@@ -16,15 +17,37 @@ const links = [
 
 const Navbar = () => {
   const { toggle, mode, toggleBgMode, bgMode } = useContext(ThemeContext)
+  const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [menuCopied, setMenuCopied] = useState(false)
+  const [activeSection, setActiveSection] = useState('hero')
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40)
+      if (pathname !== '/') return
+      const sectionIds = ['hero', 'about', 'experience', 'projects', 'contact']
+      const scrollPos = window.scrollY + 180
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i])
+        if (el && el.offsetTop <= scrollPos) {
+          setActiveSection(sectionIds[i])
+          break
+        }
+      }
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [pathname])
+
+  const isLinkActive = (href) => {
+    if (href === '/cv') return pathname === '/cv'
+    if (pathname !== '/') return false
+    const sec = href.replace('/#', '').replace('#', '')
+    return activeSection === sec
+  }
 
   // Close on Escape key or window resize to desktop
   useEffect(() => {
@@ -83,19 +106,26 @@ const Navbar = () => {
           <span className="text-[10px] opacity-60 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--text)' }}>⇄</span>
         </button>
 
-        <div className="hidden md:flex items-center gap-8">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-base font-semibold transition-colors"
-              style={{ color: 'var(--text)' }}
-              onMouseEnter={(e) => e.target.style.color = 'var(--accent-text)'}
-              onMouseLeave={(e) => e.target.style.color = 'var(--text)'}
-            >
-              {link.title}
-            </Link>
-          ))}
+        <div className="hidden md:flex items-center gap-7">
+          {links.map((link) => {
+            const active = isLinkActive(link.href)
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-base font-semibold transition-all relative py-1"
+                style={{ color: active ? 'var(--accent-text)' : 'var(--text)' }}
+              >
+                <span>{link.title}</span>
+                {active && (
+                  <span
+                    className="absolute bottom-0 left-0 right-0 h-[2.5px] rounded-full"
+                    style={{ background: 'var(--accent-text)' }}
+                  />
+                )}
+              </Link>
+            )
+          })}
         </div>
 
         <div className="flex items-center gap-3">
@@ -186,28 +216,46 @@ const Navbar = () => {
                   </span>
                 </div>
 
-                {links.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="group flex items-center justify-between px-3.5 py-3 rounded-xl transition-all duration-200 hover:bg-black/5 dark:hover:bg-white/10 active:scale-[0.99]"
-                  >
-                    <span className="text-sm sm:text-base font-bold tracking-wide transition-colors group-hover:translate-x-1 duration-200" style={{ color: 'var(--text-h)' }}>
-                      {link.title}
-                    </span>
+                {links.map((link) => {
+                  const active = isLinkActive(link.href)
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      className={`group flex items-center justify-between px-3.5 py-3 rounded-xl transition-all duration-200 ${
+                        active
+                          ? 'border border-[var(--accent-border)]'
+                          : 'hover:bg-black/5 dark:hover:bg-white/10'
+                      }`}
+                      style={{
+                        background: active ? 'var(--accent-bg)' : 'transparent',
+                      }}
+                    >
+                      <span
+                        className="text-sm sm:text-base font-bold tracking-wide transition-colors group-hover:translate-x-1 duration-200"
+                        style={{ color: active ? 'var(--accent-text)' : 'var(--text-h)' }}
+                      >
+                        {link.title}
+                      </span>
 
-                    {link.title === 'CV' ? (
-                      <span className="text-[11px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md border border-[var(--accent-border)]" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
-                        Resume
-                      </span>
-                    ) : (
-                      <span className="text-sm opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all font-bold" style={{ color: 'var(--accent-text)' }}>
-                        →
-                      </span>
-                    )}
-                  </Link>
-                ))}
+                      {link.title === 'CV' ? (
+                        <span className="text-[11px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md border border-[var(--accent-border)]" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
+                          Resume
+                        </span>
+                      ) : (
+                        <span
+                          className={`text-sm group-hover:translate-x-1 transition-all font-bold ${
+                            active ? 'opacity-100' : 'opacity-50 group-hover:opacity-100'
+                          }`}
+                          style={{ color: 'var(--accent-text)' }}
+                        >
+                          →
+                        </span>
+                      )}
+                    </Link>
+                  )
+                })}
 
                 {/* Mobile Quick Action Footer */}
                 <div className="mt-2 pt-3 border-t border-[var(--border)] flex items-center justify-between px-2 gap-2">

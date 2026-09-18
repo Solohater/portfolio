@@ -8,7 +8,7 @@ import { ThemeContext } from '@/context/ThemeContext';
 
 const floatingTags = [
   "Java", "Vert.x", "Angular", "React", "Next.js",
-  "PostgreSQL", "TypeScript", "JavaScript", "Tailwind CSS", "Go"
+  "PostgreSQL", "TypeScript", "JavaScript", "Tailwind CSS", "Node.js"
 ];
 
 /* ───── Hero ───── */
@@ -179,20 +179,35 @@ function HeroSection() {
 
 /* ───── About ───── */
 function AboutSection() {
-  const { mode, bgMode } = useContext(ThemeContext);
   return (
     <section id="about" className="px-6 py-20 md:py-28">
       <div className="max-w-3xl mx-auto">
         <h2 className="section-title">About Me</h2>
 
-        <div className="glass-card p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row gap-6 items-center sm:items-start mb-8">
-          <Image src={bgMode === "animated" ? (mode === "dark" ? "/aDarkP.png" : "/aLightP.png") : (mode === "dark" ? "/darkimg.png" : "/lightimg.png")} alt="Yoseph Ayalew" width={100} height={100} className="w-24 h-24 rounded-full object-cover object-top flex-shrink-0 ring-4" style={{ ringColor: 'var(--bg)' }} />
-          <p className="text-base sm:text-lg leading-relaxed" style={{ color: 'var(--text)' }}>
-            Motivated Computer Science graduate and Junior Software Developer with professional experience
-            building web applications using <strong>Java, Vert.x, Angular, PostgreSQL,</strong> and <strong>SQL</strong>.
-            Skilled in frontend and backend development, debugging, testing, Git, and GitLab.
-            Currently expanding backend expertise with <strong>Go</strong>.
+        <div className="glass-card p-6 sm:p-8 rounded-2xl mb-8">
+          <p className="text-base sm:text-lg leading-relaxed mb-6" style={{ color: 'var(--text)' }}>
+            Full-Stack Software Engineer with professional experience designing and building performant web applications using <strong>Java, Vert.x, Angular, React,</strong> and <strong>PostgreSQL</strong>. Passionate about clean architecture, crafting robust backend APIs, and building responsive, intuitive user interfaces that deliver real-world impact.
           </p>
+          <div className="grid grid-cols-3 gap-4">
+            {[
+              { value: '1/2+', label: 'Year Exp.', href: '#experience' },
+              { value: '6+',   label: 'Projects Shipped', href: '#projects' },
+              { value: '15+',  label: 'Technologies', href: '#skills' },
+            ].map((stat) => (
+              <a
+                key={stat.label}
+                href={stat.href}
+                className="flex flex-col items-center p-4 rounded-xl glass-card text-center transition-all duration-200 hover:-translate-y-1 hover:border-[var(--border-focus)] cursor-pointer group"
+                title={`Jump to ${stat.label}`}
+              >
+                <span className="text-2xl sm:text-3xl font-bold font-display mb-1 group-hover:opacity-80 transition-opacity" style={{ color: 'var(--accent-text)' }}>{stat.value}</span>
+                <span className="text-xs sm:text-sm font-medium flex items-center justify-center gap-1" style={{ color: 'var(--text)' }}>
+                  <span>{stat.label}</span>
+                  <span className="text-[11px] opacity-0 group-hover:opacity-100 group-hover:translate-y-0.5 transition-all" style={{ color: 'var(--accent-text)' }}>↓</span>
+                </span>
+              </a>
+            ))}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
@@ -310,16 +325,6 @@ function ExperienceSection() {
           </div>
         </div>
 
-        {/* Timeline slider hint */}
-        <motion.p
-          className="text-center text-xs mt-8 font-mono"
-          style={{ color: 'var(--text)' }}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          <span style={{ color: 'var(--accent-text)' }}>●</span> main — scroll to view full timeline
-        </motion.p>
       </div>
     </section>
   );
@@ -327,27 +332,88 @@ function ExperienceSection() {
 
 /* ───── Skills ───── */
 const skillGroups = [
-  { category: 'Languages', skills: ['Java', 'JavaScript', 'TypeScript', 'SQL', 'Go'] },
-  { category: 'Frontend', skills: ['Angular', 'React', 'Next.js', 'Tailwind CSS', 'Redux', 'Material UI'] },
-  { category: 'Backend', skills: ['Vert.x', 'Node.js', 'Express.js', 'REST APIs', 'JWT'] },
-  { category: 'Databases', skills: ['PostgreSQL', 'MongoDB'] },
-  { category: 'Tools', skills: ['Git', 'GitLab', 'GitHub', 'Postman', 'Figma', 'Vercel', 'Render'] },
+  {
+    category: 'Languages',
+    tiers: {
+      Core: ['Java', 'JavaScript', 'TypeScript', 'SQL'],
+      Familiar: ['Go'],
+    },
+  },
+  {
+    category: 'Frontend',
+    tiers: {
+      Core: ['Angular', 'React', 'Next.js', 'Tailwind CSS'],
+      Proficient: ['Redux', 'Material UI'],
+    },
+  },
+  {
+    category: 'Backend',
+    tiers: {
+      Core: ['Vert.x', 'REST APIs'],
+      Proficient: ['Node.js', 'Express.js', 'JWT'],
+    },
+  },
+  {
+    category: 'Databases',
+    tiers: {
+      Core: ['PostgreSQL'],
+      Proficient: ['MongoDB'],
+    },
+  },
+  {
+    category: 'Tools',
+    tiers: {
+      Core: ['Git', 'GitLab', 'GitHub'],
+      Proficient: ['Postman', 'Figma', 'Vercel', 'Render'],
+    },
+  },
 ];
+
+const tierStyle = {
+  Core:      { opacity: 1,    fontWeight: 700 },
+  Proficient:{ opacity: 0.82, fontWeight: 600 },
+  Familiar:  { opacity: 0.60, fontWeight: 500 },
+};
 
 function SkillsSection() {
   return (
     <section id="skills" className="px-6 py-20 md:py-28">
       <div className="max-w-4xl mx-auto">
         <h2 className="section-title">Tech Stack</h2>
+
+        {/* Legend */}
+        <div className="flex flex-wrap justify-center gap-4 mb-8 text-xs font-semibold">
+          {Object.entries(tierStyle).map(([tier, s]) => (
+            <span key={tier} className="flex items-center gap-1.5" style={{ color: 'var(--text)', opacity: s.opacity }}>
+              <span className="w-2 h-2 rounded-full inline-block" style={{ background: 'var(--accent-text)', opacity: s.opacity }} />
+              {tier}
+            </span>
+          ))}
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {skillGroups.map((group) => (
             <div key={group.category} className="p-5 rounded-xl glass-card">
               <h3 className="text-base font-bold uppercase tracking-wider mb-3.5" style={{ color: 'var(--accent-text)' }}>{group.category}</h3>
-              <div className="flex flex-wrap gap-2.5">
-                {group.skills.map((skill) => (
-                  <span key={skill} className="px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-transform hover:scale-105 cursor-default border border-[var(--accent-border)]" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>
-                    {skill}
-                  </span>
+              <div className="flex flex-col gap-2.5">
+                {Object.entries(group.tiers).map(([tier, skills]) => (
+                  <div key={tier} className="flex flex-wrap gap-2">
+                    {skills.map((skill) => (
+                      <span
+                        key={skill}
+                        title={tier}
+                        className="px-3.5 py-1.5 rounded-full text-xs sm:text-sm transition-transform hover:scale-105 cursor-default border border-[var(--accent-border)]"
+                        style={{
+                          background: 'var(--accent-bg)',
+                          color: 'var(--accent-text)',
+                          opacity: tierStyle[tier].opacity,
+                          fontWeight: tierStyle[tier].fontWeight,
+                        }}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 ))}
               </div>
             </div>
@@ -371,11 +437,10 @@ const projects = [
   },
   {
     title: 'TechShop',
-    desc: 'Commercial tech store featuring responsive product catalog, cart, wishlist, real-time order tracking, and customer account dashboard.',
+    desc: 'Commercial tech store featuring responsive product catalog, cart, wishlist, real-time order tracking, and customer account dashboard. Private codebase — available for discussion in interview.',
     tech: ['TypeScript', 'Next.js', 'Tailwind CSS'],
     link: 'https://techshop-peach.vercel.app',
     demo: 'admin@techshop.com / Admin@12345',
-    note: 'Enterprise Client Repo',
   },
   {
     title: 'Ethio Kemem — Food Menu',
@@ -417,20 +482,13 @@ function ProjectsSection() {
           {projects.map((p, i) => (
             <div
               key={i}
-              className={`p-6 rounded-xl transition-all duration-300 hover:-translate-y-1 glass-card flex flex-col justify-between ${
-                p.featured ? 'ring-1 ring-emerald-500/30 dark:ring-emerald-400/40' : ''
-              }`}
+              className="p-6 rounded-xl transition-all duration-300 hover:-translate-y-1 glass-card flex flex-col"
             >
-              <div>
+              <div className="flex-1">
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <h3 className="text-xl sm:text-2xl font-bold" style={{ color: 'var(--text-h)' }}>{p.title}</h3>
-                  {p.featured && (
-                    <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-600/20 text-emerald-900 dark:text-emerald-300 border border-emerald-600/40">
-                      ★ Featured
-                    </span>
-                  )}
                   {p.note && (
-                    <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-black/5 dark:bg-white/10 text-[var(--text)] border border-[var(--border)]">
+                    <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-black/5 dark:bg-white/10 text-[var(--text)] border border-[var(--border)] shrink-0">
                       {p.note}
                     </span>
                   )}
@@ -450,17 +508,18 @@ function ProjectsSection() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 pt-2">
+              <div className="flex items-center gap-3 pt-2 mt-auto">
                 {p.github && (
                   <a
                     href={p.github}
                     target="_blank"
-                    className="text-sm font-semibold px-4 py-2 rounded-lg transition border border-[var(--accent-border)]"
+                    className="text-sm font-semibold px-4 py-2 rounded-lg transition border border-[var(--accent-border)] flex items-center gap-1.5 hover:scale-105"
                     style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}
                     onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--accent-text)'; e.currentTarget.style.color = 'var(--bg)'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--accent-bg)'; e.currentTarget.style.color = 'var(--accent-text)'; }}
                   >
-                    Source Code
+                    <span>Source Code</span>
+                    <span className="text-xs">↗</span>
                   </a>
                 )}
                 <a
@@ -498,7 +557,7 @@ function ContactSection() {
     const data = new FormData(form);
 
     try {
-      const res = await fetch('https://formspree.io/f/xqeoarld', {
+      const res = await fetch('https://formspree.io/f/xoevqgye', {
         method: 'POST',
         body: data,
         headers: {
@@ -520,7 +579,7 @@ function ContactSection() {
     <section id="contact" className="px-6 py-20 md:py-28">
       <div className="max-w-4xl mx-auto">
         <h2 className="section-title">Get In Touch</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
           <div className="glass-card p-6 sm:p-8 rounded-2xl flex flex-col gap-5 min-w-0 w-full">
             <p className="text-base sm:text-lg leading-relaxed" style={{ color: 'var(--text)' }}>
               Feel free to reach out for software engineering roles, project collaboration, or tech inquiries. I typically respond within 24 hours.
@@ -597,34 +656,47 @@ function ContactSection() {
           </div>
 
           <form onSubmit={handleSubmit} className="glass-card p-6 sm:p-8 rounded-2xl flex flex-col gap-4 min-w-0 w-full">
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              required
-              disabled={formStatus === 'submitting'}
-              className="glass-input px-4 py-3 rounded-lg text-base outline-none transition"
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              required
-              disabled={formStatus === 'submitting'}
-              className="glass-input px-4 py-3 rounded-lg text-base outline-none transition"
-            />
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              rows={4}
-              required
-              disabled={formStatus === 'submitting'}
-              className="glass-input px-4 py-3 rounded-lg text-base outline-none transition resize-none"
-            />
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="contact-name" className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--accent-text)' }}>Your Name</label>
+              <input
+                id="contact-name"
+                type="text"
+                name="name"
+                placeholder="e.g. John Doe"
+                required
+                disabled={formStatus === 'submitting'}
+                className="glass-input px-4 py-3 rounded-lg text-base outline-none transition"
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="contact-email" className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--accent-text)' }}>Your Email</label>
+              <input
+                id="contact-email"
+                type="email"
+                name="email"
+                placeholder="e.g. john@example.com"
+                required
+                disabled={formStatus === 'submitting'}
+                className="glass-input px-4 py-3 rounded-lg text-base outline-none transition"
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="contact-message" className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--accent-text)' }}>Message</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                placeholder="What would you like to discuss?"
+                rows={4}
+                required
+                disabled={formStatus === 'submitting'}
+                className="glass-input px-4 py-3 rounded-lg text-base outline-none transition resize-none"
+              />
+            </div>
             <button
               type="submit"
               disabled={formStatus === 'submitting'}
-              className="self-start px-7 py-3 rounded-lg text-base font-semibold transition bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 border-2 border-black dark:border-white disabled:opacity-50 cursor-pointer"
+              className="self-start px-7 py-3 rounded-lg text-base font-semibold transition border-2 border-[var(--accent-text)] disabled:opacity-50 cursor-pointer hover:opacity-90 active:scale-95"
+              style={{ background: 'var(--accent-text)', color: 'var(--bg)' }}
             >
               {formStatus === 'submitting' ? 'Sending...' : 'Send Message'}
             </button>
@@ -655,10 +727,34 @@ function ContactSection() {
   );
 }
 
+/* ───── Scroll Progress Bar ───── */
+function ScrollProgressBar() {
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const onScroll = () => {
+      const el = document.documentElement;
+      const scrolled = el.scrollTop || document.body.scrollTop;
+      const total = el.scrollHeight - el.clientHeight;
+      setProgress(total > 0 ? (scrolled / total) * 100 : 0);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  return (
+    <div className="fixed top-0 left-0 right-0 z-[60] h-[3px] pointer-events-none">
+      <div
+        className="h-full transition-none"
+        style={{ width: `${progress}%`, background: 'var(--accent-text)' }}
+      />
+    </div>
+  );
+}
+
 /* ───── Page ───── */
 export default function Home() {
   return (
     <>
+      <ScrollProgressBar />
       <HeroSection />
       <AboutSection />
       <ExperienceSection />

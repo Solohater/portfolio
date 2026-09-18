@@ -3,7 +3,7 @@ import Link from 'next/link'
 const Footer = () => {
   return (
     <footer className="w-full border-t border-[var(--border)]" style={{ background: 'var(--card-bg)', backdropFilter: 'blur(var(--glass-blur))', WebkitBackdropFilter: 'blur(var(--glass-blur))' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48 py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 py-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
             <p className="text-base font-medium" style={{ color: 'var(--text-h)' }}>

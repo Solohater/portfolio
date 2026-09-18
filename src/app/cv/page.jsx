@@ -63,10 +63,7 @@ export default function CVPage() {
 
           {/* Summary */}
           <p className="text-base sm:text-lg leading-relaxed pt-5" style={{ color: 'var(--text)' }}>
-            Motivated Computer Science graduate and Junior Software Developer with professional experience
-            building web applications using <strong>Java, Vert.x, Angular, PostgreSQL,</strong> and <strong>SQL</strong>.
-            Skilled in frontend and backend development, debugging, testing, Git, and GitLab.
-            Currently expanding backend expertise with <strong>Go</strong>.
+            Full-Stack Software Engineer with professional experience designing and building performant web applications using <strong>Java, Vert.x, Angular, React,</strong> and <strong>PostgreSQL</strong>. Passionate about clean architecture, crafting robust backend APIs, and building responsive, intuitive user interfaces that deliver real-world impact.
           </p>
         </div>
 
