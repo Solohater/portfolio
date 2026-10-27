@@ -109,7 +109,7 @@ function HeroSection() {
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
             </Link>
             <Link href="https://gitlab.com/yosephh" target="_blank" className="transition hover:scale-110" style={{ color: 'var(--text)' }} aria-label="GitLab">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M21 14.07a1.42 1.42 0 0 1-.41.73l-4.42 4.42a2.82 2.82 0 0 1-2 .82 2.79 2.79 0 0 1-2-.82l-4.42-4.42a1.41 1.41 0 0 1 0-2l4.42-4.42a2.82 2.82 0 0 1 2-.82c.75 0 1.5.27 2 .82l4.42 4.42c.19.19.4.44.41.72z"/><path d="M3.29 14.07c0 .2.07.5.41.73l4.42 4.42a2.82 2.82 0 0 0 2 .82V5.97c-.75 0-1.5.27-2 .82L3.7 11.21a1.41 1.41 0 0 0-.41.72v2.14z"/></svg>
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="m23.6004 9.5927-.0337-.0862L20.3.9814a.851.851 0 0 0-.3362-.405.8748.8748 0 0 0-.9997.0539.8748.8748 0 0 0-.29.4399l-2.2055 6.748H7.5375l-2.2057-6.748a.8573.8573 0 0 0-.29-.4412.8748.8748 0 0 0-.9997-.0537.8585.8585 0 0 0-.3362.4049L.4332 9.5015l-.0325.0862a6.0657 6.0657 0 0 0 2.0119 7.0105l.0113.0087.03.0213 4.976 3.7264 2.462 1.8633 1.4995 1.1321a1.0085 1.0085 0 0 0 1.2197 0l1.4995-1.1321 2.4619-1.8633 5.006-3.7489.0125-.01a6.0682 6.0682 0 0 0 2.0094-7.003z"/></svg>
             </Link>
             <Link href="https://t.me/YOSEP015" target="_blank" className="transition hover:scale-110" style={{ color: 'var(--text)' }} aria-label="Telegram">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
@@ -637,6 +637,29 @@ function ContactSection() {
                     </>
                   )}
                 </button>
+              </div>
+
+              {/* Phone Card with direct tel link */}
+              <div className="flex items-center justify-between gap-3 p-3.5 sm:p-4 rounded-xl glass-card border border-[var(--border)] min-w-0">
+                <a
+                  href="tel:+251933967295"
+                  className="flex items-center gap-3 min-w-0 group/phone hover:opacity-80 transition"
+                  title="Call +251 933 967 295"
+                >
+                  <div className="p-2.5 rounded-lg bg-black/5 dark:bg-white/10 text-[var(--accent-text)] shrink-0">
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-xs font-mono uppercase tracking-wider opacity-70" style={{ color: 'var(--text)' }}>
+                      Phone / Mobile
+                    </span>
+                    <span className="text-sm sm:text-base font-mono font-semibold truncate group-hover/phone:underline" style={{ color: 'var(--text-h)' }}>
+                      +251 933 967 295
+                    </span>
+                  </div>
+                </a>
               </div>
 
               <div className="flex items-center gap-2 text-base opacity-80 pt-0.5" style={{ color: 'var(--text)' }}>

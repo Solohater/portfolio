@@ -84,8 +84,10 @@ export default function CVPage() {
                 Computer Science graduate with professional experience engineering high-concurrency microservices, healthcare clinical systems, and cooperative financial platforms using Java, Vert.x, Angular, React, and PostgreSQL.
               </p>
               <div className="flex flex-wrap gap-3.5 mt-3.5 justify-center sm:justify-start text-xs sm:text-sm font-medium">
-                <span style={{ color: 'var(--text)' }}>yosefayalew56@gmail.com</span>
+                <a href="tel:+251933967295" className="hover:underline" style={{ color: 'var(--text)' }}>+251 933 967 295</a>
+                <a href="mailto:yosefayalew56@gmail.com" className="hover:underline" style={{ color: 'var(--text)' }}>yosefayalew56@gmail.com</a>
                 <span style={{ color: 'var(--text)' }}>Addis Ababa, Ethiopia</span>
+                <a href="https://t.me/YOSEP015" target="_blank" className="font-semibold hover:underline" style={{ color: 'var(--accent-text)' }}>Telegram (@YOSEP015)</a>
                 <a href="https://portfolio2-hazel-gamma.vercel.app" target="_blank" className="font-semibold hover:underline" style={{ color: 'var(--accent-text)' }}>Portfolio 2 (New) ↗</a>
                 <a href="https://github.com/Solohater" target="_blank" className="font-semibold hover:underline" style={{ color: 'var(--accent-text)' }}>GitHub</a>
                 <a href="https://gitlab.com/yosephh" target="_blank" className="font-semibold hover:underline" style={{ color: 'var(--accent-text)' }}>GitLab</a>
@@ -201,7 +203,7 @@ export default function CVPage() {
         {/* Download PDF button with Cache Busting */}
         <p className="text-center text-xs mt-8" style={{ color: 'var(--text)' }}>
           <a
-            href="/cv.pdf?v=20261027"
+            href="/cv.pdf?v=20261027_v2"
             target="_blank"
             download="Yoseph_Ayalew_CV.pdf"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition hover:opacity-90 shadow-lg hover:scale-105"
