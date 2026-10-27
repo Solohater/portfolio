@@ -9,7 +9,7 @@ const experience = [
     period: 'Mar 2026 – Present',
     title: 'Junior Software Developer',
     company: 'eTech SC',
-    desc: 'Developing and maintaining full-stack software features using Java, Vert.x, Angular, and PostgreSQL. Collaborating via Git/GitLab, debugging, testing, and participating in code reviews.',
+    desc: 'Engineering high-concurrency microservices and full-stack web applications using Java, Vert.x, Angular, React, and PostgreSQL. Developing enterprise clinical healthcare platforms (Chilalo Shed, Nubira, Meqrez Hospital) and cooperative banking SACCO platforms (Ethio-Trit, Netsebirak, Oromia Bank SACCO) with double-entry ledgers, non-blocking APIs, and database query optimization.',
   },
 ];
 
@@ -54,6 +54,7 @@ export default function CVPage() {
               <div className="flex flex-wrap gap-3.5 mt-3.5 justify-center sm:justify-start text-xs sm:text-sm font-medium">
                 <span style={{ color: 'var(--text)' }}>yosefayalew56@gmail.com</span>
                 <span style={{ color: 'var(--text)' }}>Addis Ababa, Ethiopia</span>
+                <a href="https://portfolio2-hazel-gamma.vercel.app" target="_blank" className="font-semibold hover:underline" style={{ color: 'var(--accent-text)' }}>Portfolio 2</a>
                 <a href="https://github.com/Solohater" target="_blank" className="font-semibold hover:underline" style={{ color: 'var(--accent-text)' }}>GitHub</a>
                 <a href="https://gitlab.com/yosephh" target="_blank" className="font-semibold hover:underline" style={{ color: 'var(--accent-text)' }}>GitLab</a>
                 <a href="https://www.linkedin.com/in/yoseph-ayalew-65247b291" target="_blank" className="font-semibold hover:underline" style={{ color: 'var(--accent-text)' }}>LinkedIn</a>
