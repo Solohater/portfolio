@@ -9,7 +9,40 @@ const experience = [
     period: 'Mar 2026 – Present',
     title: 'Junior Software Developer',
     company: 'eTech SC',
-    desc: 'Engineering high-concurrency microservices and full-stack web applications using Java, Vert.x, Angular, React, and PostgreSQL. Developing enterprise clinical healthcare platforms (Chilalo Shed, Nubira, Meqrez Hospital) and cooperative banking SACCO platforms (Ethio-Trit, Netsebirak, Oromia Bank SACCO) with double-entry ledgers, non-blocking APIs, and database query optimization.',
+    desc: 'Engineering high-concurrency microservices, healthcare clinical systems, and cooperative financial platforms using Java, Vert.x, PostgreSQL, Angular, and React.',
+    highlights: [
+      'eHealth Systems (Chilalo Shed, Nubira, Meqrez Hospital): Engineered reactive backend microservices in Java Vert.x handling multi-department patient triage, electronic health records (EHR), and prescription dispensing.',
+      'Financial SACCOs (Ethio-Trit, Netsebirak, Oromia Bank SACCO): Developed core accounting modules ensuring strict double-entry transactional guarantees, automated loan amortization schedules, and dividend calculations.',
+      'Database Engineering: Designed normalized relational schemas in PostgreSQL; optimized complex queries and composite indexes, significantly reducing query response times.',
+      'Frontend Architecture: Constructed accessible Angular UI components with dynamic client-side validation for high-accuracy financial data entry.',
+    ],
+  },
+];
+
+const projects = [
+  {
+    title: 'Document Management System',
+    tech: 'React • Node.js • Prisma ORM • PostgreSQL • JWT',
+    desc: 'Role-based approval workflow platform (Admin/Reviewer/Author) with secure JWT authorization, PostgreSQL relational schema, and live search indexing.',
+    link: 'https://blog-app-seven-bice-50.vercel.app',
+  },
+  {
+    title: 'TechShop Commercial E-Commerce',
+    tech: 'TypeScript • Next.js • Tailwind CSS • Responsive UI',
+    desc: 'Full-featured electronics store with product search, cart state persistence, customer account management, and real-time order tracking.',
+    link: 'https://techshop-peach.vercel.app',
+  },
+  {
+    title: 'Ethio Kemem — Food Menu Platform',
+    tech: 'TypeScript • Next.js • Tailwind CSS • Localization',
+    desc: 'Traditional culinary platform featuring full Amharic and English localization, categorized interactive ordering menus, and administrative dashboard.',
+    link: 'https://fastfood-amber-chi.vercel.app',
+  },
+  {
+    title: 'Repair Management Portal',
+    tech: 'React • Node.js • Express • MongoDB • MERN',
+    desc: 'Field service portal featuring technician assignment, status tracking, role-based ticket management, and operational analytics dashboards.',
+    link: 'https://web-seven-woad-99.vercel.app',
   },
 ];
 
@@ -18,7 +51,7 @@ const education = [
     period: '2020 – 2023',
     degree: 'BSc in Computer Science',
     school: "St. Mary's University",
-    desc: 'Focused on software development, algorithms, and database systems.',
+    desc: 'Focused on algorithms, distributed systems, relational database management, and object-oriented software design.',
   },
 ];
 
@@ -26,8 +59,8 @@ const skills = [
   { category: 'Languages', items: ['Java', 'JavaScript', 'TypeScript', 'SQL', 'Go'] },
   { category: 'Frontend', items: ['Angular', 'React', 'Next.js', 'Tailwind CSS', 'Redux', 'Material UI'] },
   { category: 'Backend', items: ['Vert.x', 'Node.js', 'Express.js', 'REST APIs', 'JWT'] },
-  { category: 'Databases', items: ['PostgreSQL', 'MongoDB'] },
-  { category: 'Tools', items: ['Git', 'GitLab', 'GitHub', 'Postman', 'Figma', 'Vercel', 'Render'] },
+  { category: 'Databases', items: ['PostgreSQL', 'Prisma ORM', 'MongoDB'] },
+  { category: 'Tools', items: ['Git', 'GitLab', 'GitHub', 'Docker', 'Postman', 'Figma', 'Vercel', 'Render'] },
 ];
 
 export default function CVPage() {
@@ -46,15 +79,14 @@ export default function CVPage() {
             <Image src={mode === "dark" ? "/darkimg.png" : "/lightimg.png"} alt="Yoseph Ayalew" width={100} height={100} className="w-24 h-24 rounded-full object-cover object-top shrink-0 ring-2 ring-[var(--border)]" />
             <div className="text-center sm:text-left">
               <h1 className="text-3xl sm:text-4xl font-bold mb-1" style={{ color: 'var(--text-h)' }}>Yoseph Ayalew</h1>
-              <p className="text-lg sm:text-xl font-semibold mb-2" style={{ color: 'var(--accent-text)' }}>Software Engineer</p>
+              <p className="text-lg sm:text-xl font-semibold mb-2" style={{ color: 'var(--accent-text)' }}>Full-Stack Software Engineer</p>
               <p className="text-base sm:text-lg max-w-lg leading-relaxed" style={{ color: 'var(--text)' }}>
-                Computer Science graduate with professional experience building full-stack web applications.
-                Skilled in Java, Vert.x, Angular, React, PostgreSQL, and modern web technologies.
+                Computer Science graduate with professional experience engineering high-concurrency microservices, healthcare clinical systems, and cooperative financial platforms using Java, Vert.x, Angular, React, and PostgreSQL.
               </p>
               <div className="flex flex-wrap gap-3.5 mt-3.5 justify-center sm:justify-start text-xs sm:text-sm font-medium">
                 <span style={{ color: 'var(--text)' }}>yosefayalew56@gmail.com</span>
                 <span style={{ color: 'var(--text)' }}>Addis Ababa, Ethiopia</span>
-                <a href="https://portfolio2-hazel-gamma.vercel.app" target="_blank" className="font-semibold hover:underline" style={{ color: 'var(--accent-text)' }}>Portfolio 2</a>
+                <a href="https://portfolio2-hazel-gamma.vercel.app" target="_blank" className="font-semibold hover:underline" style={{ color: 'var(--accent-text)' }}>Portfolio 2 (New) ↗</a>
                 <a href="https://github.com/Solohater" target="_blank" className="font-semibold hover:underline" style={{ color: 'var(--accent-text)' }}>GitHub</a>
                 <a href="https://gitlab.com/yosephh" target="_blank" className="font-semibold hover:underline" style={{ color: 'var(--accent-text)' }}>GitLab</a>
                 <a href="https://www.linkedin.com/in/yoseph-ayalew-65247b291" target="_blank" className="font-semibold hover:underline" style={{ color: 'var(--accent-text)' }}>LinkedIn</a>
@@ -64,7 +96,7 @@ export default function CVPage() {
 
           {/* Summary */}
           <p className="text-base sm:text-lg leading-relaxed pt-5" style={{ color: 'var(--text)' }}>
-            Full-Stack Software Engineer with professional experience designing and building performant web applications using <strong>Java, Vert.x, Angular, React,</strong> and <strong>PostgreSQL</strong>. Passionate about clean architecture, crafting robust backend APIs, and building responsive, intuitive user interfaces that deliver real-world impact.
+            Full-Stack Software Engineer with professional experience engineering high-concurrency microservices, healthcare clinical systems (<strong>Chilalo Shed, Nubira, Meqrez Hospital</strong>), and cooperative financial platforms (<strong>Ethio-Trit, Netsebirak, Oromia Bank SACCO</strong>) using <strong>Java, Vert.x, PostgreSQL, Angular</strong>, and <strong>React</strong>.
           </p>
         </div>
 
@@ -72,7 +104,7 @@ export default function CVPage() {
         <section className="mb-10">
           <h2 className="text-xl sm:text-2xl font-bold mb-5 flex items-center gap-2" style={{ color: 'var(--text-h)' }}>
             <span className="w-1.5 h-6 rounded-sm inline-block" style={{ background: 'var(--accent-text)' }} />
-            Experience
+            Professional Experience
           </h2>
           {experience.map((exp, i) => (
             <motion.div
@@ -86,10 +118,40 @@ export default function CVPage() {
                 <h3 className="text-lg sm:text-xl font-bold" style={{ color: 'var(--text-h)' }}>{exp.title}</h3>
                 <span className="text-xs sm:text-sm font-mono font-semibold px-3 py-1 rounded-full border border-[var(--accent-border)] self-start sm:self-center" style={{ background: 'var(--accent-bg)', color: 'var(--accent-text)' }}>{exp.company}</span>
               </div>
-              <p className="text-xs sm:text-sm mb-2.5 font-mono" style={{ color: 'var(--text)' }}>{exp.period}</p>
-              <p className="text-base leading-relaxed" style={{ color: 'var(--text)' }}>{exp.desc}</p>
+              <p className="text-xs sm:text-sm mb-3 font-mono" style={{ color: 'var(--text)' }}>{exp.period}</p>
+              <p className="text-base leading-relaxed mb-4" style={{ color: 'var(--text)' }}>{exp.desc}</p>
+              <div className="space-y-2 pt-2 border-t border-[var(--border)]">
+                {exp.highlights.map((h, j) => (
+                  <p key={j} className="text-sm leading-relaxed flex items-start gap-2" style={{ color: 'var(--text)' }}>
+                    <span className="text-emerald-500 font-bold mt-0.5">•</span>
+                    <span>{h}</span>
+                  </p>
+                ))}
+              </div>
             </motion.div>
           ))}
+        </section>
+
+        {/* Selected Projects */}
+        <section className="mb-10">
+          <h2 className="text-xl sm:text-2xl font-bold mb-5 flex items-center gap-2" style={{ color: 'var(--text-h)' }}>
+            <span className="w-1.5 h-6 rounded-sm inline-block" style={{ background: 'var(--accent-text)' }} />
+            Selected Full-Stack Projects
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {projects.map((proj) => (
+              <div key={proj.title} className="p-5 rounded-xl glass-card flex flex-col justify-between">
+                <div>
+                  <h3 className="text-base sm:text-lg font-bold mb-1" style={{ color: 'var(--text-h)' }}>{proj.title}</h3>
+                  <p className="text-xs font-mono font-semibold mb-2" style={{ color: 'var(--accent-text)' }}>{proj.tech}</p>
+                  <p className="text-sm leading-relaxed mb-3" style={{ color: 'var(--text)' }}>{proj.desc}</p>
+                </div>
+                <a href={proj.link} target="_blank" className="text-xs font-semibold hover:underline self-start" style={{ color: 'var(--accent-text)' }}>
+                  View Project Demo ↗
+                </a>
+              </div>
+            ))}
+          </div>
         </section>
 
         {/* Education */}
@@ -118,7 +180,7 @@ export default function CVPage() {
         <section className="mb-10">
           <h2 className="text-xl sm:text-2xl font-bold mb-5 flex items-center gap-2" style={{ color: 'var(--text-h)' }}>
             <span className="w-1.5 h-6 rounded-sm inline-block" style={{ background: 'var(--accent-text)' }} />
-            Skills
+            Technical Skills
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {skills.map((group) => (
@@ -136,10 +198,17 @@ export default function CVPage() {
           </div>
         </section>
 
-        {/* Download hint */}
+        {/* Download PDF button with Cache Busting */}
         <p className="text-center text-xs mt-8" style={{ color: 'var(--text)' }}>
-          <a href="/cv.pdf" download className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition hover:opacity-90" style={{ background: 'var(--text-h)', color: 'var(--bg)' }}>
-            Download PDF
+          <a
+            href="/cv.pdf?v=20261027"
+            target="_blank"
+            download="Yoseph_Ayalew_CV.pdf"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition hover:opacity-90 shadow-lg hover:scale-105"
+            style={{ background: 'var(--accent)', color: '#ffffff' }}
+          >
+            <span>Download Updated CV (PDF)</span>
+            <span>↓</span>
           </a>
         </p>
 
